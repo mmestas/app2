@@ -1,0 +1,20 @@
+<form id="needsMoreInfoStep" name="needsMoreInfoStep" novalidate  ng-init="initNeedsMoreInfo()">
+  <h2 class="teal">Needs More Info</h2>
+  <h4 class="subStepTitle">More details were requested for this patient</h4>
+
+
+
+  <div class="nmiAdminNotes">
+    <!-- <div class="vmb-10"><label>Sent Back:</label> &nbsp; {{casefile.statusModifiedDate | jsonDate}}</div> -->
+    <div class="vmb-10"><label>Sent Back:</label> &nbsp; {{casefile.statusModifiedDate}}</div>
+    <div class="vmb-10">
+      <div><label>Notes:</label></div>
+      <div class="urlSite-well">
+          &nbsp; {{casefile.adminNotes.needmoreinformation}}
+      </div>
+    </div>
+    <div><label>Have any questions?</label>  &nbsp; Please call urlSite at <strong>(866) 908-4867</strong></div>
+  </div>
+
+
+</form>

@@ -1,0 +1,55 @@
+.errorMsg {text-align: center; padding-bottom: 15px;}
+.warningMsg {color: $urlSiteOrange;}
+
+.activelyEditing {color:$urlSiteGreen;}
+
+// TOASTS
+md-toast {
+  .md-toast-content {color: $urlSiteGrey; background-color: $urlSiteWhite;border: 2px solid $urlSiteGrey;}
+  &.md-default-theme {
+    .md-toast-content {border-color: $urlSiteWhite;}
+  }
+  &.md-danger-toast-theme {
+    .md-toast-content {border-color: $urlSiteRed;}
+  }
+  &.md-warning-toast-theme {
+    .md-toast-content {border-color: $urlSiteOrange;}
+  }
+  &.md-primary-toast-theme {
+    .md-toast-content {border-color: $urlSiteTeal;}
+  }
+  &.md-success-toast-theme {
+    .md-toast-content {border-color: $urlSiteGreen;}
+  }
+  .md-toast-text {font-weight: 300;}
+  &.width_100 {
+    .md-toast-content {max-width:100%;}
+  }
+}
+
+// Bootstrap Alerts
+.alert-primary {
+  color: $urlSiteDarkTeal;
+  background-color: $urlSiteTealHover;
+  border-color: darken($urlSiteTeal, 2%);
+}
+.alert-success {
+  color: $urlSiteDarkGreen;
+  background-color: $urlSiteGreenHover;
+  border-color: darken($urlSiteGreen, 2%);
+}
+.alert-danger {
+  color: $urlSiteDarkRed;
+  background-color: $urlSiteRedHover;
+  border-color: darken($urlSiteRed, 2%);
+}
+.alert-warning {
+    color: $urlSiteDarkOrange;
+    background-color: lighten($urlSiteOrange, 35%);
+    border-color: darken($urlSiteOrange, 2%);
+}
+.alert-info {
+    color: $urlSiteDarkBlue;
+    background-color: $urlSiteBlueHover;
+    border-color: darken($urlSiteBlue, 2%);
+}

@@ -1,0 +1,227 @@
+.ngViewWrapper {background: #f1f1f1;padding-top: 150px; padding-bottom:80px; min-height: 100vh;}
+
+/************* Select Hack **************/
+
+.safariSelectHack {position: relative;display:inline-block;vertical-align:middle;
+  &:after {content: "";position: absolute;z-index: 2;right: 8px;top: 50%;margin-top: -3px;height: 0;width: 0;border-top: 6px solid #bbb;border-left: 6px solid transparent;border-right: 6px solid transparent;pointer-events: none;}
+  select {font-weight: 200; padding-right: 25px;}
+}
+
+table {
+  .safariSelectHack {position: relative;display:inline-block;vertical-align:middle;
+    &:after {content: "";position: absolute;z-index: 2;right: 8px;top: 50%;margin-top: -3px;height: 0;width: 0;border-top: 6px solid #bbb;border-left: 6px solid transparent;border-right: 6px solid transparent;pointer-events: none;}
+
+    select {font-weight: 200; padding-right: 25px;height:26px;max-width: 100px;}
+  }
+}
+
+/************* Collapsable Sections **************/
+.collapsableSection {
+  .collapsableSectionHeader { font-size: 17px;
+    i.fa.fa-minus-circle, i.fa.fa-plus-circle {font-size: 18px; color:$urlSiteOrange;outline: none;}
+  }
+  .collapsableSectionBody {
+    border-top: 1px solid $urlSiteOrange;
+    padding-top: 10px;
+    margin-top: 8px;
+  }
+}
+
+/************* Wells **************/
+.urlSite-well {
+  padding: 20px;
+  border: 2px solid #eee;
+  background: #f9f9f9;
+  box-shadow: inset 0px 0px 5px 0px #e2e2e2;
+  -webkit-box-shadow: inset 0px 0px 5px 0px #e2e2e2;
+  -moz-box-shadow: inset 0px 0px 5px 0px #e2e2e2;
+  -o-box-shadow: inset 0px 0px 5px 0px #e2e2e2;
+}
+
+/************* Labels **************/
+label {font-size: 12px;text-align: left;color: $urlSiteMedGrey;line-height: 11px;
+  font-weight: bold;font-weight: 100;}
+  //Not sure what this goes to - also in New Patient Sign up scss
+.uploadLabels {
+  font-size: 11px;
+  overflow-wrap: break-word;
+  color: #535353;
+  padding-top: 5px;
+}
+.radioLabel {padding-left: 5px; margin-bottom: 3px;}
+.inline {display:inline; }
+.inlineLabel {display:inline-block; text-align: right; margin:0;vertical-align: middle;}
+.inlineBlock {display:inline-block;}
+.vAlign {vertical-align: middle;}
+
+/************* Lists **************/
+.actions {list-style: none;padding: 0px;display: inline-block;float: right;margin: 0px;
+  li {display: inline-block;padding: 0px;vertical-align: middle;
+    a {cursor:pointer;}
+  }
+}
+
+/************* TABS **************/
+.urlSite-tabs { list-style-type: none; display:flex;align-items: flex-end;
+  .urlSite-tab {
+    margin: 0;
+    padding: 4px 12px;
+    border: 1px solid $urlSiteBorderGrey2;
+    background-color:$urlSiteBorderGrey2;
+    color: $urlSiteWhite;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom: 0;
+    margin-right: 2px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s;
+    &.active {
+      padding-bottom: 10px;
+      background-color: #ffffff;
+      border-color: #eee;
+      color: $urlSiteMedGrey;
+      border-bottom-color: transparent;
+      // box-shadow: 0px -3px 8px -3px rgba(0, 0, 0, 0.1);
+    }
+    &:hover {padding-bottom: 10px;}
+    &.tab-orange {
+      background-color: $urlSiteOrange;
+      border-color: $urlSiteOrange;
+      color: $urlSiteWhite;
+      &:hover {
+        background-color: darken($urlSiteOrange, 5);
+        border-color: darken($urlSiteOrange, 5);
+        color: $urlSiteWhite;
+      }
+      &.active {
+        background-color: #ffffff;
+        border-color: #eee;
+        color: $urlSiteMedGrey;
+      }
+    }
+    &.tab-teal {
+      background-color: $urlSiteTeal;
+      border-color: $urlSiteTeal;
+      color: $urlSiteWhite;
+      &:hover {
+        background-color: darken($urlSiteTeal, 5);
+        border-color: darken($urlSiteTeal, 5);
+        color: $urlSiteWhite;
+      }
+      &.active {
+        background-color: #ffffff;
+        border-color: #eee;
+        color: $urlSiteMedGrey;
+      }
+    }
+    &.tab-green {
+      background-color: $urlSiteGreen;
+      border-color: $urlSiteGreen;
+      color: $urlSiteWhite;
+      &:hover {
+        background-color: darken($urlSiteGreen, 5);
+        border-color: darken($urlSiteGreen, 5);
+        color: $urlSiteWhite;
+      }
+      &.active {
+        background-color: #ffffff;
+        border-color: #eee;
+        color: $urlSiteMedGrey;
+      }
+    }
+
+  }
+}
+.tabContent {
+  border: 1px solid #eee;
+  padding:10px;
+  margin-top: -1px;
+}
+
+/************* Upload Image Drop Rectangles **************/
+.uploadWrapper {height: 100%;
+  .uploadInnerWrapper {height: calc(100% - 36px);height: 304px;
+    border: 1px solid $urlSiteBorder;
+    padding:10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba( $urlSiteBorder, .2 );
+    .uploadLabel {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      img {max-width:100%;max-height: 100%;}
+    }
+    .dragDropImg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      &.dragover {background-color: $urlSiteBackgroundBlue; opacity: 0.3;}
+    }
+    .deleteImg{
+      position: absolute;
+      top: 0;
+      right: 2px;
+      outline: none;
+      &:focus {outline:none;}
+    }
+  }
+}
+
+/************* Upload File Drops **************/
+.dragNDropFileUploader {
+  border: 1px dashed #d0d0d0;
+  padding: 10px;
+  background: #fff;
+  color: #777;
+  width: 130px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: none;
+  margin-bottom: 0;
+  &:hover {background: $urlSiteTeal;
+    .fa {color:#fff;}
+    // .fa-file-o {color:transparent;}
+  }
+  .fa {font-size:22px;}
+}
+.dragFileUploader {
+    cursor: pointer;
+    height: 80px;
+    width: 130px;
+    background: transparent;
+    margin-top: -80px;
+    border-radius: 4px;
+    border: 1px dashed transparent;
+  &:hover {background: $urlSiteTeal;}
+  &.dragover {background-color: $urlSiteBackgroundBlue; opacity: 0.3;}
+  &.fileUploaded {background: $urlSiteTeal;border: 1px dashed $urlSiteDarkTeal;
+    &.dragover {background-color: $urlSiteBackgroundBlue; opacity: 0.3;}
+  }
+
+}
+
+/************* Upload File Drops Old Buttons **************/
+.dragSelect {
+  position: absolute;
+  cursor: pointer;
+  height: 34px;
+  width: 194px;
+  top: 0px;
+  left: 0px;
+  &.dragover {background-color: $urlSiteOrange; opacity: 0.7;}
+
+}

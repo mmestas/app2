@@ -1,0 +1,29 @@
+
+html {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;-ms-box-sizing: border-box;box-sizing: border-box;}
+*, *::after, *::before {box-sizing: inherit;-moz-box-sizing: inherit;-webkit-box-sizing: inherit;-ms-box-sizing: inherit;box-sizing: inherit;}
+body, div, p, a, td, th, h1, h2, h3, h4, h5, h6, button, select, html, textarea, input {font-family: "museo-sans-rounded",sans-serif;font-weight: 100;outline: none;
+}
+
+a {outline: none;}
+p {font-size: 12px;color: #64656A;line-height: 14px;font-weight: normal;}
+/************* HEADERS *************/
+h1, h2, h3, h4, h5, h6 {
+  color: #64656A;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+h1 {font-size: 28px;font-weight: 100;}
+h2 {font-size: 18px;}
+h3 {font-size: 12px;font-weight: bold;}
+h4 {}
+h5 {}
+h6 {}
+
+/*************  *************/
+
+
+
+/************* OL/UL *************/
+ul li {margin-left: initial;outline: none;}
+
+// section {border: 1px solid $urlSiteBorder; margin-top:15px; padding:10px;}

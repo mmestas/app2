@@ -1,0 +1,88 @@
+    <div id="dashboard" ng-init="dashboardInit()">
+      <div class="container">
+        <div class="dashboardWrapper">
+          <div class="dashTitle">
+            <h2>Technician Dashboard</h2>
+          </div>
+        </div>
+        <div class="stats" >
+          <div class="stat" ng-class="{statActive: 1 === selectedTile}" ng-click="selectTile(1)" >
+            <button>My Active Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{(casesData | filter: { status: { id: activeCasesFilter } }:filterByStatus | filter:{ assignedTo: { id: userInfo.id } } ).length}}</h3>
+                <p>My Active Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 2 === selectedTile}" ng-click="selectTile(2)">
+            <button>All Active Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{(cases.data | filter: { status: { id: activeCasesFilter } }:filterByStatus).length}}</h3>
+                <p>All Active Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 3 === selectedTile}" ng-click="selectTile(3)">
+            <button>My Completed Cases</button>
+            <a href="#">
+              <div>
+                <h3 ng-if="!completedCasesData">{{(notHiddenCompletedCases + statushiddenCompletedCases)}}</h3>
+                <h3 ng-if="completedCasesData">{{(completedCasesData | filter: { assignedTo: { id: userInfo.id } } ).length }}</h3>
+                <p>My Completed Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 4 === selectedTile}" ng-click="selectTile(4)">
+            <button>All Completed Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{notHiddenCompletedCases + statushiddenCompletedCases}}</h3>
+                <p>All Completed Cases</p>
+              </div></a>
+          </div>
+        </div>
+
+
+        <div class="sortDropdown">
+
+          <div class="d-flex">
+            <div class="mr-2">
+              <span class="safariSelectHack">
+                <select ng-options="option.date for option in sortByDate" ng-model="sorted" ng-change="sortNewstOldest(sorted)">
+                  <option value=''> --Sort by Days in Queue-- </option>
+                </select>
+              </span>
+            </div>
+
+            <!--  4.17.19 - Patient Search -->
+            <!-- "3 === selected" Means that only will display when the completed tab is selected -->
+            <div data-ng-if="4 === selectedTile" class="autcompleteWrapper">
+              <input data-ng-model="searchFields.input" data-ng-change="getPatientsByAutocomplete(searchFields.input)" ng-placeholder="autocompleteField" data-ng-class="{'darkInputText': autocompleteSelected}"></input>
+              <div class="autocompleteDropdown" data-ng-class="{'showDropdown': patientSearchDropdown && showAutocompleteDropdown}">
+                  <ul>
+                      <li data-ng-repeat="result in patientSearchDropdown" data-ng-click="getCasesBySearch(result)">
+                          {{result.info.firstname}} {{result.info.lastname}} - {{result.casenumber}}
+                      </li>
+                  </ul>
+              </div>
+              <button class="btn btn-outline-secondary btn-lg" data-ng-click="clearSearch(searchFields)">Clear</button>
+            </div>
+            <!-- END 4.17.19 - Patient Search -->
+
+          </div>
+
+
+
+          <div>
+            <input id="showHideCases" type="checkbox" ng-model="showHideCases" value="" ng-true-value="''">
+              <label class="checkbox-inline checkbox" for="showHideCases"> Show Hidden Cases </label>
+          </div>
+
+        </div>
+
+        <div class="row" ng-include="'/views/dashboard/technician/tables/activeCases.html'" ng-if="selectedTile === 1"></div>
+        <div class="row" ng-include="'/views/dashboard/technician/tables/activeCasesAll.html'" ng-if="selectedTile === 2"></div>
+        <div class="row" ng-include="'/views/dashboard/technician/tables/completedCases.html'" ng-if="selectedTile === 3"></div>
+        <div class="row" ng-include="'/views/dashboard/technician/tables/completedCasesAll.html'" ng-if="selectedTile === 4"></div>
+      </div>
+    </div>
+  <div ng-include="'/views/modals/admin/autoLogout.html'"></div>

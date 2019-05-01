@@ -1,0 +1,130 @@
+input {padding: 10px;color: $urlSiteMedGrey;background-color: #fff;border: 1px solid $urlSiteBorder;margin-top: 10px;border-radius: 3px;margin-top:0; font-size: 12px;
+  &:not([type=checkbox]):not([type=radio]) {height:45px;}
+  &:focus {outline: none;}
+  &::-webkit-input-placeholder {color: $urlSiteBorderGrey3;}
+  &:-ms-input-placeholder {color: $urlSiteBorderGrey3;}
+  &::placeholder {color: $urlSiteBorderGrey3;}
+}
+input[type=radio] {margin-right: 5px;}
+
+textarea {padding: 10px;color: $urlSiteMedGrey;background: none;border: 1px solid $urlSiteBorder;margin-top: 10px;border-radius: 3px;font-size: 12px;background-color: $urlSiteWhite;
+  margin-top:0;
+  &:focus {outline: none;}
+}
+
+select{-moz-appearance: none;text-indent: 0.01px;text-overflow: '';
+  height: 45px;
+  border: 1px solid $urlSiteBorder;
+  font-size: 12px;
+  margin: 0px;
+  border-radius: 3px;
+  padding: 10px;
+  color: #64656A;
+  &:focus {outline: none;}
+}
+
+.errorField {border-color: $urlSiteRed; background-color: lighten($urlSiteRed, 35%);}
+
+.disabled {}
+
+.form-check-inline .form-check-input {height: 15px;}
+/************* Upload Files **************/
+
+/************* DATE PICKER **************/
+.md-datepicker-input {padding: 0 10px 0; border: 1px solid $urlSiteBorder;background-color: $urlSiteWhite; min-width: 165px;}
+.md-icon-button + .md-datepicker-input-container {margin-left: 5px;}
+.md-datepicker-input-container {
+  width: calc(100% - 250px);
+  border-bottom-width:0;}
+.spec-box input.md-datepicker-input {padding: 0 0 0 10px; min-width:125px;}
+.md-datepicker-triangle-button.md-button.md-icon-button {
+    height: 40px;
+    width: 36px;
+    position: absolute;
+    padding: 8px;
+    right: -8px;
+}
+#activeDashboard .md-datepicker-triangle-button.md-button.md-icon-button {right: 12px;}
+.md-button.md-icon-button {
+    margin: 0 0 0 6px;
+    margin: 0;
+    height: 40px;
+    min-width: 0;
+    line-height: 24px;
+    padding: 8px 0;
+    width: 30px;
+    border-radius: 50%;
+}
+body#system_admin .registration .container form .row .halffield .newCaseDatepicker input {padding-left: 10px; padding-bottom: 0;}
+
+// 12.12.18
+.md-datepicker-input-container {width:auto;}
+._md-datepicker-has-triangle-icon {padding-right:42px; padding-right:20px;}
+.md-datepicker-triangle-button.md-button.md-icon-button {
+    height: 45px;
+    width: 36px;
+    position: absolute;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    background: transparent;
+    border-radius: 0;
+    right: 0;
+    right: 16px;
+    margin: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid #eaeaea;
+    border-left-color: transparent;
+}
+
+.numInput {width:100px; margin-right:5px; display:flex; align-items: center;
+  .fakeNumImput {
+    color: $urlSiteTeal;
+  }
+  span {margin-right:5px;width: 15px;}
+  input[type=number] {width: calc(100% - 20px);
+    &:-moz-read-only {border:0; color: $urlSiteTeal; -moz-appearance:textfield;}
+     &:-webkit-read-only {border:0; color: $urlSiteTeal;
+       &::-webkit-outer-spin-button {
+         -webkit-appearance: none;
+         margin: 0;
+       }
+       &::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+          margin: 0;
+       }
+     }
+     &:read-only  {border:0; color: $urlSiteTeal;}
+  }
+}
+
+
+/************* DATE PICKER **************/
+.autcompleteWrapper {position:relative;
+  input {min-width: 200px;
+    &.darkInputText {
+      &::-webkit-input-placeholder {
+        color: $urlSiteMedLtGrey;
+      }
+      &::-moz-placeholder {
+        color: $urlSiteMedLtGrey;
+      }
+      &:-ms-input-placeholder {
+        color: $urlSiteMedLtGrey;
+      }
+      &:-moz-placeholder {
+        color: $urlSiteMedLtGrey;
+      }
+    }
+  }
+  .autocompleteDropdown {position: absolute;z-index: 1000;background: #ffffff;border: 1px solid #ececec; display:none;
+    &.showDropdown {display:block;}
+    ul {list-style-type: none;margin:0; padding:0; min-width: 198px; //note: should be 200px but is adding 2px because of border
+      li {border-bottom: 1px solid $urlSiteBorder;cursor: pointer;padding: 4px;margin:0;font-size: 14px;
+        &:last-child {border-bottom-color: transparent;}
+        &:hover {background-color: $urlSiteGreenHover;}
+      }
+    }
+  }
+}

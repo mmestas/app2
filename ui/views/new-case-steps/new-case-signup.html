@@ -1,0 +1,43 @@
+<div ng-init="newStepsInit()">
+
+  <div id="newPatientSignup" class="registration">
+      <div class="container flex">
+        <div class="sideNav flex flex-column">
+          <!-- Only for Needs More Info Status 6 -->
+          <div class="sideNavLink nmiStep" ng-class="{'active' : (currentState === 101)}" ui-sref="new-case.needsMoreInfo({id: caseLinkId})" data-ng-if="newCasefile.status.id === 6">Needs More Info</div>
+
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 1)}" data-ng-click="goToState('new-case.step-1', caseLinkId, true)" data-ng-if="true">Patient Info  <i ng-if="step1Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 2), 'disabled': !step1Complete}" data-ng-click="goToState('new-case.step-2', caseLinkId, step1Complete)" data-ng-if="true">Health History  <i ng-if="step1Complete && step2Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 3), 'disabled': !step1Complete || !step2Complete}" data-ng-click="goToState('new-case.step-3', caseLinkId, step2Complete)" data-ng-if="true">Images  <i ng-if="step1Complete && step2Complete && step3Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 4), 'disabled': !step1Complete || !step2Complete || !step3Complete}" data-ng-click="goToState('new-case.step-4', caseLinkId, step3Complete)" data-ng-if="true">Intra Oral Images  <i ng-if="step1Complete && step2Complete && step3Complete && step4Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 5), 'disabled': !step1Complete || !step2Complete || !step3Complete || !step4Complete}" data-ng-click="goToState('new-case.step-5', caseLinkId, step4Complete)" data-ng-if="true">CBCT Upload  <i ng-if="step1Complete && step2Complete && step3Complete && step4Complete && step5Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 6), 'disabled': !step1Complete || !step2Complete || !step3Complete || !step4Complete || !step5Complete}" data-ng-click="goToState('new-case.step-6', caseLinkId, step5Complete)" data-ng-if="true">Patient Occlusion  <i ng-if="step1Complete && step2Complete && step3Complete && step4Complete && step5Complete && step6Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="sideNavLink" ng-class="{'active' : (currentState === 8), 'disabled': !step1Complete || !step2Complete || !step3Complete || !step4Complete || !step5Complete || !step6Complete}" data-ng-click="goToState('new-case.step-8', caseLinkId, step6Complete)" data-ng-if="true">Misc. Documents  <i ng-if="step1Complete && step2Complete && step3Complete && step4Complete && step5Complete && step6Complete && step8Complete" class="fa fa-check-circle"></i></div>
+
+          <div class="text-center vp-5" data-ng-if="newCasefile.status.id === 6">
+            <button data-ng-click="submitPatientCase(newCasefile)" class="btn btn-primary">Update & Save</button>
+          </div>
+
+          <div class="saveAndReturnContainer">
+            <div data-ng-click="saveAndReturn(newCasefile)" class="saveAndReturn flex flex-align-center" data-ng-if="newCasefile.status.id === 1 || newCasefile.status.id === 6">
+              <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+              <span>Save & Return to Dashboard</span>
+            </div>
+            <div ui-sref="providerDash" class="saveAndReturn flex flex-align-center" data-ng-if="newCasefile.status.id !== 1 && newCasefile.status.id !== 6">
+              <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+              <span>Return to Dashboard</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="signUpContent" ui-view></div>
+      </div>
+  </div>
+</div>

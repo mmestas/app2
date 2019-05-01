@@ -1,0 +1,254 @@
+        <form id="SystemAdministratorRegistrationStep2" name="step3" novalidate ng-init="step3Init()">
+            <h2 class="teal">Step 3 - Faciometric and Postural Images</h2>
+            <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+            <div class="flex flex-wrap">
+              <div class="width_33 uploadWrapper">
+                  <div class="uploadInnerWrapper">
+                  <label class="uploadLabel" for="BigSmile">
+                      <img ngf-src="newCasefile2.photos.facial.bigsmile" value="">
+                      <input class="hidden" id="BigSmile" type="file" ngf-select="uploadFiles(newCasefile2.photos.facial.bigsmile, 'facial_bigsmile')"
+                          ng-model="newCasefile2.photos.facial.bigsmile" name="file" ngf-accept="'image/*'" required>
+                  </label>
+                  <div id="BigSmile" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.facial.bigsmile, 'facial_bigsmile')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.facial.bigsmile, 'facial_bigsmile')" ng-model="newCasefile2.photos.facial.bigsmile"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('facial_bigsmile')" data-ng-if="newCasefile2.photos.facial.bigsmile !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                      <h3>
+                          <span class="required">*</span>
+                          <span class="v-tooltip">Big Smile
+                              <span class="v-tooltipInfo">
+                                  <img src="/images/instructions/bigsmile.jpg">
+                                  <ul>
+                                      <li>Eyes Open</li>
+                                      <li>No Glasses</li>
+                                      <li>Hair tucked behind ears</li>
+                                  </ul>
+                              </span>
+                          </span>
+                      </h3>
+                  </div>
+              </div>
+              <div class="width_33 uploadWrapper">
+                <div class="uploadInnerWrapper">
+                  <label class="uploadLabel">
+                    <img ngf-src="newCasefile2.photos.facial.frontatrest" value="">
+                      <input class="hidden" id="frontatrest" type="file" ngf-select="uploadFiles(newCasefile2.photos.facial.frontatrest, 'facial_frontatrest')"
+                          ng-model="newCasefile2.photos.facial.frontatrest" name="file" ngf-accept="'image/*'" required>
+                  </label>
+                  <div id="FrontAtRest" class="dragNDrop-newCase"
+                      ngf-select="uploadFiles(newCasefile2.photos.facial.frontatrest, 'facial_frontatrest')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.facial.frontatrest, 'facial_frontatrest')" ng-model="newCasefile2.photos.facial.frontatrest"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('facial_frontatrest')" data-ng-if="newCasefile2.photos.facial.frontatrest !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                    <h3>
+                        <span class="required">*</span>
+                        <span class="v-tooltip">Front - Relaxed
+                            <span class="v-tooltipInfo">
+                                <img src="/images/instructions/frontatrest.jpg">
+                                <ul>
+                                    <li>Eyes Open</li>
+                                    <li>No Glasses</li>
+                                    <li>Hair tucked behind ears</li>
+                                </ul>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+
+              </div>
+              <div class="width_33 uploadWrapper">
+                <div class="uploadInnerWrapper">
+                  <label class="uploadLabel" for="RightProfile">
+                      <img ngf-src="newCasefile2.photos.facial.rightprofile" value="">
+                      <input class="hidden" id="RightProfile" type="file" ngf-select="uploadFiles(newCasefile2.photos.facial.rightprofile, 'facial_rightprofile')"
+                          ng-model="newCasefile2.photos.facial.rightprofile" name="file" ngf-accept="'image/*'" required>
+                  </label>
+                  <div id="RightProfile" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.facial.rightprofile, 'facial_rightprofile')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.facial.rightprofile, 'facial_rightprofile')" ng-model="newCasefile2.photos.facial.rightprofile"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('facial_rightprofile')" data-ng-if="newCasefile2.photos.facial.rightprofile !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                    <h3>
+                        <span class="required">*</span>
+                        <span class="v-tooltip">Profile - Facing the right
+                            <span class="v-tooltipInfo">
+                                <img src="/images/instructions/profile.jpg">
+                                <ul>
+                                    <li>Eyes Open</li>
+                                    <li>No Glasses</li>
+                                    <li>Hair tucked behind ears</li>
+                                </ul>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+              </div>
+              <div class="width_33 uploadWrapper">
+                <div class="uploadInnerWrapper">
+                  <label class="uploadLabel" for="SubmentoVertex">
+                      <img ngf-src="newCasefile2.photos.facial.submentovertex" value="">
+                      <input class="hidden" id="SubmentoVertex" type="file" ngf-select="uploadFiles(newCasefile2.photos.facial.submentovertex, 'facial_submentovertex')"
+                          ng-model="newCasefile2.photos.facial.submentovertex" name="file" ngf-accept="'image/*'" required>
+                  </label>
+                  <div id="SubmentoVertex" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.facial.submentovertex, 'facial_submentovertex')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.facial.submentovertex, 'facial_submentovertex')" ng-model="newCasefile2.photos.facial.submentovertex"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('facial_submentovertex')" data-ng-if="newCasefile2.photos.facial.submentovertex !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                    <h3>
+                        <span class="required">*</span>
+                        <span class="v-tooltip">Submento-Vertex
+                            <span class="v-tooltipInfo">
+                                <img src="/images/instructions/submentovertex.jpg">
+                                <ul>
+                                    <li>Eyes Open</li>
+                                    <li>No Glasses</li>
+                                    <li>Hair tucked behind ears</li>
+                                </ul>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+              </div>
+              <div class="width_33 uploadWrapper">
+                <div class="uploadInnerWrapper">
+                  <label class="uploadLabel">
+                      <img ngf-src="newCasefile2.photos.postural.fullBodyFront">
+                      <input class="hidden" id="FrontPosture" type="file" ngf-select="uploadFiles(newCasefile2.photos.postural.fullBodyFront, 'postural_fullBodyFront ')"
+                          ng-model="newCasefile2.photos.postural.fullBodyFront" name="file" ngf-accept="'image/*'" required>
+                  </label>
+                  <div id="FrontPosture" class="dragNDrop-newCase"
+                      ngf-select="uploadFiles(newCasefile2.photos.postural.fullBodyFront, 'postural_fullBodyFront ')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.postural.fullBodyFront, 'postural_fullBodyFront ')" ng-model="newCasefile2.photos.postural.fullBodyFront"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('postural_fullBodyFront')" data-ng-if="newCasefile2.photos.postural.fullBodyFront !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                    <h3>
+                        <span class="v-tooltip">Full Body Posture: Anterior
+                            <span class="v-tooltipInfo">
+                                <img src="/images/instructions/frontPosture.jpg">
+                                <ul>
+                                    <li>Eyes Open</li>
+                                    <li>No Glasses</li>
+                                    <li>Hair tucked behind ears</li>
+                                </ul>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+              </div>
+              <div class="width_33 uploadWrapper">
+                <div class="uploadInnerWrapper">
+                  <label class="uploadLabel">
+                      <img ngf-src="newCasefile2.photos.postural.fullBodyPosterior">
+                  </label>
+                  <div id="FrontPosture" class="dragNDrop-newCase"
+                      ngf-select="uploadFiles(newCasefile2.photos.postural.fullBodyPosterior, 'postural_fullBodyPosterior')"
+                      ngf-drop="uploadFiles(newCasefile2.photos.postural.fullBodyPosterior, 'postural_fullBodyPosterior')" ng-model="newCasefile2.photos.postural.fullBodyPosterior"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                      &nbsp;
+                  </div>
+                  <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('postural_fullBodyPosterior')" data-ng-if="newCasefile2.photos.postural.fullBodyPosterior !== apiUrl+'/images/camera.svg'"></i>
+                </div>
+                <div class="selectionInfo">
+                    <h3>
+                        <span class="v-tooltip">Full Body Posture - Profile facing right
+                            <span class="v-tooltipInfo">
+                                <img src="/images/instructions/posteriorPosture.jpg">
+                                <ul>
+                                    <li>Eyes Open</li>
+                                    <li>No Glasses</li>
+                                    <li>Hair tucked behind ears</li>
+                                </ul>
+                            </span>
+                        </span>
+                    </h3>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+                <div class="save">
+                  <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 3)" data-ng-if="!caseIsSubmitted">
+                  Save + Continue</button>
+                  <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-4({selectedTile: selectedTile, id: caseLinkId})">Go to Images</button>
+                  &nbsp;
+                  <div ng-if="showErrorMsg && (
+                  newCasefile2.photos.facial.frontatrest === apiUrl+'/images/camera.svg' ||
+                  newCasefile2.photos.facial.rightprofile === apiUrl+'/images/camera.svg' ||
+                  newCasefile2.photos.facial.submentovertex === apiUrl+'/images/camera.svg'
+                  )">
+                    <div class="fieldError" >
+                        {{errorMsg}}
+                    </div>
+                    <div class="fieldError">
+                      <span>
+                        Missing:
+                      </span>
+                      <span ng-show="newCasefile2.photos.facial.bigsmile === apiUrl+'/images/camera.svg'">
+                          &nbsp; Big Smile <span ng-if="newCasefile2.photos.facial.frontatrest === apiUrl+'/images/camera.svg' || newCasefile2.photos.facial.rightprofile === apiUrl+'/images/camera.svg' ||
+                          newCasefile2.photos.facial.submentovertex === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.facial.frontatrest === apiUrl+'/images/camera.svg'">
+                          &nbsp; Front - Relaxed <span ng-if="newCasefile2.photos.facial.rightprofile === apiUrl+'/images/camera.svg' ||
+                          newCasefile2.photos.facial.submentovertex === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.facial.rightprofile === apiUrl+'/images/camera.svg'">
+                          &nbsp; Profile - Facing the Right <span ng-if="newCasefile2.photos.facial.submentovertex === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.facial.submentovertex === apiUrl+'/images/camera.svg'">
+                          &nbsp; Submento Vertex
+                      </span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </form>

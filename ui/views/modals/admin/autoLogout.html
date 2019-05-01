@@ -1,0 +1,18 @@
+<script type="text/ng-template" id="autoLogout.html">
+   <div class="modal fade show" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title confirmDelete">Your session has expired.</h4>
+          <button type="button" class="close" ng-click="modalCtrl.redirectToLogin()" data-dismiss="modal" aria-hidden="true">&times;</button>        
+        </div>
+        <div class="modal-body">
+          Your session has expired.  You need to log in to continue.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="modalCtrl.redirectToLogin()" data-dismiss="modal">Okay</button>
+        </div>
+      </div>
+    </div>
+   </div>
+</script>

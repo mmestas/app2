@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html ng-app="urlSiteDiagnostics" ng-cloak="">
+	<head>
+    <title>{{title}}</title>
+		<base href="/">
+    <!-- ///////////// Meta Tags /////////////// -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <!-- ///////////// CSS /////////////// -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> <!-- New 2.20.19 -->
+		<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+		<link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.4/angular-material.css">
+		<link rel="stylesheet" href="https://material.angularjs.org/1.1.4/docs.css">
+		<link rel="stylesheet" type="text/css" href="/css/urlSite.css?v=c155ed1">
+  </head>
+
+  <body id="{{page}}">
+		<nav ng-show="loggedInNav" id="diagnosticNav">
+			<div ng-class="{'urlSite-technicianTransparentNav': navTech, 'urlSite-diagnosticianTransparentNav': navDiag, 'urlSite-adminTransparentNav': navAdmin, 'urlSite-providerTransparentNav': navProv }">
+				<div class="navContainer">
+					<div class="leftNav">
+						<a href="/"><img class="urlSiteLogo" src="{{baseUrl}}/images/urlSite-logo.svg"></a>
+						<span class="title" ui-sref="default">Patients</span>
+					</div>
+					<div class="rightNav">
+								<a class="btn navHeaderBtn" ng-href="{{apiUrl}}">
+									<span class="cloudName">urlSite Cloud</span>
+								</a>
+								<a class="btn navHeaderBtn" ng-click="myAccountLink()">My Account</a>
+								<button class="btn navHeaderBtn" ng-click="logOut()">Logout</button>
+		            <img alt="image" class="img-circle" ng-src="{{userInfo.profile_avatar}}">
+		            <div class="userName">{{userInfo.firstname}} {{userInfo.lastname}}</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+    <div class="ngViewWrapper"><div class="ui-view"></div></div>
+
+		<!-- ///////////// JS /////////////// -->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.5.7/jquery.fileupload.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+		<script src="https://unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+
+		<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+
+		<script type="text/javascript" src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.4/angular-material.js"></script>
+		<script type="text/javascript" src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+		<script src="https://rawgit.com/dwmkerr/angular-modal-service/master/dst/angular-modal-service.js"></script>
+
+		<!-- Not sure if we will end up using these -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.js"></script>
+		<script src="/js/angular/s3sign.js?v=7cc49d9"></script>
+		<script src="/js/angular/jquery.fileupload-jquery-ui.js?v=909038a"></script>
+		<script src="/js/angular/jquery.fileupload-ui.js?v=f3399e0"></script>
+		<!-- End unsure -->
+
+		<script src="/js/angular/angular-block-ui.min.js?v=26d1e0b"></script>
+		<script src="/js/angular/ng-file-upload-shim.js?v=63287ec"></script>
+		<script src="/js/angular/ng-file-upload.js?v=1b51fe1"></script>
+		<script src="/js/angular/angular-upload.min.js?v=260038a"></script>
+		<script src="/js/angular/angular-image-cropper.js?v=305c68a"></script>
+
+		<script type="text/javascript" src="/js/app.js?v=96af036"></script>
+		<script type="text/javascript" src="/js/ui-router.js?v=c682d78"></script>
+		<script type="text/javascript" src="/js/services/apiSrvc.js?v=ac3e0d1"></script>
+		<script type="text/javascript" src="/js/services/authSrvc.js?v=508a9a7"></script>
+		<script type="text/javascript" src="/js/services/commonFnSrvc.js?v=3f49706"></script>
+		<script type="text/javascript" src="/js/controllers/mainCtrl.js?v=3023238"></script>
+		<script type="text/javascript" src="/js/directives/s3Directive.js?v=2711164"></script>
+		<script type="text/javascript" src="/js/directives/phoneDirective.js?v=7da8aa6"></script>
+		<script type="text/javascript" src="/js/directives/ngPlaceholder.js?v=861e6d0"></script>
+		<script type="text/javascript" src="/js/filters/jsonDateFilter.js?v=9ae20cf"></script>
+		<script type="text/javascript" src="/js/filters/getFilenameFromUrl.js?v=7e3ed8a"></script>
+		<script type="text/javascript" src="/js/filters/statusFilter.js?v=37f7efe"></script>
+
+		<script type="text/javascript" src="/views/modals/admin/confirmStatusChange.js?v=cb47715"></script>
+		<script type="text/javascript" src="/views/modals/admin/needMoreInfo.js?v=e748352"></script>
+
+		<script type="text/javascript" src="/views/dashboard/admin/index.js?v=663ee66"></script>
+		<script type="text/javascript" src="/views/dashboard/technician/index.js?v=581f9bd"></script>
+		<script type="text/javascript" src="/views/dashboard/clinician/index.js?v=3646aec"></script>
+		<script type="text/javascript" src="/views/dashboard/finalReviewer/index.js?v=3a1f6a9"></script>
+		<script type="text/javascript" src="/views/dashboard/provider/index.js?v=4117215"></script>
+
+		<script type="text/javascript" src="/views/new-case-steps/index.js?v=2927172"></script>
+		<script type="text/javascript" src="/views/patientDetails/patientProfile.js?v=63ff13c"></script>
+		<script type="text/javascript" src="/views/patientDetails/modals/archivePatient.js?v=c2dcdbb"></script>
+		<script type="text/javascript" src="/views/patientDetails/modals/transferPatient.js?v=b64e9e0"></script>
+
+		<script type="text/javascript" src="/views/createRx/index.js?v=ae81f27"></script>
+		<script type="text/javascript" src="/views/createRx/teethSelectionModal.js?v=1dd610f"></script>
+		<script type="text/javascript" src="/views/createRx/addNewAddressModal.js?v=c8dffb1"></script>
+
+
+
+
+		<script src="https://use.typekit.net/pft7unm.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+	</body>
+</html>

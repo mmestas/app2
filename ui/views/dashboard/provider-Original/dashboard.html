@@ -1,0 +1,74 @@
+<div id="user" ng-cloak><div class="container"></div></div>
+
+<div id="dashboard" ng-init="dashboardInit()">
+  <div class="container">
+    <div class="dashboardWrapper">
+      <div class="dashTitle">
+        <h2>Provider Dashboard</h2>
+      </div>
+      <div class="open">
+        <button class="btn btn-primary" href="/new-case-step1" ng-click="openNewCase(casefile)">Open a New Case</button>
+      </div>
+    </div>
+    <div class="stats" >
+      <div class="stat" ng-class="{statActive: 1 === selected}"  ng-click="selectTile(1)" >
+        <button>Active Cases</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: activeCases} }:inclusiveFilter).length }}</h3>
+            <p>Active Cases</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 2 === selected}"  ng-click="selectTile(2)" >
+        <button>Pending</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: 1} }).length }}</h3>
+            <p>Pending</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 3 === selected}"  ng-click="selectTile(3)" >
+        <button>Needs More Info</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: 6} }).length }}</h3>
+            <p>Needs More Info</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 4 === selected}"  ng-click="selectTile(4)" >
+        <button>Under Review</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: underReview} }:inclusiveFilter).length }}</h3>
+            <p>Under Review</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 5 === selected}"  ng-click="selectTile(5)" >
+        <button>Completed</button>
+        <a href="#">
+          <div>
+            <h3 ng-if="!completedCasesData">{{notHiddenCompletedCases + statushiddenCompletedCases}}</h3>
+            <h3 ng-if="completedCasesData">{{completedCasesData.length }}</h3>
+            <p>Completed</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div ng-include="'/views/modals/admin/tagFilter.html'"></div>
+    <!-- TABLES -->
+    <div class="row" ng-include="'/views/dashboard/provider/tables/active.html'" ng-if="selected === 1"></div>
+    <div class="row" ng-include="'/views/dashboard/provider/tables/pending.html'" ng-if="selected === 2"></div>
+    <div class="row" ng-include="'/views/dashboard/provider/tables/needsMoreInfo.html'" ng-if="selected === 3"></div>
+    <div class="row" ng-include="'/views/dashboard/provider/tables/underReview.html'" ng-if="selected === 4"></div>
+    <div class="row" ng-include="'/views/dashboard/provider/tables/completed.html'" ng-if="selected === 5"></div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div ng-include="'/views/modals/admin/confirmDelete.html'"></div>
+<div ng-include="'/views/modals/admin/requestRefund.html'"></div>
+<div ng-include="'/views/modals/admin/autoLogout.html'"></div>

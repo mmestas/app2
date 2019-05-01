@@ -1,0 +1,35 @@
+<table ng-table="completedCasesTable" class="table table-condensed table-bordered table-striped casesTable">
+  <tr ng-class="{rushOrder: case.isRushOrder == true }" ng-repeat="case in $data | filter: formattedDateFilter | filter: { assignedTo: { id: userInfo.id } } |  filter: {tag: {title: tagFilter} } | filter: {adminHide: showHideCases} | orderBy: ['-isRushOrder']">
+      <td class="goToCase" title="'Case #'" data-title="'Case #'" filter="{'casenumber': 'text'}" sortable="'casenumber'" ng-click="gotocase(case)">
+        <div class="caseNumberWithReportImages">
+          <div>{{case.casenumber}}</div>
+          <div class="radiologyReportImg">
+            <img data-ng-show="case.includeRadiologyReport" src="/images/AirwayIcon.png">
+            <img data-ng-show="case.includeSassouniPlus" src="/images/sassouniPlus.png">
+          </div>
+        </div>
+      </td>
+      <td class="status" data-title="'Provider'" filter="{'requestedby.name': 'text'}" sortable="'requestedby.name'">{{case.requestedby.name}}</td>
+      <td class="" data-title="'Patient'" filter="firstLastNameFilter" sortable="'info.lastname'">
+        <div class="flexBox">
+          <div><img class="profileImg tableImg" src="{{contentUrl+case.photos.facial.bigsmile}}"></div>
+          <div class="tablePatientName">{{case.info.firstname + " " + case.info.lastname}}</div>
+        </div>
+      </td>
+      <td class="" data-title="'Clinician'" filter="{'assignedToDiagnostician.name': 'text'}" sortable="'assignedToDiagnostician.name'">
+        <span ng-if="case.assignedToDiagnostician.id > 0">{{case.assignedToDiagnostician.name}}</span>
+      </td>
+      <td class="" data-title="'Final Reviewer'" filter="{'assignedToFinalReviewer.name': 'text'}" sortable="'assignedToFinalReviewer.name'">
+        <span ng-if="case.assignedToFinalReviewer.id > 0">{{case.assignedToFinalReviewer.name}}</span>
+      </td>
+      <td data-title="'Date Completed'" filter="{'statusCompletedDate': 'text'}" sortable="'statusCompletedDateSort'">{{case.statusCompletedDate}}</td>
+      <td filter="{'tag.title' : 'filter/tagHeader.html'}" data-title="'Tag'" style="position:relative;">
+        <ul  ng-show="case.selected"  class="tagContainer">
+          <li ng-repeat="tag in tagSelections" ng-click="changeTagColor(case, tag)">
+              <div id="{{tag.id}}" ng-class="{'defaultTag' : !tag.id}" class="tagStyle" style="background-color:{{tag.color}};">{{tag.name}}</div>
+          </li>
+        </ul>
+        <div id="{{case.id}}" ng-class="{'defaultTag' : !case.tag.id}" class="tagStyle" style="background-color:{{case.tag.color}};" ng-click="openCaseTag(case)">{{case.tag.name}}</div>
+      </td>
+    </tr>
+  </table>

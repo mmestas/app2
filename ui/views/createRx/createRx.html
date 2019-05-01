@@ -1,0 +1,875 @@
+<toast></toast>
+<div id="createRx" data-ng-init="createRxInit()">
+  <div class="container vp-10 rxMenu"><i class="fa fa-arrow-circle-o-left fa-lg white" data-ng-click="saveAndReturn(patientPrescriptionDetails, newCasefile)"></i></div>
+  <div class="container vp-20">
+    <!-- Patient Header-->
+    <div class="detailHeader flex-default flex-justify-spaceBetween">
+      <div class="patientRxInfo flex-default">
+        <img class="patientRxPhoto" data-ng-src="{{patientPrescriptionDetails.patient.patientProfilePic}}">
+        <div class="patientRxData">
+          <div class="patientRxName">
+            <span ng-hide="showEditFields">{{patientPrescriptionDetails.patient.patientLastName}}, {{patientPrescriptionDetails.patient.patientFirstName}}</span>
+            <span ng-show="showEditFields">
+              <input data-ng-model="patientPrescriptionDetails.patient.patientLastName">
+              <input data-ng-model="patientPrescriptionDetails.patient.patientFirstName">
+            </span>
+          </div>
+          <div>{{patientPrescriptionDetails.casenumber}}</div>
+          <div class="patientFields">
+            <span ng-hide="showEditFields"><strong>DOB:</strong> <small>{{patientPrescriptionDetails.patient.patientDOB}}</small></span>
+            <span ng-show="showEditFields">
+              <md-datepicker class="" name="patientBD" ng-model="patientPrescriptionDetails.patient.patientDOB" md-current-view="year" md-placeholder="* Patient Birthdate"
+                  ng-change="getAge(patientPrescriptionDetails.patient.patientDOB)" ng-required="true"></md-datepicker>
+            </span>
+            <strong>&nbsp; Age:</strong> <small>{{currentAge}} yr<span data-ng-if="currentAge !== 1">s</span></small> <small>{{currentAgeMonth}} mnth<span data-ng-if="currentAge !== 1">s</span></small>
+            <span ng-hide="showEditFields"><strong>&nbsp; Sex:</strong> <small>{{patientPrescriptionDetails.patient.gender}}</small></span>
+            <span ng-show="showEditFields">
+              <label class="radioLabel">
+                  <input type="radio" name="Patient Gender" ng-model="patientPrescriptionDetails.patient.gender" value="male"> Male
+              </label>
+              <label class="radioLabel">
+                  <input type="radio" name="Patient Gender" ng-model="patientPrescriptionDetails.patient.gender" value="female"> Female
+              </label>
+            </span>
+          </div>
+          <div><strong>Prescription ID:</strong> <small ng-if="patientPrescriptionDetails.prescriptionId">{{patientPrescriptionDetails.prescriptionId}}</small><small ng-if="!patientPrescriptionDetails.prescriptionId">New</small></div>
+        </div>
+      </div>
+      <div class="providerRxInfo">
+        <img class="providerRxPhoto" data-ng-src="{{patientPrescriptionDetails.patient.requestedByProfile_avatar}}">
+        <div class="providerRxName">{{patientPrescriptionDetails.patient.requestedByName}}</div>
+      </div>
+    </div>
+    <!-- Lab Selection -->
+    <section class="border vp-10 vmt-15" id="labSelection">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader flex-default flex-justify-spaceBetween">
+              <div>
+                <i class="fa fa-minus-circle" data-ng-click="showSection = !showSection" ng-show="showSection"></i>
+                <i class="fa fa-plus-circle" data-ng-click="showSection = !showSection; getLabs()" ng-hide="showSection"></i>
+                <strong>Lab Selection</strong>
+              </div>
+              <div><i class="fa fa-check-circle green" data-ng-if="labSectionComplete"></i></div>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showSection">
+              <div class="flex-default flex-justify-center">
+                <div class="flex-default flex-column flex-align-center sectionSelections vmr-20">
+                  <div class="flex-default flex-align-center">
+                    <label>Please Choose Lab</label>
+                    <select data-ng-options="lab as lab.name for lab in labSelections track by lab.name" data-ng-model="patientPrescriptionDetails.labs.lab" data-ng-change="checkLab(patientPrescriptionDetails.labs)" data-ng-disabled="!allowSave">
+                      <option value="">Please Select</option>
+                    </select>
+                  </div>
+                  <div class="flex-default flex-align-center" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid !== '{5db38949-748f-4c89-942a-86f946945f2c}'">
+                    <label>Production Time</label>
+                    <select data-ng-options="time.id as time.name for time in productionTime" ng-model="patientPrescriptionDetails.labs.productionTime" data-ng-disabled="disableProductionTimeSelection || (patientPrescriptionDetails.prescriptionNumber!==0)"></select>
+                  </div>
+                </div>
+                <div class="labImg">
+                  <img data-ng-src="{{patientPrescriptionDetails.labs.lab.imageUrl}}">
+                </div>
+              </div>
+              <div class="text-right"><button class="btn btn-primary vmt-20" data-ng-click="savePatientPrescriptionDetails(patientPrescriptionDetails, newCasefile)" data-ng-if="allowChanges">Save Changes</button></div>
+            </div>
+        </div>
+    </section>
+    <!-- Teeth Charting -->
+    <section class="border vp-10 vmt-15" id="teethCharting">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader  flex-default flex-justify-spaceBetween">
+              <div>
+                <i class="fa fa-minus-circle" data-ng-click="showSection3 = !showSection3" ng-show="showSection3"></i>
+                <i class="fa fa-plus-circle" data-ng-click="showSection3 = !showSection3" ng-hide="showSection3"></i>
+                <strong>Confirm Teeth Charting</strong>
+              </div>
+              <div><i class="fa fa-check-circle green" data-ng-if="teethChartedSectionComplete"></i></div>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showSection3">
+              <div class="row" style="margin-top: 15px; border: 1px solid #eaeaea; padding: 10px;">
+                <div id="toothMap" class="flex flex-justify-center flex-wrap">
+                  <div style="width:236px;">
+                    <div style="font-size:13px;"><strong>Select input, then indicate on teeth chart</strong></div>
+                    <div>
+                      <ul class="tabbedList">
+                        <li data-ng-click="selectModel(1)" data-ng-class="{'selectedDiagram': missingTeethDiagram}">Missing teeth/extractions (M)</li>
+                        <li data-ng-click="selectModel(2)" data-ng-class="{'selectedDiagram': bridgeDiagram}">Bridge (B)</li>
+                        <li data-ng-click="selectModel(3)" data-ng-class="{'selectedDiagram': crownDiagram}">Crown (C)</li>
+                        <li data-ng-click="selectModel(4)" data-ng-class="{'selectedDiagram': implantsDiagram}">Implants (I)</li>
+                        <li data-ng-click="selectModel(5)" data-ng-class="{'selectedDiagram': impactedDiagram}">Impacted (IP)</li>
+                        <li data-ng-click="selectModel(6)" data-ng-class="{'selectedDiagram': deciduousDiagram}">Deciduous (D)</li>
+                        <li data-ng-click="selectModel(7)" data-ng-class="{'selectedDiagram': allDiagram}">All</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="toothDiagram" data-ng-class="{'toothInactive': !allowChanges}">
+                    <div ng-include="'views/new-case-steps/teethModels/missingTeeth.html'" ng-show="missingTeethDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/bridge.html'" ng-show="bridgeDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/crown.html'" ng-show="crownDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/implants.html'" ng-show="implantsDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/impacted.html'" ng-show="impactedDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/deciduous.html'" ng-show="deciduousDiagram"></div>
+                    <div ng-include="'views/new-case-steps/teethModels/all.html'" ng-show="allDiagram"></div>
+                  </div>
+                </div>
+              </div>
+              <!--Note: Because of the teethCharting, this section has the parameter "newCasefile" -->
+              <div class="text-right"><button class="btn btn-primary vmt-20" data-ng-click="savePatientPrescriptionDetails(patientPrescriptionDetails, newCasefile)" data-ng-if="allowChanges">Save Changes</button></div>
+              <!-- <div class="text-right"><button class="btn btn-primary vmt-20" data-ng-click="saveTeeth(patientPrescriptionDetails, newCasefile)" data-ng-if="allowChanges">Save Changes</button></div> -->
+            </div>
+
+        </div>
+    </section>
+    <!-- Appliance Construction -->
+    <section class="border vp-10 vmt-15" id="applianceConstruction">
+      <div class="collapsableSection">
+          <div class="collapsableSectionHeader flex-default flex-justify-spaceBetween">
+            <div>
+              <i class="fa fa-minus-circle" data-ng-click="showSection2 = !showSection2" ng-show="showSection2"></i>
+              <i class="fa fa-plus-circle" data-ng-click="showSection2 = !showSection2; getApplianceData(); removeSelectedurlSiteGuides();" ng-hide="showSection2"></i>
+              <strong>Appliance Construction</strong>
+            </div>
+            <div><i class="fa fa-check-circle green" data-ng-if="applianceSystemComplete"></i></div>
+          </div>
+          <div class="collapsableSectionBody" ng-show="showSection2">
+            <div class="flex-default flex-justify-center">
+              <div class="flex-default flex-column flex-align-center sectionSelections vmr-20">
+                <div class="flex-default flex-align-center">
+                  <label>Treatment Stage<span class="required">*</span></label>
+                  <select name="" data-ng-model="patientPrescriptionDetails.healthHistory.sleepTestInfo.treatmentStage" data-ng-options="stage.id as stage.name for stage in treatmentStages" data-ng-disabled="!allowSave">
+                    <option value=''>Select One</option>
+                  </select>
+                </div>
+                <div class="flex-default flex-align-center">
+                  <label>urlSite System Construction<span class="required">*</span></label>
+                  <select data-ng-options="appliance as appliance.name for appliance in appliances | filter: '!{C9C9726A-F542-40B8-9674-DD48E2C7AB22}' | filter: '!{5db38949-748f-4c89-942a-86f946945f2c}' track by appliance.name " ng-model="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem" data-ng-disabled="!allowSave" data-ng-if="patientPrescriptionDetails.labs.lab.guid !== '{cfe70a68-ca83-4020-b9e6-0b622d74e309}'">
+
+                    <option value=''>Select One</option>
+                  </select>
+                  <div data-ng-if="patientPrescriptionDetails.labs.lab.guid === '{cfe70a68-ca83-4020-b9e6-0b622d74e309}'">{{patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.name}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Upper Arch Analysis -->
+            <div id="singleUpperArchSystem" class="applianceConstructionForm vmb-15" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{9303A641-E32C-43DF-9F18-03C551FD99F3}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{AEC9E99B-1D7E-4466-A4DC-744162A005AB}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{476D52E7-4783-4D40-8BA6-E00471F7B13B}'">
+              <div class="urlSite-well">
+                <h3 class="well-title">Upper Arch System</h3>
+                <div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Base<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="baseUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.base" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Acrylic </label>
+                      <label class="radioLabel"><input type="radio" name="baseUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.base" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Wireframe </label>
+                      <label class="radioLabel"><input type="radio" name="baseUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.base" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Hybrid </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Screw<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="screwUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.screw" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Y Split (3 way) </label>
+                      <div class=""  data-ng-if="patientPrescriptionDetails.applianceSystem.upperSystem.screw === 2" style="display:inline-block;">
+                        <div><label>y Split Cuts Distal on #s</label></div>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(12)">
+                          <span data-ng-repeat="ySplit in patientPrescriptionDetails.applianceSystem.upperSystem.ySplitCutsDistal">{{ySplit}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.ySplitCutsDistal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+
+                      <label class="radioLabel"><input type="radio" name="screwUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.screw" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Transverse </label>
+                      <label class="radioLabel"><input type="radio" name="screwUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.screw" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Cruciform or Pattern </label>
+
+                      <div class="" data-ng-if="patientPrescriptionDetails.applianceSystem.upperSystem.screw === 3" style="display:inline-block;">
+                        <div><label>Cruciform Cuts Distal on #s</label></div>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(13)" >
+                          <span data-ng-repeat="cruciform in patientPrescriptionDetails.applianceSystem.upperSystem.cruciformCutsDistal">{{cruciform}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.cruciformCutsDistal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+
+                      <label class="radioLabel"><input type="radio" name="screwUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.screw" ng-value="4" data-ng-true-value="4" value="4" data-ng-disabled="!allowSave"> none </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Clasps</h3>
+                    <div class="flex-grow flex">
+                      <div class="flex flex-column vmr-5">
+                        <label>Adams on #s</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(1)">
+                          <span data-ng-repeat="adam in patientPrescriptionDetails.applianceSystem.upperSystem.clasps.adams">{{adam}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.clasps.adams.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Ball (select between #s)</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(2)">
+                          <span data-ng-repeat="ball in patientPrescriptionDetails.applianceSystem.upperSystem.clasps.ball">{{ball}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.clasps.ball.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>C on #s</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(3)">
+                          <span data-ng-repeat="c in patientPrescriptionDetails.applianceSystem.upperSystem.clasps.c">{{c}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.clasps.c.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Arrow (select between #s)</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(4)">
+                          <span data-ng-repeat="arrow in patientPrescriptionDetails.applianceSystem.upperSystem.clasps.arrow">{{arrow}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.clasps.arrow.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Stops</h3>
+                    <div class="flex-grow flex">
+                      <div class="flex flex-column vmr-5">
+                        <label>Mesial</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(5)">
+                          <span data-ng-repeat="mesidal in patientPrescriptionDetails.applianceSystem.upperSystem.stops.mesidal">{{mesidal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.stops.mesidal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Distal</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(6)">
+                          <span data-ng-repeat="distal in patientPrescriptionDetails.applianceSystem.upperSystem.stops.distal">{{distal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.stops.distal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Occlusal</label>
+                        <button class="fakeInput" ng-click="openTeethSelectionModal(7)">
+                          <span data-ng-repeat="occusal in patientPrescriptionDetails.applianceSystem.upperSystem.stops.occusal">{{occusal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.stops.occusal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Elastic Hooks</h3>
+
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="hooksUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.elasticHooks" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Class II </label>
+                      <label class="radioLabel"><input type="radio" name="hooksUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.elasticHooks" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Vertical </label>
+                      <label class="radioLabel"><input type="radio" name="hooksUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.elasticHooks" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> none </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Bow<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="bowUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.bow" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Standard </label>
+                      <label class="radioLabel"><input type="radio" name="bowUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.bow" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Circumferencial (wrap) </label>
+                      <label class="radioLabel"><input type="radio" name="bowUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.bow" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Other </label>
+                      <input data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.bowOther" data-ng-if="patientPrescriptionDetails.applianceSystem.upperSystem.bow === 3" data-ng-required="patientPrescriptionDetails.applianceSystem.upperSystem.bow === 3">
+                      <label class="radioLabel"><input type="radio" name="bowUpper" ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.bow" ng-value="4" data-ng-true-value="4" value="4" data-ng-disabled="!allowSave"> none </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Anterior Index Ramp</h3>
+                    <input type="checkbox" id="anteriorIndexRamp" name="anteriorIndexRamp" data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.anteriorIndexRamp" data-ng-disabled="!allowSave">
+                    <label for="anteriorIndexRamp" class="checkbox">Yes</label>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Occlusal Acrylic Coverage to #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openTeethSelectionModal(8)">
+                        <span data-ng-repeat="oac in patientPrescriptionDetails.applianceSystem.upperSystem.occusalAcrylicCoverage">{{oac}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.occusalAcrylicCoverage.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">3D Axial Springs on #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openTeethSelectionModal(9)">
+                        <span data-ng-repeat="axialSpring in patientPrescriptionDetails.applianceSystem.upperSystem.axialSprings">{{axialSpring}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.axialSprings.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">'C' Loop 3D Axial Springs</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openTeethSelectionModal(11)">
+                        <span data-ng-repeat="cLoop in patientPrescriptionDetails.applianceSystem.upperSystem.cLoops">{{cLoop}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.cLoops.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Eruption friendly on #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openTeethSelectionModal(10)">
+                        <span data-ng-repeat="eruptionFriendly in patientPrescriptionDetails.applianceSystem.upperSystem.eruptionFriendly">{{eruptionFriendly}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.upperSystem.eruptionFriendly.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">OSA Extension</h3>
+                    <div class="flex flex-column">
+                      <input type="checkbox" id="osaExtension" name="osaExtension" data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.osaExtension" data-ng-disabled="!allowSave">
+                      <label for="osaExtension" class="checkbox">Yes</label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10" data-ng-if="patientPrescriptionDetails.applianceSystem.upperSystem.osaExtension">
+                    <h3 class="rowLabel">OSA Extension Length</h3>
+                    <div>
+                      <input data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.osaExtensionLength" placeholder="mm" data-ng-disabled="!allowSave">
+                    </div>
+                    <label> &nbsp; (Measurement is in mm; measure from the posterior portion of the acrylic to the end of the extension.)</label>
+                  </div>
+
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Head Gear <br><small>(additional $150)</small></h3>
+                    <div class="flex flex-column">
+                      <input type="checkbox" id="headGear" name="headGear" data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.headGear" data-ng-disabled="!allowSave">
+                      <label for="headGear" class="checkbox">Yes</label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Comments</h3>
+                    <div class="flex-grow" >
+                      <textarea style="min-height:85px; width:100%;" data-ng-model="patientPrescriptionDetails.applianceSystem.upperSystem.additionalComments" placeholder="Additional Comments for Upper Arch System" data-ng-disabled="!allowSave"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">PDF Diagram</h3>
+                    <div style="clear:both;" class="steps files_list">
+                        <input class="hidden" id="uploadUpperDiagram" name="uploadUpperDiagram" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram, 'upperSystem_diagram')"
+                            ng-model="patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram" value="" data-ng-disabled="!allowSave">
+                        <label class="dragNDropFileUploader" for="uploadLowerDiagram"><i class="fa fa-file-pdf-o"></i></label>
+                        <div class="dragFileUploader" ngf-select="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram, 'upperSystem_diagram')"
+                            ngf-drop="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram, 'upperSystem_diagram')" ng-model="patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            data-ngf-accept="'.pdf'" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram.name}}</div>
+                        <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram" ng-hide="patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram.name"
+                            ng-bind="patientPrescriptionDetailsImages.applianceSystem.upperSystem.diagram  | fileNameOnly">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-align-center vmb-10">
+                      <h3 class="rowLabel">Download Blank Diagram</h3>
+                      <label><a data-ng-href="{{patientPrescriptionDetails.RxDiagramPDFPath}}" class="btn btn-primary" target="_blank"><i class="fa fa-download"></i> Blank PDF Diagram</a></label>
+                    </div>
+
+                    <div class="flex-justify-center">
+                      <div class="flex-default flex-column  vmr-10" style="width:300px;">
+                        <h3 class="vm-0">Please select one urlSite Guide</h3>
+                        <div style="font-size:10px; font-style: italic;">
+                          The Single Arch Upper System includes one urlSite Guide.  Additional guides may be purchased on a per patient basis for an additional fee.
+                        </div>
+                        <div class="fieldError" data-ng-if="showErrorMsg">{{errorMsg}}</div>
+                      </div>
+                      <div style="width:255px;">
+                        <div class="flex-default">
+                          <select class="vmb-5 guideSelect" data-ng-options="guide as guide.name for guide in urlSiteGuides track by guide.name" ng-model="patientPrescriptionDetails.applianceSystem.urlSiteGuideForUpperSystem" data-ng-disabled="!allowSave">
+                            <option value=''>Select One</option>
+                          </select>
+
+                          <select class="vmb-5 vml-5 guideSelect" data-ng-options="size as size for size in patientPrescriptionDetails.applianceSystem.urlSiteGuideForUpperSystem.sizes" ng-model="patientPrescriptionDetails.applianceSystem.urlSiteGuideForUpperSystem.size" data-ng-if="patientPrescriptionDetails.applianceSystem.urlSiteGuideForUpperSystem.sizes.length > 0">
+                            <option value=''>Select Size</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+                </div>
+              </div>
+            </div>
+            <!-- Lower Arch Analysis -->
+            <div id="singleLowerArchSystem" class="applianceConstructionForm vmb-15" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{17854ec2-83be-4967-9442-edd568aad472}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{AEC9E99B-1D7E-4466-A4DC-744162A005AB}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{476D52E7-4783-4D40-8BA6-E00471F7B13B}'">
+              <div class="urlSite-well">
+                <h3 class="well-title">Lower Arch System</h3>
+                <div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Base<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="base" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.base" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Acrylic </label>
+                      <label class="radioLabel"><input type="radio" name="base" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.base" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Wireframe </label>
+                      <label class="radioLabel"><input type="radio" name="base" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.base" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Hybrid </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Clasps</h3>
+                    <div class="flex-grow flex">
+                      <div class="flex flex-column vmr-5">
+                        <label>Adams on #s</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(1)">
+                          <span data-ng-repeat="adam in patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.adams">{{adam}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.adams.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Ball (select between #s)</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(2)">
+                          <span data-ng-repeat="ball in patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.ball">{{ball}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.ball.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>C on #s</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(3)">
+                          <span data-ng-repeat="c in patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.c">{{c}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.c.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Arrow (select between #s)</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(4)">
+                          <span data-ng-repeat="arrow in patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.arrow">{{arrow}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.clasps.arrow.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Stops</h3>
+                    <div class="flex-grow flex">
+                      <div class="flex flex-column vmr-5">
+                        <label>Mesial</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(5)">
+                          <span data-ng-repeat="mesidal in patientPrescriptionDetails.applianceSystem.lowerSystem.stops.mesidal">{{mesidal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.stops.mesidal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Distal</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(6)">
+                          <span data-ng-repeat="distal in patientPrescriptionDetails.applianceSystem.lowerSystem.stops.distal">{{distal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.stops.distal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                      <div class="flex flex-column vmr-5">
+                        <label>Occlusal</label>
+                        <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(7)">
+                          <span data-ng-repeat="occusal in patientPrescriptionDetails.applianceSystem.lowerSystem.stops.occusal">{{occusal}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.stops.occusal.length - 1)">, </span></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Screw<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="screw" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.screw" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Transverse </label>
+                      <label class="radioLabel"><input type="radio" name="screw" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.screw" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Y Split (3 way) </label>
+                      <label class="radioLabel"><input type="radio" name="screw" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.screw" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Cruciform or Pattern </label>
+                    </div>
+                  </div> -->
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Elastic Hooks<span class="required">*</span></h3>
+
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="hooks" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.elasticHooks" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Class II </label>
+                      <label class="radioLabel"><input type="radio" name="hooks" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.elasticHooks" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Vertical </label>
+                      <label class="radioLabel"><input type="radio" name="hooksUpper" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.elasticHooks" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> none </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Bow<span class="required">*</span></h3>
+                    <div class="flex-grow">
+                      <label class="radioLabel"><input type="radio" name="bow" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.bow" ng-value="1" data-ng-true-value="1" value="1" data-ng-disabled="!allowSave"> Standard </label>
+                      <label class="radioLabel"><input type="radio" name="bow" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.bow" ng-value="2" data-ng-true-value="2" value="2" data-ng-disabled="!allowSave"> Circumferencial (wrap) </label>
+                      <label class="radioLabel"><input type="radio" name="bow" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.bow" ng-value="3" data-ng-true-value="3" value="3" data-ng-disabled="!allowSave"> Other </label>
+                      <input data-ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.bowOther" data-ng-if="patientPrescriptionDetails.applianceSystem.lowerSystem.bow === 3" data-ng-required="patientPrescriptionDetails.applianceSystem.lowerSystem.bow === 3">
+                      <label class="radioLabel"><input type="radio" name="bow" ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.bow" ng-value="4" data-ng-true-value="4" value="4" data-ng-disabled="!allowSave"> none </label>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Occlusal Acrylic Coverage to #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(8)">
+                        <span data-ng-repeat="oac in patientPrescriptionDetails.applianceSystem.lowerSystem.occusalAcrylicCoverage">{{oac}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.occusalAcrylicCoverage.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">3D Axial Springs on #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(9)">
+                        <span data-ng-repeat="axialSpring in patientPrescriptionDetails.applianceSystem.lowerSystem.axialSprings">{{axialSpring}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.axialSprings.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">'C' Loop 3D Axial Springs</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(11)">
+                        <span data-ng-repeat="cLoop in patientPrescriptionDetails.applianceSystem.lowerSystem.cLoops">{{cLoop}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.cLoops.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Eruption friendly on #s</h3>
+                    <div>
+                      <button class="fakeInput" ng-click="openLowerArchTeethSelectionModal(10)">
+                        <span data-ng-repeat="eruptionFriendly in patientPrescriptionDetails.applianceSystem.lowerSystem.eruptionFriendly">{{eruptionFriendly}}<span data-ng-if="$index < (patientPrescriptionDetails.applianceSystem.lowerSystem.eruptionFriendly.length - 1)">, </span></span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-align-center vmb-10">
+                    <h3 class="rowLabel">Comments</h3>
+                    <div class="flex-grow" >
+                      <textarea style="min-height:85px; width:100%;" data-ng-model="patientPrescriptionDetails.applianceSystem.lowerSystem.additionalComments" placeholder="Additional Comments for Lower Arch System" data-ng-disabled="!allowSave"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex flex-align-center vmb-10" data-ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{17854ec2-83be-4967-9442-edd568aad472}'">
+                    <h3 class="rowLabel">PDF Diagram</h3>
+                    <div style="clear:both;" class="steps files_list">
+                        <input class="hidden" id="uploadLowerDiagram" name="uploadLowerDiagram" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram, 'lowerSystem_diagram')"
+                            ng-model="patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram" value="" data-ng-disabled="!allowSave">
+                        <label class="dragNDropFileUploader" for="uploadLowerDiagram"><i class="fa fa-file-pdf-o"></i></label>
+                        <div class="dragFileUploader" ngf-select="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram, 'lowerSystem_diagram')"
+                            ngf-drop="uploadFiles(patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram, 'lowerSystem_diagram')" ng-model="patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            data-ngf-accept="'.pdf'" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram.name}}</div>
+                        <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram" ng-hide="patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram.name"
+                            ng-bind="patientPrescriptionDetailsImages.applianceSystem.lowerSystem.diagram">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex flex-align-center vmb-10"  data-ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{17854ec2-83be-4967-9442-edd568aad472}'">
+                      <h3 class="rowLabel">Download Blank Diagram</h3>
+                      <label><a data-ng-href="{{patientPrescriptionDetails.RxDiagramPDFPath}}" class="btn btn-primary" target="_blank"><i class="fa fa-download"></i> Blank PDF Diagram</a></label>
+                    </div>
+
+                    <div class="flex-justify-center"  ng-if="!(patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{9303A641-E32C-43DF-9F18-03C551FD99F3}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{AEC9E99B-1D7E-4466-A4DC-744162A005AB}' || patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{476D52E7-4783-4D40-8BA6-E00471F7B13B}')">
+                      <div class="flex-default flex-column vmr-10" style="width:300px;">
+                        <h3 class="vm-0">Please select one urlSite Guide</h3>
+                        <div style="font-size:10px; font-style: italic;">
+                          The Single Arch Upper System includes one urlSite Guide.  Additional guides may be purchased on a per patient basis for an additional fee.
+                        </div>
+                        <div class="fieldError" data-ng-if="showErrorMsg">{{errorMsg}}</div>
+                      </div>
+                      <div style="width:255px;">
+                        <div class="flex-default">
+                          <select class="vmb-5 guideSelect" data-ng-options="guide as guide.name for guide in urlSiteGuides track by guide.name" ng-model="patientPrescriptionDetails.applianceSystem.urlSiteGuideForLowerSystem" data-ng-disabled="!allowSave">
+                            <option value=''>Select One</option>
+                          </select>
+
+                          <select class="vmb-5 vml-5 guideSelect" data-ng-options="size as size for size in patientPrescriptionDetails.applianceSystem.urlSiteGuideForLowerSystem.sizes" ng-model="patientPrescriptionDetails.applianceSystem.urlSiteGuideForLowerSystem.size" data-ng-if="patientPrescriptionDetails.applianceSystem.urlSiteGuideForLowerSystem.sizes.length > 0" data-ng-disabled="!allowSave">
+                            <option value=''>Select Size</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- urlSite Guides -->
+            <div id="urlSiteGuides" class="applianceConstructionForm" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid === '{5db38949-748f-4c89-942a-86f946945f2c}'">
+              <div class="flex-justify-center">
+                <div class="flex-default flex-column" style="width:300px;">
+                  <h3 class="vm-0" data-ng-if="patientPrescriptionDetails.prescriptionNumber === 0">Select up to four (4) guides</h3>
+                  <div style="font-size:10px; font-style: italic;" data-ng-if="patientPrescriptionDetails.prescriptionNumber === 0">
+                    You can select up to 4 urlSite guides, each additional guide is purchased on a per patient basis for an additional fee.
+                  </div>
+                  <div class="fieldError" data-ng-if="showErrorMsg">{{errorMsg}}</div>
+                </div>
+                <div style="width:255px;">
+                  <div data-ng-repeat="selectedGuide in patientPrescriptionDetails.applianceSystem.urlSiteGuides track by $index" class="flex-default" >
+                    <div class="guideSelect">
+                      {{selectedGuide.name}}
+                      <span data-ng-click="removeGuide(selectedGuide, $index)" style="float:right; cursor:pointer;" data-ng-if="!selectedGuide.invoiced && allowSave"><i class="fa fa-close"></i></span>
+                    </div>
+                    <select class="vmb-5 vml-5 guideSelect" data-ng-options="size as size for size in selectedGuide.sizes" ng-model="selectedGuide.size" ng-change="addSize(selectedGuide.size, selectedGuide)" data-ng-if="selectedGuide.sizes.length > 0">
+                      <option value=''>Select Size</option>
+                    </select>
+                  </div>
+
+                  <select class="vmb-5 guideSelect" data-ng-options="guide as guide.name for guide in urlSiteGuides" ng-model="guideSelect" ng-change="selectGuid(guideSelect); guideSelect = {};" data-ng-hide="patientPrescriptionDetails.applianceSystem.urlSiteGuides.length === 4">
+                    <option value=''>Select One</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="text-right vmt-20">
+              <button class="btn btn-primary vmt-5" data-ng-click="savePatientPrescriptionDetails(patientPrescriptionDetails, newCasefile)" data-ng-if="allowSave">Save Changes</button>
+            </div>
+          </div>
+      </div>
+    </section>
+    <!-- Upload Rx -->
+    <section class="border vp-10 vmt-15" id="uploadRx" data-ng-hide="true">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader  flex-default flex-justify-spaceBetween">
+              <div>
+                <i class="fa fa-minus-circle" data-ng-click="showSection4 = !showSection4" ng-show="showSection4"></i>
+                <i class="fa fa-plus-circle" data-ng-click="showSection4 = !showSection4" ng-hide="showSection4"></i>
+                <strong>Upload Rx</strong>
+              </div>
+              <div><i class="fa fa-check-circle green" data-ng-if="false"></i></div>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showSection4">
+              Section Body
+            </div>
+        </div>
+    </section>
+    <!-- Model Source -->
+    <section class="border vp-10 vmt-15" id="modelSrc" data-ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid !== '{5db38949-748f-4c89-942a-86f946945f2c}'">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader  flex-default flex-justify-spaceBetween">
+              <div>
+                <i class="fa fa-minus-circle" data-ng-click="showSection5 = !showSection5" ng-show="showSection5"></i>
+                <i class="fa fa-plus-circle" data-ng-click="showSection5 = !showSection5; getConstructionBites(); getShippingMethods();" ng-hide="showSection5"></i>
+                <strong>Model Source</strong>
+              </div>
+              <div><i class="fa fa-check-circle green" data-ng-if="modelSourceComplete"></i></div>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showSection5">
+              <!-- Select Way to send in models CHECKBOXES -->
+              <div style="display:flex;">
+                <div class="mr-5">
+                  <input type="checkbox" id="mailInStoneModels" name="mailInStoneModels" data-ng-model="patientPrescriptionDetails.labs.mailInStoneModels" data-ng-disabled="!allowSave">
+                  <label for="mailInStoneModels" class="checkbox vml-10">Mail in Stone Models</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="uploadStoneModels" name="uploadStoneModels" data-ng-model="patientPrescriptionDetails.labs.uploadStoneModels" data-ng-disabled="!allowSave">
+                  <label for="uploadStoneModels" class="checkbox ml-10">Upload Digital Models</label>
+                </div>
+              </div>
+              <div>
+                <input type="checkbox" id="constructionBiteSelected" name="constructionBiteSelected" data-ng-model="patientPrescriptionDetails.labs.mailInConstructionBite" data-ng-disabled="!allowSave">
+                <label for="constructionBiteSelected" class="checkbox vml-10">I am mailing in a construction bite</label>
+              </div>
+
+
+                <!-- Select shipping method for stone models -->
+                <div class="vmb-10 vmt-10" data-ng-show="patientPrescriptionDetails.labs.mailInStoneModels">
+                  <!-- Temporary fix -->
+                  <div data-ng-if="patientPrescriptionDetails.labs.lab.guid">
+                    <h3 class="inlineLabel formLabel">Please mail package to this address:</h3>
+                    <div >
+                      {{patientPrescriptionDetails.labs.lab.name}}<br>
+                      {{patientPrescriptionDetails.labs.lab.address}}<br>
+                      {{patientPrescriptionDetails.labs.lab.city}}, {{patientPrescriptionDetails.labs.lab.state}} {{patientPrescriptionDetails.labs.lab.zip}}<br>
+                      {{patientPrescriptionDetails.labs.lab.phone}}
+                    </div>
+                  </div>
+                  <div class="fieldError" data-ng-if="!patientPrescriptionDetails.labs.lab.guid">
+                      Please select a lab in the Lab Selection section to see a shipping address.
+                  </div>
+
+                  <!-- This is to be implemented later -->
+                  <div data-ng-if="false">
+                    <h3>Shipping Method for Stone Models</h3>
+                    <select class="formValue" data-ng-options="mism as mism.name for mism in shippingMethods track by mism.name" ng-model="patientPrescriptionDetails.labs.stoneModelsShippingMethod" data-ng-disabled="!allowSave">
+                      <option value="">Please Select*</option>
+                    </select>
+                  </div>
+                </div>
+
+              <!-- Upload the images -->
+              <div data-ng-if="patientPrescriptionDetails.labs.uploadStoneModels" class="mt-15">
+                <h3 class="">Upload Digital Model Files:</h3>
+
+                <div class="flex">
+                    <div class="width_25 vpr-5 vpl-5">
+                        <div style="clear:both;" class="steps files_list">
+                            <input class="hidden" id="upload_sleep_study" name="upload_sleep_study" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.impression3D, 'studymodels_Impression3D')"
+                                ng-model="patientPrescriptionDetailsImages.photos.studymodels.impression3D" value="" data-ng-disabled="!allowSave">
+                            <label class="choose_a_sleep_study_file" for="upload_sleep_study">Upper Arch</label>
+                            <div class="drag3D" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.impression3D, 'studymodels_Impression3D')"
+                                ngf-drop="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.impression3D, 'studymodels_Impression3D')" ng-model="patientPrescriptionDetailsImages.photos.studymodels.impression3D"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                &nbsp;
+                            </div>
+                            <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.photos.studymodels.impression3D.name}}</div>
+                            <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.photos.studymodels.impression3D" ng-hide="patientPrescriptionDetailsImages.photos.studymodels.impression3D.name"
+                                ng-bind="patientPrescriptionDetailsImages.photos.studymodels.impression3D"></div>
+                        </div>
+                    </div>
+                    <div class="width_25 vpr-5 vpl-5">
+                        <div style="clear:both;" class="steps files_list">
+                            <input class="hidden" id="upload_sleep_study" name="upload_sleep_study" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')"
+                                ng-model="patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression" value="" data-ng-disabled="!allowSave">
+                            <label class="choose_a_sleep_study_file" for="upload_sleep_study">Lower Arch</label>
+                            <div class="drag3D" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')"
+                                ngf-drop="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')" ng-model="patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                &nbsp;
+                            </div>
+                            <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression.name}}</div>
+                            <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression" ng-hide="patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression.name"
+                                ng-bind="patientPrescriptionDetailsImages.photos.studymodels.lowerArch3Dimpression"></div>
+                        </div>
+                    </div>
+                    <div class="width_25 vpr-5 vpl-5">
+                        <div style="clear:both;" class="steps files_list">
+                            <input class="hidden" id="upload_sleep_study" name="upload_sleep_study" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')"
+                                ng-model="patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression" value="" data-ng-disabled="!allowSave">
+                            <label class="choose_a_sleep_study_file" for="upload_sleep_study">Natural Bite</label>
+                            <div class="drag3D" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')"
+                                ngf-drop="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')" ng-model="patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                &nbsp;
+                            </div>
+                            <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression.name}}</div>
+                            <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression" ng-hide="patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression.name"
+                                ng-bind="patientPrescriptionDetailsImages.photos.studymodels.naturalBite3Dimpression"></div>
+                        </div>
+                    </div>
+                    <div class="width_25 vpr-5 vpl-5">
+                        <div style="clear:both;" class="steps files_list">
+                            <input class="hidden" id="upload_sleep_study" name="upload_sleep_study" type="file" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')"
+                                ng-model="patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression" value="" data-ng-disabled="!allowSave">
+                            <label class="choose_a_sleep_study_file" for="upload_sleep_study">Constructed Bite</label>
+                            <div class="drag3D" ngf-select="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')"
+                                ngf-drop="uploadFiles(patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')" ng-model="patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                &nbsp;
+                            </div>
+                            <div class="choosen_file uploadLabels">{{patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression.name}}</div>
+                            <div class="uploadLabels" ng-if="patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression" ng-hide="patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression.name"
+                                ng-bind="patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression"></div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="vmb-10" data-ng-show="patientPrescriptionDetails.labs.mailInConstructionBite || patientPrescriptionDetailsImages.photos.studymodels.constructedBite3Dimpression">
+                <h3 class="">Construction Bite Type</h3>
+                <select name="" data-ng-model="patientPrescriptionDetails.studyModels.constructionBite" data-ng-options="bite as bite.name for bite in constructionBites track by bite.name" data-ng-disabled="!allowSave">
+                  <option value=''>Select One</option>
+                </select>
+                <input data-ng-model="patientPrescriptionDetails.studyModels.constructionBiteOther" data-ng-if="patientPrescriptionDetails.studyModels.constructionBite.name === 'Other'" placeholder="other" data-ng-disabled="!allowSave">
+              </div>
+              <div class="vmb-10">
+                <h3 class=" formLabel">Staff Member Who Took the Impression</h3>
+                <input class="formValue" type="text" ng-model="patientPrescriptionDetails.studyModels.staffMemberWhoTookTheImpression" placeholder="Enter name here" data-ng-disabled="!allowSave">
+              </div>
+
+              <div class="fieldError text-right" data-ng-if="showErrorMsgModelSrc">{{errorMsg}}</div>
+              <div class="text-right"><button class="btn btn-primary vmt-20" data-ng-click="savePatientPrescriptionDetails(patientPrescriptionDetails, newCasefile)" data-ng-if="allowChanges">Save Changes</button></div>
+            </div>
+        </div>
+    </section>
+    <!-- Final Review -->
+    <section class="border vp-10 vmt-15" id="finalReview">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader  flex-default flex-justify-spaceBetween">
+              <div>
+                <i class="fa fa-minus-circle" data-ng-click="showSection6 = !showSection6" ng-show="showSection6"></i>
+                <i class="fa fa-plus-circle" data-ng-click="showSection6 = !showSection6; getShippingMethods(); getApplianceSpecialists();  getLabs(); getShippingAddress();" ng-hide="showSection6"></i>
+                <strong>Final Review</strong>
+              </div>
+              <div><i class="fa fa-check-circle green" data-ng-if="finalReviewSectionComplete"></i></div>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showSection6">
+              <div class="flex-justify-spaceBetween flex-align-center vmb-10">
+                <div>
+                  <h3 class="inlineLabel formLabel">Prescription ID</h3>
+                  <div class="inlineBlock formValue">{{patientPrescriptionDetails.prescriptionId}}</div>
+                </div>
+                <div>
+                  <h3 class="inlineLabel formLabel">Provider</h3>
+                  <div class="inlineBlock formValue">{{patientPrescriptionDetails.patient.requestedByName}}</div>
+                </div>
+              </div>
+              <div class="flex-justify-spaceBetween flex-align-center vmb-10">
+                <div>
+                  <h3 class="inlineLabel formLabel">Laboratory</h3>
+                  <select class="formValue" data-ng-options="lab as lab.name for lab in labSelections track by lab.name" ng-model="patientPrescriptionDetails.labs.lab"  ng-change="checkLab(patientPrescriptionDetails.labs)" ng-disabled="(patientPrescriptionDetails.prescriptionNumber!==0)">
+                    <option value="">Please Select</option>
+                  </select>
+                </div>
+                <div>
+                  <h3 class="inlineLabel formLabel">Ship to Address</h3>
+                  <select class="formValue" data-ng-model="patientPrescriptionDetails.labs.shipToAddress" data-ng-options="address as address.addressLine1 + ' ' + address.addressLine2 for address in shippingAddresses track by address.guid" data-ng-disabled="!allowSave" ng-change="addNewShipping(patientPrescriptionDetails.labs.shipToAddress)">
+                    <option value="">Please Select</option>
+                  </select>
+                </div>
+              </div>
+              <div class="flex-justify-spaceBetween flex-align-center vmb-10">
+                <div ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid !== '{5db38949-748f-4c89-942a-86f946945f2c}'">
+                  <h3 class="inlineLabel formLabel">Production Time</h3>
+                  <select class="formValue" data-ng-options="time.id as time.name for time in productionTime" ng-model="patientPrescriptionDetails.labs.productionTime" data-ng-disabled="disableProductionTimeSelection || (patientPrescriptionDetails.prescriptionNumber!==0)"></select>
+                </div>
+                <div>
+                  <h3 class="inlineLabel formLabel">Office Phone</h3>
+                  <div class="inlineBlock formValue">{{userInfo.phone}}</div>
+                </div>
+              </div>
+              <div class="flex-justify-spaceBetween flex-align-center vmb-10">
+                <div>
+                  <h3 class="inlineLabel formLabel">Impression By</h3>
+                  <input class="formValue" type="text" ng-model="patientPrescriptionDetails.studyModels.staffMemberWhoTookTheImpression" placeholder="Enter name here" ng-readonly="(patientPrescriptionDetails.prescriptionNumber!==0)">
+                </div>
+                <div>
+                  <h3 class="inlineLabel formLabel">Appliance Shipping Method</h3>
+                  <select class="formValue" data-ng-options="sm as sm.name for sm in shippingMethods track by sm.name" ng-model="patientPrescriptionDetails.labs.shippingMethod" data-ng-disabled="!allowSave">
+                    <option value="">Please Select</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex vmb-10" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid !== '{5db38949-748f-4c89-942a-86f946945f2c}'">
+                <h3 class="inlineLabel formLabel">Comments</h3>
+                <textarea class="flex-grow" style="min-height:85px; margin-left:14px;" data-ng-model="patientPrescriptionDetails.labs.technicianComments" placeholder="Type to Enter Comments for urlSite/Lab Technician" ng-readonly="(patientPrescriptionDetails.prescriptionNumber!==0)"></textarea>
+              </div>
+
+              <div class="vmb-10" ng-if="patientPrescriptionDetails.initialTreatmentPlan.suggestedApplianceTreatmentSystem.guid !== '{5db38949-748f-4c89-942a-86f946945f2c}'">
+                <div>
+                  <div class="vmb-5">
+                    <h3 class="inlineLabel formLabel">&nbsp;</h3>
+                    <input type="checkbox" id="speakTourlSiteApplianceSpecialist" name="speakTourlSiteApplianceSpecialist" data-ng-model="patientPrescriptionDetails.labs.speakTourlSiteApplianceSpecialist" data-ng-disabled="!allowSave">
+                    <label for="speakTourlSiteApplianceSpecialist" class="checkbox vml-10">I would like to speak to a urlSite Appliance Design Specialist before this appliance is manufactured</label>
+                  </div>
+                  <div data-ng-if="patientPrescriptionDetails.labs.speakTourlSiteApplianceSpecialist" class="vmb-10">
+                    <h3 class="inlineLabel formLabel">&nbsp;</h3>
+                    <span class="required">*</span><select class="formValue vml-10" data-ng-model="patientPrescriptionDetails.labs.applianceSpecialist" data-ng-options="vas as vas.name for vas in urlSiteApplianceSpecialists track by vas.name" data-ng-disabled="!allowSave">
+                      <option value="">Select</option>
+                    </select>
+                    <label  data-ng-if="patientPrescriptionDetails.labs.applianceSpecialist.guid" class="checkbox vml-10"><a class="text-danger font-weight-bold" style="font-size: 16px;" data-ng-click="goToVasLink(patientPrescriptionDetails, newCasefile)" target="_blank" data-ng-href="{{patientPrescriptionDetails.labs.applianceSpecialist.scheduleURL}}"><i class="fa fa-calendar" style="font-size:24px;"></i> &nbsp; Please click here to schedule an appointment with {{patientPrescriptionDetails.labs.applianceSpecialist.name}}</a></label>
+                  </div>
+                </div>
+
+                <div class="vmb-5">
+                  <h3 class="inlineLabel formLabel">&nbsp;</h3>
+                  <input type="checkbox" id="speakToLabSpecialist" name="speakToLabSpecialist" data-ng-model="patientPrescriptionDetails.labs.speakToLabSpecialist" data-ng-disabled="!allowSave">
+                  <label for="speakToLabSpecialist" class="checkbox vml-10">I would like to speak to a Laboratory Specialist before this appliance is manufactured</label>
+                </div>
+
+                <div class="flex vmb-10" data-ng-if="patientPrescriptionDetails.labs.speakToLabSpecialist">
+                  <h3 class="inlineLabel formLabel">Comments</h3>
+                  <textarea class="flex-grow" style="min-height:85px; margin-left:14px;" data-ng-model="patientPrescriptionDetails.labs.additionalInfo" placeholder="Please enter the best time to reach you, questions to cover, etc." data-ng-disabled="!allowSave"></textarea>
+                </div>
+              </div>
+
+              <div id="toastHolder" class="text-center vmt-15 vmb-15">
+                <div id="barcode"></div>
+                <!-- <button class="btn btn-primary" data-ng-click="generateBarcode(newCasefile)" >Barcode</button> -->
+                <button class="btn btn-primary" data-ng-click="submitFunction(patientPrescriptionDetails, newCasefile)" data-ng-if="allowSave">Submit Rx</button>
+              </div>
+              <div class="flex-justify-center flex-align-center" ng-if="patientPrescriptionDetails.prescriptionSubmittedDate">
+                <h3 class="inlineLabel vmr-10">Case Submitted By:</h3>
+                <div>{{userInfo.name}} on {{patientPrescriptionDetails.prescriptionSubmittedDate}}</div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+  </div>
+</div>

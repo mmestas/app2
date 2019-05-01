@@ -1,0 +1,371 @@
+<form id="SystemAdministratorRegistration" name="step2" novalidate  ng-init="step7Init()">
+            <h2 class="teal">Step 7 - Patient Objectives</h2>
+            <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+
+            <section class="border vp-10 vmt-15">
+	            <div class="collapsableSection">
+	                <div class="collapsableSectionHeader vmb-10">
+						<i class="fa fa-minus-circle" data-ng-click="showPatientComplaints = !showPatientComplaints" ng-show="showPatientComplaints"></i>
+						<i class="fa fa-plus-circle" data-ng-click="showPatientComplaints = !showPatientComplaints" ng-hide="showPatientComplaints"></i>
+						<strong>Patient Chief Complaints<span class="required">*</span></strong>
+	                </div>
+	                <div class="collapsableSectionBody" ng-show="showPatientComplaints">
+	                    <div class="flex">
+	                    	<div class="flex flex-column">
+	                    		<input type="checkbox" id="sleep" class="" name="sleep" ng-model="newCasefile.patientComplaints.sleep">
+	                    		<label for="sleep" class="checkbox">Sleep</label>
+	                    	</div>
+	                    	<div class="flex flex-column">
+	                    		<input type="checkbox" id="function" class="" name="function" ng-model="newCasefile.patientComplaints.use">
+	                    		<label for="function" class="checkbox">Function</label>
+	                    	</div>
+	                    	<div class="flex flex-column">
+	                    		<input type="checkbox" id="pain" class="" name="pain" ng-model="newCasefile.patientComplaints.pain">
+	                    		<label for="pain" class="checkbox">Pain</label>
+	                    	</div>
+	                    	<div class="flex flex-column">
+	                    		<input type="checkbox" id="looks" class="" name="looks" ng-model="newCasefile.patientComplaints.looks">
+	                    		<label for="looks" class="checkbox">Cosmetics</label>
+	                    	</div>
+	                    </div>
+	                    <div class="vmt-20">
+	                    	<label for="newCaseTextArea" class="">Details<span class="required">*</span></label>
+	                    	<textarea class="newCaseTextArea" ng-model="newCasefile.patientComplaints.notes" ng-required="true" placeholder="Please describe the complaints in detail"></textarea>
+	                    </div>
+	                </div>
+	             </div>
+            </section>
+            <section class="border vp-10 vmt-15">
+	            <div class="collapsableSection">
+	                <div class="collapsableSectionHeader vmb-10">
+						<i class="fa fa-minus-circle" data-ng-click="showDiagnosticImpression = !showDiagnosticImpression" ng-show="showDiagnosticImpression"></i>
+						<i class="fa fa-plus-circle" data-ng-click="showDiagnosticImpression = !showDiagnosticImpression" ng-hide="showDiagnosticImpression"></i>
+						<strong>Initial Diagnostic Impression</strong>
+	                </div>
+	                <div class="collapsableSectionBody" ng-show="showDiagnosticImpression">
+	                	<div class="flex flex-wrap">
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="sleepBruxism" class="" name="sleepBruxism" ng-model="newCasefile.initialDiagnosticImpression.sleepBruxism">
+	                    		<label for="sleepBruxism" class="checkbox">Retrusive/sleep bruxism</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="previouslyDiagnosedOSA" class="" name="previouslyDiagnosedOSA" ng-model="newCasefile.initialDiagnosticImpression.previouslyDiagnosedOSA">
+	                    		<label for="previouslyDiagnosedOSA" class="checkbox">Previously Diagnosed OSA</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="previouslyDiagnosedTMD" class="" name="previouslyDiagnosedTMD" ng-model="newCasefile.initialDiagnosticImpression.previouslyDiagnosedTMD">
+	                    		<label for="previouslyDiagnosedTMD" class="checkbox">Previously Diagnosed TMD</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="suspectedSDB" class="" name="suspectedSDB" ng-model="newCasefile.initialDiagnosticImpression.suspectedSDB">
+	                    		<label for="suspectedUndiagnosedTmdBsb" class="checkbox">Suspected SDB</label>
+	                    	</div>
+                        <div class="width_25">
+	                    		<input type="checkbox" id="suspectedTMD" class="" name="suspectedTMD" ng-model="newCasefile.initialDiagnosticImpression.suspectedTMD">
+	                    		<label for="suspectedTMD" class="checkbox">Suspected TMD</label>
+	                    	</div>
+                        <div class="width_25">
+	                    		<input type="checkbox" id="Ankyloglossia" class="" name="Ankyloglossia" ng-model="newCasefile.initialDiagnosticImpression.Ankyloglossia">
+	                    		<label for="Ankyloglossia" class="checkbox">Ankyloglossia (tongue-tie)</label>
+	                    	</div>
+                        <div class="width_25">
+	                    		<input type="checkbox" id="Apertognathia" class="" name="Apertognathia" ng-model="newCasefile.initialDiagnosticImpression.Apertognathia">
+	                    		<label for="Apertognathia" class="checkbox">Apertognathia (open bite)</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="craniofacialObesity" class="" name="craniofacialObesity" ng-model="newCasefile.initialDiagnosticImpression.craniofacialObesity">
+	                    		<label for="craniofacialObesity" class="checkbox">Craniofacial obesity</label>
+	                    	</div>
+                        <div class="width_25">
+	                    		<input type="checkbox" id="craniofacialHypoplasia" class="" name="craniofacialHypoplasia" ng-model="newCasefile.initialDiagnosticImpression.craniofacialHypoplasia">
+	                    		<label for="craniofacialHypoplasia" class="checkbox">Craniofacial hypoplasia</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="other" class="" name="other" ng-model="newCasefile.initialDiagnosticImpression.other">
+	                    		<label for="other" class="checkbox">Other</label>
+	                    	</div>
+	                  </div>
+                    <div class="vmt-20">
+                    	<textarea class="newCaseTextArea" ng-model="newCasefile.initialDiagnosticImpression.notes" ng-required="true" placeholder="Please Describe in Detail"></textarea>
+                    </div>
+	                </div>
+	             </div>
+            </section>
+            <section class="border vp-10 vmt-15">
+	            <div class="collapsableSection">
+	                <div class="collapsableSectionHeader vmb-10">
+						<i class="fa fa-minus-circle" data-ng-click="showTreatmentOptions = !showTreatmentOptions" ng-show="showTreatmentOptions"></i>
+						<i class="fa fa-plus-circle" data-ng-click="showTreatmentOptions = !showTreatmentOptions" ng-hide="showTreatmentOptions"></i>
+						<strong>Initial Treatment Objective</strong>
+	                </div>
+	                <div class="collapsableSectionBody" ng-show="showTreatmentOptions">
+	                	  <div class="flex flex-wrap">
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="improveOverbite" class="" name="improveOverbite" ng-model="newCasefile.initialTreatmentObjective.improveOverbite">
+	                    		<label for="improveOverbite" class="checkbox">Improve overbite/overjet to WNL</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="reduceGummySmile" class="" name="reduceGummySmile" ng-model="newCasefile.initialTreatmentObjective.reduceGummySmile">
+	                    		<label for="reduceGummySmile" class="checkbox">Reduce 'gummy smile' tendency</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="recaptureUpperMolarSpaces" class="" name="recaptureUpperMolarSpaces" ng-model="newCasefile.initialTreatmentObjective.recaptureUpperMolarSpaces">
+	                    		<label for="recaptureUpperMolarSpaces" class="checkbox">Recapture upper premolar spaces</label>
+	                    	</div>
+	                    	<div class="width_25">
+	                    		<input type="checkbox" id="correctMidlineDiscrepancy" class="" name="correctMidlineDiscrepancy" ng-model="newCasefile.initialTreatmentObjective.correctMidlineDiscrepancy">
+	                    		<label for="correctMidlineDiscrepancy" class="checkbox">Correct midline discrepancy</label>
+	                    	</div>
+	                    	<div class="">
+	                    		<input type="checkbox" id="increaseTranspalatalBoneWidth" class="" name="increaseTranspalatalBoneWidth" ng-model="newCasefile.initialTreatmentObjective.increaseTranspalatalBoneWidth">
+	                    		<label for="increaseTranspalatalBoneWidth" class="checkbox">Increase transpalatal bone width to accomodate tongue widely</label>
+	                    	</div>
+	                    </div>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Resolve Upper Anterior</h4>
+	                    	<div class="flex flex-wrap">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="uaCrowding" class="" name="uaCrowding" ng-model="newCasefile.initialTreatmentObjective.resolveUpperAnterior.crowding">
+		                    		<label for="uaCrowding" class="checkbox">Crowding</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="spacing" class="" name="spacing" ng-model="newCasefile.initialTreatmentObjective.resolveUpperAnterior.spacing">
+		                    		<label for="spacing" class="checkbox">Spacing</label>
+		                    	</div>
+	                    	</div>
+	                    </section>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Resolve Lower</h4>
+	                    	<div class="flex flex-wrap">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteriorCrowding" class="" name="anteriorCrowding" ng-model="newCasefile.initialTreatmentObjective.resolveLower.anteriorCrowding">
+		                    		<label for="anteriorCrowding" class="checkbox">Anterior Crowding</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteriorSpacing" class="" name="anteriorSpacing" ng-model="newCasefile.initialTreatmentObjective.resolveLower.anteriorSpacing">
+		                    		<label for="anteriorSpacing" class="checkbox">Anterior Spacing</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="posteriorSpacing" class="" name="posteriorSpacing" ng-model="newCasefile.initialTreatmentObjective.resolveLower.posteriorSpacing">
+		                    		<label for="posteriorSpacing" class="checkbox">Posterior Spacing</label>
+		                    	</div>
+	                    	</div>
+	                    </section>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Reposition Mandible</h4>
+	                    	<div class="flex flex-wrap">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteroInferiorlyMidline" class="" name="anteroInferiorlyMidline" ng-model="newCasefile.initialTreatmentObjective.repositionMandible.anteroInferiorlyMidline">
+		                    		<label for="anteroInferiorlyMidline" class="checkbox">Anterior-inferiorly in midline</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteroSuperiorlyMidline" class="" name="anteroSuperiorlyMidline" ng-model="newCasefile.initialTreatmentObjective.repositionMandible.anteroSuperiorlyMidline">
+		                    		<label for="anteroSuperiorlyMidline" class="checkbox">Antero-superiorly in midline</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="inMidline" class="" name="inMidline" ng-model="newCasefile.initialTreatmentObjective.repositionMandible.inMidline">
+		                    		<label for="inMidline" class="checkbox">In midline</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="superiorlyInMidline" class="" name="superiorlyInMidline" ng-model="newCasefile.initialTreatmentObjective.repositionMandible.superiorlyInMidline">
+		                    		<label for="superiorlyInMidline" class="checkbox">Superiorly in midline</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteriorlyInMidline" class="" name="anteriorlyInMidline" ng-model="newCasefile.initialTreatmentObjective.repositionMandible.anteriorlyInMidline">
+		                    		<label for="anteriorlyInMidline" class="checkbox">Anteriorly in midline</label>
+		                    	</div>
+	                    	</div>
+	                    </section>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Improve Upper Airway Parameters</h4>
+	                    	<div class="flex flex-wrap">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="nasal" class="" name="nasal" ng-model="newCasefile.initialTreatmentObjective.improveUpperAirwayParameters.nasal">
+		                    		<label for="nasal" class="checkbox">Nasal</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="retropalatal" class="" name="retropalatal" ng-model="newCasefile.initialTreatmentObjective.improveUpperAirwayParameters.retropalatal">
+		                    		<label for="retropalatal" class="checkbox">Retropalatal</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="retroglossal" class="" name="retroglossal" ng-model="newCasefile.initialTreatmentObjective.improveUpperAirwayParameters.retroglossal">
+		                    		<label for="retroglossal" class="checkbox">Retroglossal</label>
+		                    	</div>
+		                    </div>
+	                    </section>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Correct Crossbite</h4>
+	                    	<div class="flex flex-wrap">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="anteriorTendency" class="" name="anteriorTendency" ng-model="newCasefile.initialTreatmentObjective.correctCrossbite.anteriorTendency">
+		                    		<label for="anteriorTendency" class="checkbox">Anterior Tendency</label>
+		                    	</div>
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="posteriorTendency" class="" name="posteriorTendency" ng-model="newCasefile.initialTreatmentObjective.correctCrossbite.posteriorTendency">
+		                    		<label for="posteriorTendency" class="checkbox">Posterior Tendency</label>
+		                    	</div>
+		                    </div>
+	                    </section>
+	                    <section class="border vp-10 vmt-15">
+	                    	<h4>Other</h4>
+	                    	<div class="flex flex-wrap flex-align-center">
+		                    	<div class="width_33">
+		                    		<input type="checkbox" id="otherOption" class="" name="otherOption" ng-model="newCasefile.initialTreatmentObjective.other.other">
+		                    		<label for="otherOption" class="checkbox">Other</label>
+		                    	</div>
+		                    	<div class="width_66">
+		                    		<input type="text" id="otherNotes" class="width_100" name="otherNotes" ng-model="newCasefile.initialTreatmentObjective.other.notes" placeholder="Other Details">
+		                    	</div>
+		                    </div>
+	                    </section>
+	                </div>
+	             </div>
+            </section>
+            <section class="border vp-10 vmt-15">
+	            <div class="collapsableSection">
+	                <div class="collapsableSectionHeader vmb-10">
+        						<i class="fa fa-minus-circle" data-ng-click="showTreatmentPlan = !showTreatmentPlan" ng-show="showTreatmentPlan"></i>
+        						<i class="fa fa-plus-circle" data-ng-click="showTreatmentPlan = !showTreatmentPlan" ng-hide="showTreatmentPlan"></i>
+        						<strong>Initial Treatment Plan</strong>
+	                </div>
+	                <div class="collapsableSectionBody" ng-show="showTreatmentPlan">
+	                	  <div class="flex flex-wrap vmb-15">
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="reviewTMJOpinion" class="" name="reviewTMJOpinion" ng-model="newCasefile.initialTreatmentPlan.reviewTMJOpinion">
+	                    		<label for="reviewTMJOpinion" class="checkbox">Review TMJ staus/radiologist opinion</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="suggestOvernightSleepStudy" class="" name="suggestOvernightSleepStudy" ng-model="newCasefile.initialTreatmentPlan.suggestOvernightSleepStudy">
+	                    		<label for="suggestOvernightSleepStudy" class="checkbox">Suggest overnight sleep study/HST/Sleep MD opinion</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="suggestAtlasOpinion" class="" name="suggestAtlasOpinion" ng-model="newCasefile.initialTreatmentPlan.suggestAtlasOpinion">
+	                    		<label for="suggestAtlasOpinion" class="checkbox">Suggest Atlas-orthogonist/NUCCA Chiropractic opinion</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="suggestHealthCounseling" class="" name="suggestHealthCounseling" ng-model="newCasefile.initialTreatmentPlan.suggestHealthCounseling">
+	                    		<label for="suggestHealthCounseling" class="checkbox">Suggest health & nutritional counseling for BMI management</label>
+	                    	</div>
+                        <div class="width_50">
+	                    		<input type="checkbox" id="suggestMyofunctionalTherapy" class="" name="suggestMyofunctionalTherapy" ng-model="newCasefile.initialTreatmentPlan.suggestMyofunctionalTherapy">
+	                    		<label for="suggestMyofunctionalTherapy" class="checkbox">Suggest Myofunctional Therapy</label>
+	                    	</div>
+	                    </div>
+	                    <div class="width_100">Considerations prior to Treatment</div>
+	                    <div class="flex flex-wrap vmb-15">
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="TMJStabilization" class="" name="TMJStabilization" ng-model="newCasefile.initialTreatmentPlan.considerationsPriorToTreatment.TMJStabilization">
+	                    		<label for="TMJStabilization" class="checkbox">TMJ Stabilization</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="addressPeriodontalDisease" class="" name="addressPeriodontalDisease" ng-model="newCasefile.initialTreatmentPlan.considerationsPriorToTreatment.AddressPeriodontalDiesease">
+	                    		<label for="addressPeriodontalDisease" class="checkbox">Address Periodontal Disease</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="recommendLingualFrenectomy" class="" name="recommendLingualFrenectomy" ng-model="newCasefile.initialTreatmentPlan.considerationsPriorToTreatment.RecommendLingualFrenectomy">
+	                    		<label for="recommendLingualFrenectomy" class="checkbox">Lingual Frenectomy</label>
+	                    	</div>
+	                    	<div class="width_50">
+	                    		<input type="checkbox" id="removeMandibularTori" class="" name="removeMandibularTori" ng-model="newCasefile.initialTreatmentPlan.considerationsPriorToTreatment.SurgicalRemovalMandibularTori">
+	                    		<label for="removeMandibularTori" class="checkbox">Surgical Removal of Mandibular Tori</label>
+	                    	</div>
+	                    </div>
+	                    <div class="flex flex-wrap vmb-15">
+	                    	<div class="width_50">
+	                    		Suggested Appliance Treatment System
+	                    	</div>
+	                    	<div class="width_50">
+                           <!-- data-ng-change="checkApplianceType(newCasefile.initialTreatmentPlan)" -->
+	                    		<select class="width_100" data-ng-options="appliance as appliance.name for appliance in appliances track by appliance.name" ng-model="newCasefile.initialTreatmentPlan.suggestedApplianceTreatmentSystem">
+	                    			<option value=''>Select One</option>
+	                    		</select>
+	                    	</div>
+	                    </div>
+	                    <div class="vmb-15" ng-if="showOtherInput">
+	                    	<input class="width_100" data-ng-model="newCasefile.initialTreatmentPlan.otherNotes" placeholder="Other - Please Describe">
+	                    </div>
+
+	                </div>
+	             </div>
+            </section>
+            <section class="border vp-10 vmt-15">
+	            <div class="collapsableSection">
+	                <div class="collapsableSectionHeader vmb-10">
+						<i class="fa fa-minus-circle" data-ng-click="showTreatmentTime = !showTreatmentTime" ng-show="showTreatmentTime"></i>
+						<i class="fa fa-plus-circle" data-ng-click="showTreatmentTime = !showTreatmentTime" ng-hide="showTreatmentTime"></i>
+						<strong>Estimated Treatment Time</strong>
+	                </div>
+	                <div class="collapsableSectionBody" ng-show="showTreatmentTime">
+	                	<div class="flex">
+	                		<div class="width_50 vpr-20 flex flex-align-end" style="font-size:12px;">
+	                			Appliance
+	                		</div>
+	                		<div class="width_50 flex flex-justify-even flex-align-end">
+	                			<div style="font-size:12px; width:120px;">Approximate # of months in use</div>
+	                			<div style="font-size:12px; width:120px;">Approximate patient wear time hrs/day</div>
+	                			<div style="font-size:12px; width:120px;">Approximate # of months of passive use</div>
+	                		</div>
+	                	</div>
+
+	                	<div class="flex vmt-10" data-ng-repeat="toa in newCasefile.estimatedTreatmentTime.appliance">
+	                		<div class="width_50 vpr-20">
+	                			<select class="width_100" ng-model="toa.appliance" data-ng-options="appliance as appliance.name for appliance in appliances track by appliance.name" data-ng-change="checkIfApplianceIsSelected(toa)">
+                                	<option value=''>Select One</option>
+                        		</select>
+                        		<input class="width_100 vmt-3" ng-model="toa.other" data-ng-if="toa.appliance.other" placeholder="Enter Appliance Name*" required>
+	                		</div>
+	                		<div class="width_50 flex flex-justify-even"">
+	                			<input class="" style="width:120px;" ng-model="toa.monthsInUse" type="number" ng-change="calculateTotalMIU(toa)" ng-disabled="!toa.appliance.name">
+	                			<input class="" style="width:120px;" ng-model="toa.hoursWornPerDay" type="number" ng-disabled="!toa.appliance.name">
+                        <input class="" style="width:120px;" ng-model="toa.monthsOfPassiveUse" type="number" ng-disabled="!toa.appliance.name" data-ng-if="toa.appliance.passiveUse">
+	                			<div class="" style="width:120px;" data-ng-if="!toa.appliance.passiveUse">&nbsp;</div>
+	                		</div>
+	                	</div>
+
+	                	<div class="vmt-20">
+							        <div class="width_100 fieldError" data-ng-show="showNAErrorMsg" data-ng-bind="newApplianceErrorMsg"></div>
+	                		<button class="green" ng-click="addNewTreatmentOption(newCasefile.estimatedTreatmentTime.appliance)" ng-disabled="noApplianceSelected">add another treatment option</button>
+	                	</div>
+
+	                	<div class="vmt-20">
+	                		<div class="width_50 vpr-20">
+	                			<label class="vmr-20">Estimated Treatment Time (in months)</label>
+	                			<input class="" style="width:120px;" ng-model="newCasefile.estimatedTreatmentTime.monthsEstimatedTreatmentTime" type="number" readonly>
+	                		</div>
+	                	</div>
+
+	                	<div class="flex vmt-20 flex-align-end">
+	                		<div class="width_50 vpr-20">
+	                			<label>Initial Phase 2 treatement options</label>
+	                			<select class="width_100" ng-model="newCasefile.estimatedTreatmentTime.initialPhaseTreatmentOptions.selectedOption" data-ng-options="treatOp as treatOp.name for treatOp in treatementOptions track by treatOp.name">
+                                <option value=''>Select One</option>
+                            </select>
+	                		</div>
+	                		<div class="width_50">
+	                			<label>Other</label>
+	                			<input class="width_100" ng-model="newCasefile.estimatedTreatmentTime.initialPhaseTreatmentOptions.other" type="text" placeholder="Other">
+	                		</div>
+	                	</div>
+
+
+	                </div>
+	             </div>
+            </section>
+
+
+            <!-- SAVE -->
+        <div class="row">
+            <div class="save">
+                <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 7)" data-ng-if="!caseIsSubmitted">
+                Save + Continue</button>
+                <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-8({selectedTile: selectedTile, id: caseLinkId})">Go to Misc. Documents</button>
+                &nbsp;
+                <div ng-if="showErrorMsg && !newCasefile.patientComplaints.notes">
+                  <div class="fieldError" >
+                      {{errorMsg}} Patient Chief Complaints section with written Details required.
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        </form>

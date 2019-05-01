@@ -1,0 +1,69 @@
+#patientProfile {background-color: $urlSiteBackgroundBlue;
+  .returnToDashIcon {margin-top: -12px; display:flex; align-items: center; font-weight: 600; color:lighten($urlSiteBackgroundBlue, 30%);
+    .fa {font-size:27px; cursor:pointer;
+      &:hover {color: darken($urlSiteBackgroundBlue, 20%);}
+    }
+  }
+  .detailHeader {border-bottom: 1px solid $urlSiteOrange;
+    .patientRxInfo {
+      .patientRxPhoto {height: 100px;width: 100px;border-radius: 50%;margin-right:15px;}
+      .patientRxData {font-size: 15px;
+        .patientRxName {font-weight: 600; font-size: 17px;
+          i.fa.fa-pencil {cursor: pointer; outline: none;
+            &:hover {color: $urlSiteGreen;}
+          }
+          input:not([type=checkbox]):not([type=radio]) {margin-bottom: 5px;}
+        }
+        .patientFields {
+          input:not([type=checkbox]):not([type=radio]) {margin-bottom: 5px;}
+        }
+      }
+    }
+    .providerRxInfo { text-align: center;
+      .providerRxPhoto {height: 50px;width: 50px;border-radius: 50%;}
+      .providerRxName {font-size: 12px;}
+    }
+  }
+  .treatmentSystems {
+    div {line-height: 14px;}
+    label {margin: 0.2rem;}
+    select {
+      background-color: rgba($urlSiteOrange, .025);
+      padding: 3px;
+      height: 33px;
+      border-radius: 0px;
+      border-color:  $urlSiteOrange;
+    }
+  }
+  .patientDetailsNav {list-style-type: none;
+    ul {list-style-type: none;}
+    li {
+      font-weight: 500;
+      border-bottom: 1px solid $urlSiteOrange;
+      margin: 0;
+      padding: 1px 3px;
+      cursor: pointer;
+      &:hover {background-color: $urlSiteOrange; color:$urlSiteWhite;}
+      ul {
+        li { border:none; cursor:default;
+          &:hover {background-color: transparent; color:$urlSiteText;}
+          &.rxLabel {
+            &.btn {display:block;width: 135px;}
+          }
+        }
+      }
+      &.collapsableSection {cursor:default;
+        &:hover {background-color: transparent; color:$urlSiteText;}
+      }
+    }
+    .collapsableSectionHeader {font-size: 1.6rem;}
+  }
+  md-datepicker.recordDate {line-height: 17px;
+    .md-datepicker-button {display: none;}
+    .md-icon-button + .md-datepicker-input-container {margin:0;}
+    input.md-datepicker-input {height: 17px; min-width: 80px; padding:0; margin: 0; border-color: transparent;background-color: transparent;border: 0;color: inherit;}
+    .md-datepicker-input-container {border-bottom: 0;border-bottom-color:transparent;line-height: 17px;}
+    .md-datepicker-input-container.md-datepicker-focused {border-bottom: 0;border-bottom-color:transparent;}
+    .md-datepicker-triangle-button.md-button.md-icon-button {height: 17px;min-height: 17px; width: 17px;border-color: transparent;border: 0;right: 8px;}
+  }
+}

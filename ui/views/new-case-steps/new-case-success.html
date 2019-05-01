@@ -1,0 +1,20 @@
+<div class="registration" ng-init="initNewCaseSuccessfullySubmitted()">
+    <div class="container">
+        <form id="">
+            <h2 class="teal">&nbsp;</h2>
+            <div class="row">
+                <div class="orderDetails">
+                    <div class="orderHeader">
+                        <h3>Case Submitted</h3>
+                    </div>
+                    <div class="orderInfo" style="height:400px;">
+                        <div class="vmb-10">Your case has been submitted.</div>
+                        <div data-ng-if="patientDetails.includeRadiologyReport">You selected to include a radiology report.  An invoice for the Radiology Report has been sent to you.</div>
+                        <div class="orderInfoDetails"></div>
+                        <button ng-click="goToProviderDashboard()" class="btn btn-primary">Return to Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

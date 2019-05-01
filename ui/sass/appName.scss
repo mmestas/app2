@@ -1,0 +1,27 @@
+@import "library/angular-block-ui.min.scss";
+@import "library/jquery.fileupload-ui.scss";
+
+@import "colors.scss";
+@import "bootstrapCustom.scss";
+@import "mdToast.scss";
+@import "media.scss";
+@import "font.scss";
+@import "notifications.scss";
+@import "flex.scss";
+@import "widths.scss";
+@import "elements.scss";
+@import "components.scss";
+@import "navigation.scss";
+@import "buttons.scss";
+@import "forms.scss";
+@import "tables.scss";
+@import "modals.scss";
+@import "dashboard.scss";
+
+@import "toBeConverted/main-original.scss";
+@import "toBeConverted/case.scss";
+@import "toBeConverted/registration.scss";
+
+@import "pages/newPatientSignUp.scss";
+@import "pages/patientDetails.scss";
+@import "pages/createRx.scss";

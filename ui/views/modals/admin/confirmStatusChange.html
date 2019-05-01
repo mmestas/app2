@@ -1,0 +1,20 @@
+<div class="modal">
+ <div class="modal-dialog modal-sm modalCentered">
+   <div class="modal-content">
+     <div class="modal-header">
+        <h4 class="modal-title confirmDelete">{{headerMsg}}
+          {{patientDetails.caseNumber}}
+         </h4>
+        <button type="button" class="close" ng-click="dismissModal()" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <b data-ng-bind-html="bodyMsg"></b><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ng-click="dismissModal()" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" ng-click="changeStatus()" data-dismiss="modal">{{btnMsg}}</button>
+      </div>
+    </div>
+
+  </div>
+</div>

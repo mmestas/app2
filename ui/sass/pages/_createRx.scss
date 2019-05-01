@@ -1,0 +1,129 @@
+#createRx {
+  .container {
+    &.rxMenu {background-color: $urlSiteTeal;}
+    background-color: $urlSiteWhite;
+    .detailHeader {
+      .patientRxInfo {
+        .patientRxPhoto {height: 100px;width: 100px;border-radius: 50%;margin-right:15px;}
+        .patientRxData {font-size: 15px;
+          .patientRxName {font-weight: 600; font-size: 17px;
+            i.fa.fa-pencil {cursor: pointer; outline: none;
+              &:hover {color: $urlSiteGreen;}
+            }
+            input:not([type=checkbox]):not([type=radio]) {margin-bottom: 5px;}
+          }
+          .patientFields {
+            input:not([type=checkbox]):not([type=radio]) {margin-bottom: 5px;}
+          }
+        }
+      }
+      .providerRxInfo { text-align: center;
+        .providerRxPhoto {height: 75px;width: 75px;border-radius: 50%;}
+        .providerRxName {font-size: 12px;}
+      }
+
+    }
+    section {
+      // .collapsableSection {
+      //   .collapsableSectionHeader { font-size: 17px;
+      //     i.fa.fa-minus-circle, i.fa.fa-plus-circle {font-size: 18px; color:$urlSiteOrange;outline: none;}
+      //   }
+      //   .collapsableSectionBody {
+      //     border-top: 1px solid $urlSiteOrange;
+      //     padding-top: 10px;
+      //     margin-top: 8px;
+      //   }
+      // }
+      &#labSelection, &#applianceConstruction {
+        .sectionSelections {
+          > div {margin-bottom:10px;}
+          label {width:160px; font-weight: 500; font-size: 14px;}
+          select {width:200px;}
+        }
+        .labImg {width:225px; height:110px; align-items: center; display: flex;
+          img {max-width:100%; max-height: 100%;}
+        }
+      }
+      &#teethCharting {}
+      &#applianceConstruction {
+        h3.well-title {font-size:14px;}
+        h3.rowLabel {width:130px;text-align: right;margin-right: 10px;margin-bottom:0;flex-shrink: 0;}
+        .guideSelect {width:135px;margin-bottom: 5px;}
+        div.guideSelect {font-size: 12px;padding: 14px;height: 45px;border: 1px solid #eaeaea;border-radius: 3px;margin-bottom: 5px;}
+      }
+      &#uploadRx {}
+      &#modelSrc {}
+      &#finalReview {
+        .formValue {width: 175px;font-size: 12px;margin-left:10px;}
+        .formLabel {width:100px; flex-shrink: 0;}
+      }
+    }
+  }
+
+  #toastHolder md-toast {
+    transform: translate(-50%, -100%);
+    left: 50%;
+  }
+
+}
+
+
+#applianceMap { padding:30px;
+  .toothMap {
+    width: 30px;
+    height: 30px;
+    background: #e0e0e0;
+    color: #888888;
+    border-radius: 50%;
+    border: 2px solid darkgrey;
+    text-align: center;
+    font-size: 11px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {background-color: #fff263;}
+    &.disabled { color:#c1c1c1; border-color:#e0e0e0; cursor:default;
+      &:hover {background-color: #e0e0e0;}
+    }
+    &.toothSelected {background-color: $urlSiteTeal; color:$urlSiteWhite; border-color:darken($urlSiteTeal, 10%);}
+    &:focus {outline:0;}
+  }
+
+  .betweenUpperTeeth, .betweenLowerTeeth {
+    height:30px; width:3px; background-color: #e0e0e0;position: relative;
+    &.middleTeeth {height:50px;}
+    &.toothSelected {
+      span {background-color: $urlSiteTeal; color:$urlSiteWhite; border-color:darken($urlSiteTeal, 10%);}
+    }
+    &.toothMarkerHidden {background-color: $urlSiteWhite;}
+    span {position: absolute;left: -8px; width: 20px;height: 20px;border-radius: 50%;background-color: #e0e0e0;color: #888888;border: 2px solid darkgrey;font-size: 10px; font-weight: 600;text-align: center;padding: 0px;cursor: pointer; outline:0;
+      &:hover {background-color: #fff263;}
+      &:focus {outline:0;}
+    }
+  }
+  .betweenUpperTeeth {
+    span {top: -20px;}
+  }
+  .betweenLowerTeeth {
+    span {bottom: -20px;}
+  }
+
+}
+
+#teethSelectionModal {
+  &.modal.in, &.modal.fade {
+    .modal-dialog {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .modal-content {}
+    }
+  }
+}
+
+#addNewAddressModal {
+  form {
+    label {display: block;}
+    input, select {width:100%;}
+  }
+}

@@ -1,0 +1,216 @@
+<form id="newCaseStep2" name="step2" novalidate  ng-init="step2Init()">
+    <h2 class="teal">Step 2 - Health History</h2>
+    <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+
+    <div class="flex flex-align-center">
+        <div class="width_50">
+          Please enter the patient's information for:
+        </div>
+        <div class="flex flex-justify-spaceBetween width_50">
+          <div class="width_33 flex flex-column vmr-7">
+            <label>BMI</label>
+            <input class="width_100" type="number" name="BMI" placeholder="BMI" ng-model="newCasefile.healthHistory.BMI">
+          </div>
+          <div class="width_33 flex flex-column vmr-7">
+            <label>Blood Pressure</label>
+            <input class="width_100" type="text" name="Blood Pressure" placeholder="Blood Pressure" ng-model="newCasefile.healthHistory.bloodPressure">
+          </div>
+          <div class="width_33 flex flex-column">
+            <label>Epworth</label>
+            <input class="width_100" type="number" name="Epworth" placeholder="Epworth" ng-model="newCasefile.healthHistory.Epworth">
+          </div>
+        </div>
+    </div>
+
+    <section class="border vp-10 vmt-15">
+      <div class="collapsableSection">
+        <div class="collapsableSectionHeader vmb-10">
+          <i class="fa fa-minus-circle" data-ng-click="showSleepTestInfo = !showSleepTestInfo" ng-show="showSleepTestInfo"></i>
+          <i class="fa fa-plus-circle" data-ng-click="showSleepTestInfo = !showSleepTestInfo" ng-hide="showSleepTestInfo"></i>
+          <strong>Sleep Test Information</strong>
+        </div>
+        <div class="collapsableSectionBody" ng-show="showSleepTestInfo">
+
+          <div class="flex">
+              <div class="width_50">
+                <input id="pAHITest" type="checkbox" name="pAHITest" ng-model="newCasefile.healthHistory.sleepTestInfo.pAHITest" ng-change="checkIfStepsAreComplete(newCasefile, newCasefile2)">
+                <label class="checkbox-inline checkbox" for="pAHITest">The patient has had a pAHI test</label>
+              </div>
+              <div class="width_50" ng-if="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+                <input id="readByBCSP" type="checkbox" name="readByBCSP" ng-model="newCasefile.healthHistory.sleepTestInfo.readByBCSP">
+                <label class="checkbox-inline checkbox" for="readByBCSP">Has this sleep test been read by a Board Certified Sleep Physician?</label>
+              </div>
+          </div>
+
+          <div class="row vmt-20" ng-if="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+            <div class="col col-md-12">
+              <div class="halffield newCaseDatepicker">
+                <div class="flex flex-column">
+                  <label style="margin-left:42px;">Date of Sleep Test<span class="required">*</span></label>
+                  <md-datepicker name="sleepTestDate" name="dateOfSleepTest" ng-model="newCasefile.healthHistory.sleepTestInfo.dateOfSleepTest" md-current-view="year" md-placeholder="* Date of Sleep Test" data-ng-required="newCasefile.healthHistory.sleepTestInfo.pAHITest"></md-datepicker>
+                </div>
+              </div>
+              <div class="halffield flex">
+                <div class="flex flex-column">
+                  <label>pAHI Score<span class="required">*</span></label>
+                  <input class="width_33 vmr-7" type="number" placeholder="pAHI Score" name="pAHI" ng-model="newCasefile.healthHistory.sleepTestInfo.pAHI" data-ng-required="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+
+                </div>
+                <div class="flex flex-column">
+                  <label>Treatment Stage<span class="required">*</span></label>
+                  <select name="treatmentStage" data-ng-model="newCasefile.healthHistory.sleepTestInfo.treatmentStage" data-ng-options="stage.id as stage.name for stage in treatmentStages" data-ng-required="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+                    <option value=''> Select One*</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row vmt-20" ng-if="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+            <div class="col col-md-12">
+              <div class="halffield ">
+                Please upload the patient's Home Sleep Test file<span class="required">*</span>
+              </div>
+              <div class="halffield">
+                <div data-ng-if="!caseIsSubmitted">
+                  <input class="hidden" id="sleepstudy" name="sleepstudy" type="file" ngf-select="uploadFiles(newCasefile2.files.sleepstudy, 'sleepTest')"
+                  name="" ng-model="newCasefile2.files.sleepstudy" value="" data-ng-required="newCasefile.healthHistory.sleepTestInfo.pAHITest">
+                  <label class="dragNDropFileUploader m-auto" for="sleepstudy">
+                    <i class="fa fa-upload"></i>
+                  </label>
+                  <div class="dragFileUploader ml-auto mr-auto" data-ng-class="{'fileUploaded': newCasefile2.files.sleepstudy}" ngf-select="uploadFiles(newCasefile2.files.sleepstudy, 'sleepstudy')"
+                      ngf-drop="uploadFiles(newCasefile2.files.sleepstudy, 'sleepstudy')" name="" ng-model="newCasefile2.files.sleepstudy"
+                      ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                      ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                      ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                      ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                      ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                      ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                  </div>
+                </div>
+                <div class="text-center">
+                    <div class="uploadLabels" data-ng-if="newCasefile2.files.sleepstudy"
+                        data-ng-bind="newCasefile2.files.sleepstudy | fileNameOnly"></div>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.sleepstudy" data-ng-click="deleteFiles('sleepstudy')"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section class="border vp-10 vmt-15">
+      <div class="collapsableSection">
+        <div class="collapsableSectionHeader vmb-10">
+          <i class="fa fa-minus-circle" data-ng-click="showOHHI = !showOHHI" ng-show="showOHHI"></i>
+          <i class="fa fa-plus-circle" data-ng-click="showOHHI = !showOHHI" ng-hide="showOHHI"></i>
+            <strong>Other Health History Information</strong>
+        </div>
+        <div class="collapsableSectionBody" ng-show="showOHHI">
+
+          <div class="flex">
+              <div class="width_50">
+                Does the patient have TMD?
+              </div>
+              <div class="width_50">
+                <label class="radioLabel"><input id="" type="radio" name="tmd" ng-model="newCasefile.healthHistory.TMD" ng-value="true" value="true"> Yes </label>
+                <label class="radioLabel"><input id="" type="radio" name="tmd" ng-model="newCasefile.healthHistory.TMD" ng-value="false" value="false"> No </label>
+                <input class="width_100 vmt-5" type="text" placeholder="If yes, please describe" name="TMDDescription" ng-model="newCasefile.healthHistory.TMDDescription">
+              </div>
+          </div>
+          <div class="flex vmt-20">
+            <div class="width_50">
+              Mallampati Score
+            </div>
+            <div class="width_50">
+              <select name="mallampatiScore" ng-model="newCasefile.healthHistory.malampati" ng-options="score.id as score.name for score in mallampati">
+                <option value=''> Select One</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex vmt-20">
+            <div class="width_50">
+              Does the patient have a history of orthodontics?
+            </div>
+            <div class="width_50">
+              <label class="radioLabel"><input id="" type="radio" name="historyOfOrthodontics" ng-model="newCasefile.healthHistory.historyOfOrthodontics" ng-value="true" value="true"> Yes </label>
+              <label class="radioLabel"><input id="" type="radio" name="historyOfOrthodontics" ng-model="newCasefile.healthHistory.historyOfOrthodontics" ng-value="false" value="false"> No </label>
+            </div>
+          </div>
+          <div class="flex vmt-20">
+            <div class="width_50">
+              Does the patient have a history of medical and/or dental surgeries?
+            </div>
+            <div class="width_50">
+              <label class="radioLabel"><input id="" type="radio" name="historyOfDentalSurgeries" ng-model="newCasefile.healthHistory.historyOfDentalSurgeries" ng-value="true" value="true"> Yes </label>
+              <label class="radioLabel"><input id="" type="radio" name="historyOfDentalSurgeries" ng-model="newCasefile.healthHistory.historyOfDentalSurgeries" ng-value="false" value="false"> No </label>
+
+              <input ng-if="newCasefile.healthHistory.historyOfDentalSurgeries" class="width_100 vmt-5" type="text" placeholder="If yes, please describe" name="dentalSurgeryDescription" ng-model="newCasefile.healthHistory.dentalSurgeriesDescription" ng-if="newCasefile.healthHistory.historyOfDentalSurgeries">
+            </div>
+          </div>
+
+          <div class="flex vmt-20">
+            <div class="width_50">
+              Does the patient have a history of hypothyroidism?
+            </div>
+            <div class="width_50">
+              <label class="radioLabel"><input id="" type="radio" name="historyOfHypothyroidism" ng-model="newCasefile.healthHistory.historyOfHypothyroidism" ng-value="true" value="true"> Yes </label>
+              <label class="radioLabel"><input id="" type="radio" name="historyOfHypothyroidism" ng-model="newCasefile.healthHistory.historyOfHypothyroidism" ng-value="false" value="false"> No </label>
+            </div>
+          </div>
+          <div class="flex vmt-20">
+            <div class="width_50">
+              If yes, does the patient currently take thyroid medication?
+            </div>
+            <div class="width_50">
+              <label class="radioLabel"><input id="" type="radio" name="thyroidMedication" ng-model="newCasefile.healthHistory.thyroidMedication" ng-value="true" value="true"> Yes </label>
+              <label class="radioLabel"><input id="" type="radio" name="thyroidMedication" ng-model="newCasefile.healthHistory.thyroidMedication" ng-value="false" value="false"> No </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <div class="row">
+        <div class="save">
+            <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 2)"  data-ng-if="!caseIsSubmitted" >
+            Save + Continue</button>
+            <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-3({selectedTile: selectedTile, id: caseLinkId})">Go to Images</button>
+              &nbsp;
+            <div>
+              <div class="fieldError" ng-if="showErrorMsg && (!newCasefile.healthHistory.sleepTestInfo.dateOfSleepTest ||
+                !newCasefile.healthHistory.sleepTestInfo.pAHI || !newCasefile.healthHistory.sleepTestInfo.treatmentStage ||
+              !newCasefile2.files.sleepstudy)">
+                  {{errorMsg}}
+              </div>
+              <div class="fieldError" ng-if="showErrorMsg && (!newCasefile.healthHistory.sleepTestInfo.dateOfSleepTest ||
+                !newCasefile.healthHistory.sleepTestInfo.pAHI || !newCasefile.healthHistory.sleepTestInfo.treatmentStage ||
+              !newCasefile2.files.sleepstudy)">
+                <span>
+                  Missing:
+                </span>
+                <span ng-show="!newCasefile.healthHistory.sleepTestInfo.dateOfSleepTest" ng-if="showErrorMsg">
+                    &nbsp; Date of Sleep Test <span ng-if="!newCasefile.healthHistory.sleepTestInfo.pAHI || !newCasefile.healthHistory.sleepTestInfo.treatmentStage || !newCasefile2.files.sleepstudy">,</span>
+                </span>
+                <span ng-show="!newCasefile.healthHistory.sleepTestInfo.pAHI" ng-if="showErrorMsg">
+                    &nbsp; pAHI Score <span ng-if="!newCasefile.healthHistory.sleepTestInfo.treatmentStage || !newCasefile2.files.sleepstudy">,</span>
+                </span>
+                <span ng-show="!newCasefile.healthHistory.sleepTestInfo.treatmentStage" ng-if="showErrorMsg">
+                    &nbsp; Treatment Stage  <span ng-if="!newCasefile2.files.sleepstudy">,</span>
+                </span>
+                <span ng-show="!newCasefile2.files.sleepstudy" ng-if="showErrorMsg">
+                    &nbsp; Sleep Study File
+                </span>
+              </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</form>

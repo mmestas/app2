@@ -1,0 +1,61 @@
+#dashboard {
+  .container {background: white; border: 1px solid $urlSiteBorder; padding: 30px 30px; padding:12px;
+    h2 {color: $urlSiteOrange; color: $urlSiteTeal; font-size: 26px; font-weight: 300;}
+    .stats {display: inline-block; width: 100%; margin-top: 25px; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-around; align-items: stretch; align-content: stretch; padding-bottom: 40px;
+      .stat {margin-right: 04px; flex: 1; display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: stretch; align-items: stretch; align-content: stretch;
+        &:last-child {margin-right: 0;}
+        button {width: 100%; flex:1; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-right-radius: 6px; border-top-left-radius: 6px;background: rgba(89, 173, 0, 0.2); background: rgba(222, 210, 149, 0.2); border: 1px solid #ccc; color: #868686; /* fix for IE */ min-height:40px;}
+        a {text-decoration: none;
+          div {background: transparent; margin-top: 0; height: 120px; border-radius: 4px; border-top-left-radius: 0;
+            border-top-right-radius: 0; border: 1px solid #c3c3c3; display: -ms-flexbox; border-top: 0;
+            display: -webkit-flex; display:flex; -ms-flex-pack: center; -webkit-justify-content: center;
+            justify-content: center; -ms-flex-align: center; -webkit-align-items: center; align-items: center;
+            -ms-flex-direction: column; -webkit-flex-direction: column; flex-direction: column; flex-wrap:nowrap;
+            h3 {color: $urlSiteOrange; font-size: 48px; text-align: center; font-weight: lighter; line-height: 48px; margin:3px;}
+            p {text-align: center; margin:3px;}
+          }
+        }
+      }
+    }
+    .table {
+      .headers {float: left; display: block; margin-right: 2.35765%; width: 100%;
+        &:last-child {margin-right: 0;}
+        .header {margin: 0px; border-right: 1px solid #c3c3c3; border-top: 1px solid #c3c3c3; border-bottom: 1px solid #c3c3c3; padding-left: 15px; padding-bottom: 0px;
+          h3 {padding: 15px 0px; margin: 0px; font-size: 14px; font-weight: lighter; text-align: left; color: #64656A;}
+        }
+        .active {float: left; display: block; margin-right: 2.35765%; width: 23.23176%; margin: 0px; border-left: 1px solid #c3c3c3;
+          &:last-child {margin-right: 0;}
+        }
+        .status {float: left;display: block;margin-right: 2.35765%;width: 14.70196%;margin: 0px;
+          &:last-child {margin-right: 0;}
+        }
+        .summary { float: left;display: block;margin-right: 2.35765%;width: 31.76157%;margin: 0px;
+          &:last-child {margin-right: 0;}
+        }
+        .number { float: left;display: block;margin-right: 2.35765%;width: 14.70196%;margin: 0px;
+          &:last-child {margin-right: 0;}
+        }
+        .actions { float: left;display: block;margin-right: 2.35765%;width: 14.70196%;margin: 0px;
+          &:last-child {margin-right: 0;}
+        }
+      }
+    }
+    .stats {
+      .stat {
+        &.statActive {
+          button {background: $urlSiteTeal;color: $urlSiteWhite; border-color: $urlSiteDarkTeal;}
+        }
+      }
+    }
+  }
+}
+
+
+
+//NEED TO REWORK RESPONSIVENESS
+// #dashboard .container .stats .stat.statActive button {}
+// @media screen and (max-width:768px) {
+//   #dashboard .container .stats {display:block;}
+//   #dashboard .container .stats .stat {display: block; width: 100%; margin: 0;display: inline-block; width: 50%;}
+//   #dashboard .container .stats .stat a div {margin-top:0; margin-bottom: 4px;}
+// }

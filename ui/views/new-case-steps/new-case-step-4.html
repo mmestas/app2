@@ -1,0 +1,217 @@
+        <form id="SystemAdministratorRegistrationStep3" novalidate ng-init="step4Init()">
+            <h2 class="teal">Step 4 - Intra-Oral Imaging</h2>
+            <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+            <div class="flex flex-wrap">
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="AnteriorOcclusion">
+                            <img ngf-src="newCasefile2.photos.intraoral.anteriorocclusion" value="">
+                            <input class="hidden" id="AnteriorOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.anteriorocclusion, 'intraoral_anteriorocclusion')"
+                                ng-model="newCasefile2.photos.intraoral.anteriorocclusion" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="AnteriorOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.anteriorocclusion, 'intraoral_anteriorocclusion')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.anteriorocclusion, 'intraoral_anteriorocclusion')"
+                            ng-model="newCasefile2.photos.intraoral.anteriorocclusion" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                            ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                            ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_anteriorocclusion')" data-ng-if="newCasefile2.photos.intraoral.anteriorocclusion !== apiUrl+'/images/camera.svg'"></i>
+                    </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Anterior Occlusion
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/anteriorocclusion.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="LeftOcclusion">
+                            <img ngf-src="newCasefile2.photos.intraoral.leftocclusion" value="">
+                            <input class="hidden" id="LeftOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.leftocclusion, 'intraoral_leftocclusion')"
+                                ng-model="newCasefile2.photos.intraoral.leftocclusion" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="LeftOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.leftocclusion, 'intraoral_leftocclusion')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.leftocclusion, 'intraoral_leftocclusion')" ng-model="newCasefile2.photos.intraoral.leftocclusion"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_leftocclusion')" data-ng-if="newCasefile2.photos.intraoral.leftocclusion !== apiUrl+'/images/camera.svg'"></i>
+                    </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Left Buccal Occlusion
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/leftocclusion.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="RightOcclusion">
+                            <img ngf-src="newCasefile2.photos.intraoral.rightocclusion" value="">
+                            <input class="hidden" id="RightOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.rightocclusion, 'intraoral_rightocclusion')"
+                                ng-model="newCasefile2.photos.intraoral.rightocclusion" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="RightOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.rightocclusion, 'intraoral_rightocclusion')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.rightocclusion, 'intraoral_rightocclusion')" ng-model="newCasefile2.photos.intraoral.rightocclusion"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_rightocclusion')" data-ng-if="newCasefile2.photos.intraoral.rightocclusion !== apiUrl+'/images/camera.svg'"></i>
+                    </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Right Buccal Occlusion
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/rightocclusion.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="UpperArch">
+                            <img ngf-src="newCasefile2.photos.intraoral.upperarch" value="">
+                            <input class="hidden" id="UpperArch" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.upperarch, 'intraoral_upperarch')"
+                                ng-model="newCasefile2.photos.intraoral.upperarch" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="UpperArch" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.upperarch, 'intraoral_upperarch')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.upperarch, 'intraoral_upperarch')" ng-model="newCasefile2.photos.intraoral.upperarch"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_upperarch')" data-ng-if="newCasefile2.photos.intraoral.upperarch !== apiUrl+'/images/camera.svg'"></i>
+                  </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Upper Arch
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/upperarch.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="LowerArch">
+                            <img ngf-src="newCasefile2.photos.intraoral.lowerarch" value="">
+                            <input class="hidden" id="LowerArch" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.lowerarch, 'intraoral_lowerarch')"
+                                ng-model="newCasefile2.photos.intraoral.lowerarch" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="LowerArch" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.lowerarch, 'intraoral_lowerarch')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.lowerarch, 'intraoral_lowerarch')" ng-model="newCasefile2.photos.intraoral.lowerarch"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                            ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_lowerarch')" data-ng-if="newCasefile2.photos.intraoral.lowerarch !== apiUrl+'/images/camera.svg'"></i>
+                    </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Lower Arch
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/lowerarch.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+                <div class="width_33 uploadWrapper">
+                    <div class="uploadInnerWrapper">
+                        <label class="uploadLabel" for="Ventral">
+                            <img ngf-src="newCasefile2.photos.intraoral.ventricalsurfacetongue" value="">
+                            <input class="hidden" id="Ventral" type="file" ngf-select="uploadFiles(newCasefile2.photos.intraoral.ventricalsurfacetongue, 'intraoral_ventricalsurfacetongue')"
+                                ng-model="newCasefile2.photos.intraoral.ventricalsurfacetongue" name="file" ngf-accept="'image/*'">
+                        </label>
+                        <div id="Ventral" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.intraoral.ventricalsurfacetongue, 'intraoral_ventricalsurfacetongue')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.intraoral.ventricalsurfacetongue, 'intraoral_ventricalsurfacetongue')"
+                            ng-model="newCasefile2.photos.intraoral.ventricalsurfacetongue" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                            ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                            ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                        <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('intraoral_ventricalsurfacetongue')" data-ng-if="newCasefile2.photos.intraoral.ventricalsurfacetongue !== apiUrl+'/images/camera.svg'"></i>
+                    </div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="required">*</span>
+                            <span class="v-tooltip">Lingual Frenum (Ventral surface of the tongue)
+                                <span class="v-tooltipInfo">
+                                    <img src="/images/instructions/ventralsurfacetongue.jpg">
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="save">
+                  <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 4)" data-ng-if="!caseIsSubmitted">
+                  Save + Continue</button>
+                  <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-5({selectedTile: selectedTile, id: caseLinkId})">Go to CBCT Upload</button>
+                  &nbsp;
+                  <div ng-if="showErrorMsg && (newCasefile2.photos.intraoral.upperarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.anteriorocclusion === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.leftocclusion === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.rightocclusion === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg')">
+                    <div class="fieldError" >
+                        {{errorMsg}}
+                    </div>
+                    <div class="fieldError">
+                      <span>
+                        Missing:
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.anteriorocclusion === apiUrl+'/images/camera.svg'">
+                          &nbsp; Anterior <span ng-if="newCasefile2.photos.intraoral.leftocclusion === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.rightocclusion === apiUrl+'/images/camera.svg' ||  newCasefile2.photos.intraoral.upperarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.leftocclusion === apiUrl+'/images/camera.svg'">
+                          &nbsp; Left Buccal <span ng-if="newCasefile2.photos.intraoral.rightocclusion === apiUrl+'/images/camera.svg' ||  newCasefile2.photos.intraoral.upperarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.rightocclusion === apiUrl+'/images/camera.svg'">
+                          &nbsp; Right Buccal <span ng-if="newCasefile2.photos.intraoral.upperarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.upperarch === apiUrl+'/images/camera.svg'">
+                          &nbsp; Upper Arch <span ng-if="newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg' || newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.lowerarch === apiUrl+'/images/camera.svg'">
+                          &nbsp; Lower Arch <span ng-if="newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">,</span>
+                      </span>
+                      <span ng-show="newCasefile2.photos.intraoral.ventricalsurfacetongue === apiUrl+'/images/camera.svg'">
+                          &nbsp; Lingual Frenum
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+        </form>

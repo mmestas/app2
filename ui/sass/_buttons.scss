@@ -1,0 +1,200 @@
+button, .btn {overflow: visible;
+  // Button Colors - eventually depricate and move to bootstrap classes
+  &.teal {background: $urlSiteTeal; color:$urlSiteWhite;
+    &:hover {background: $urlSiteTealHover;}
+  }
+  &.green {background: $urlSiteGreen; color:$urlSiteWhite;
+    &:hover {background: $urlSiteGreenHover;}
+  }
+  &.orange {background: $urlSiteOrange;color:$urlSiteWhite;
+    &:hover {background: $urlSiteOrangeHover;}
+  }
+  &.grey {background: $urlSiteMedGrey;color:$urlSiteWhite;
+    &:hover {background: $urlSiteMedLtGrey;}
+  }
+
+  &.active {outline: none;}
+  &:active {outline: none;}
+  &.focus {outline: none;}
+  &:focus {outline: none;}
+  &.hover {outline: none;}
+  &:hover {outline: none;}
+}
+
+i.fa {
+  &.teal {color: $urlSiteTeal;
+    &:hover {color: $urlSiteTealHover;}
+  }
+  &.green {color: $urlSiteGreen;
+    &:hover {color: $urlSiteGreenHover;}
+  }
+  &.orange {color: $urlSiteOrange;
+    &:hover {color: $urlSiteOrangeHover;}
+  }
+  &.white {color: $urlSiteWhite;
+    &:hover {color: $urlSiteWhite;}
+  }
+
+  &.fa-sm {font-size: 15px;}
+  // &.fa-md {font-size: 15px;}
+  &.fa-lg {font-size: 25px;}
+}
+
+
+.btn-default {color: $urlSiteWhite;background-color: $urlSiteTeal;border-color: $urlSiteTeal;
+}
+.btn-primary {color: $urlSiteWhite;background-color: $urlSiteTeal;border-color: $urlSiteTeal;
+    &:hover {background-color: $urlSiteDarkTeal; border-color: $urlSiteDarkTeal;color: $urlSiteWhite;}
+    &.hover {background-color: $urlSiteDarkTeal; border-color: $urlSiteDarkTeal;color: $urlSiteWhite;}
+    &:active {background-color: $urlSiteDarkTeal; border-color: $urlSiteDarkTeal;color: $urlSiteWhite;}
+    &.active {background-color: $urlSiteDarkTeal; border-color: $urlSiteDarkTeal;color: $urlSiteWhite;}
+}
+.btn-secondary {color: $urlSiteWhite;background-color: $urlSiteMedGrey;border-color: $urlSiteMedGrey;
+    &:hover {background-color: $urlSiteGrey; border-color: $urlSiteGrey;color: $urlSiteWhite;}
+    &.hover {background-color: $urlSiteGrey; border-color: $urlSiteGrey;color: $urlSiteWhite;}
+    &:active {background-color: $urlSiteGrey; border-color: $urlSiteGrey;color: $urlSiteWhite;}
+    &.active {background-color: $urlSiteGrey; border-color: $urlSiteGrey;color: $urlSiteWhite;}
+}
+// .btn-info {
+//     color: $urlSiteWhite;
+//     background-color: $urlSiteMedGrey;
+//     border-color: $urlSiteMedGrey;
+//     &:hover {background-color: $urlSiteGrey; border-color: $urlSiteGrey;}
+//     &.hover {background-color: $urlSiteGrey; border-color: $urlSiteGrey;}
+//     &:active {background-color: $urlSiteGrey; border-color: $urlSiteGrey;}
+//     &.active {background-color: $urlSiteGrey; border-color: $urlSiteGrey;}
+// }
+.btn-success {color: $urlSiteWhite;background-color: $urlSiteGreen;border-color: $urlSiteGreen;
+    &:hover {background-color: $urlSiteDarkGreen; border-color: $urlSiteDarkGreen;color: $urlSiteWhite;}
+    &.hover {background-color: $urlSiteDarkGreen; border-color: $urlSiteDarkGreen;color: $urlSiteWhite;}
+    &:active {background-color: $urlSiteDarkGreen; border-color: $urlSiteDarkGreen;color: $urlSiteWhite;}
+    &.active {background-color: $urlSiteDarkGreen; border-color: $urlSiteDarkGreen;color: $urlSiteWhite;}
+}
+.btn-warning {color: $urlSiteWhite;background-color: $urlSiteOrange;border-color: $urlSiteOrange;
+    &:hover {background-color: $urlSiteDarkOrange; border-color: $urlSiteDarkOrange;color: $urlSiteWhite;}
+    &.hover {background-color: $urlSiteDarkOrange; border-color: $urlSiteDarkOrange;color: $urlSiteWhite;}
+    &:active {background-color: $urlSiteDarkOrange; border-color: $urlSiteDarkOrange;color: $urlSiteWhite;}
+    &.active {background-color: $urlSiteDarkOrange; border-color: $urlSiteDarkOrange;color: $urlSiteWhite;}
+}
+
+.btn-outline-primary {color: $urlSiteTeal;border-color: $urlSiteTeal;
+  &:hover {background-color: $urlSiteTeal; border-color: $urlSiteTeal;color: $urlSiteWhite;}
+  &.hover {background-color: $urlSiteTeal; border-color: $urlSiteTeal;color: $urlSiteWhite;}
+  &:active {background-color: $urlSiteTeal; border-color: $urlSiteTeal;color: $urlSiteWhite;}
+  &.active {background-color: $urlSiteTeal; border-color: $urlSiteTeal;color: $urlSiteWhite;}
+}
+.btn-outline-secondary {color: $urlSiteLtGrey;border-color: $urlSiteLtGrey;
+  &:hover {background-color: $urlSiteLtGrey; border-color: $urlSiteLtGrey;color: $urlSiteWhite;}
+  &.hover {background-color: $urlSiteLtGrey; border-color: $urlSiteLtGrey;color: $urlSiteWhite;}
+  &:active {background-color: $urlSiteLtGrey; border-color: $urlSiteLtGrey;color: $urlSiteWhite;}
+  &.active {background-color: $urlSiteLtGrey; border-color: $urlSiteLtGrey;color: $urlSiteWhite;}
+}
+
+
+//From urlSiteDiagnostic Stylesheet - needs to be converted
+// .btn {
+//   display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;
+// }
+
+.btn.active, .btn:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+.btn-default.active, .btn-default.focus, .btn-default:active, .btn-default:focus, .btn-default:hover, .open>.dropdown-toggle.btn-default {
+    color: $urlSiteWhite;
+    background-color: $urlSiteTeal;
+    border-color: $urlSiteTeal;
+    opacity:0.7;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    background-image: none;
+}
+.btn-group .btn+.btn, .btn-group .btn+.btn-group, .btn-group .btn-group+.btn, .btn-group .btn-group+.btn-group {
+    margin-left: -1px;
+}
+
+.btn-group-vertical>.btn, .btn-group>.btn {
+    position: relative;
+    float: left;
+}
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group-vertical>.btn:hover, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus, .btn-group>.btn:hover {
+    z-index: 2;
+}
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+.btn-group>.btn:first-child {
+    margin-left: 0;
+}
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+    border-radius: 0;
+}
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+
+// 12.12.18
+.btn {
+  // display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;border-radius: 4px;
+  display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border-radius: 4px;
+  &.btn-xs {font-size: 12px; padding: 3px 7px; border-radius: 3px; line-height: 12px;}
+  &.btn-sm {font-size: 14px; padding: 6px 10px; border-radius: 3px; line-height: 14px;}
+  &.btn-md {font-size: 16px; padding: 6px 12px; border-radius: 3px; line-height: 16px;}
+  &.btn-lg {font-size: 16px; padding: 12px 18px; border-radius: 4px; line-height: 16px;}
+  // &.btn-lg {font-size: 1.25rem; padding: .5rem 1rem; border-radius: .3rem; line-height: 1.5;}
+  &.btn-xl {font-size: 14px; padding: 6px 10px; border-radius: 3px; line-height: 14px;}
+}
+
+
+
+//Anchor Buttons
+a.teal {
+  background: $urlSiteTeal;
+  border-radius: 4px;
+  box-shadow: none;
+  border: none;
+  padding: 8px 20px;
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+  &:hover {background: $urlSiteTealHover;}
+}
+a.orange {
+  background: $urlSiteOrange;
+  border-radius: 3px;
+  box-shadow: none;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+a.orange:hover {
+  background: #ffd07b;
+}
+
+button.fakeInput {
+  background: white;
+  border: 1px solid #eaeaea;
+  height: 45px;
+  color: #64656A;
+  text-align: left;
+  padding: 10px 10px;
+  min-width: 150px;
+  &:hover {
+    background: white;
+    border: 1px solid #eaeaea;
+    color: #64656A;
+  }
+}

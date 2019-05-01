@@ -1,0 +1,33 @@
+<div class="modal">
+ <div class="modal-dialog modal-sm modalCentered">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h4 class="modal-title">Archive Patient</h4>
+       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+     <div class="modal-body">
+      <div class="form-row">
+        <h4>Reason for Archive</h4>
+      </div>
+      <div class="form-row">
+        <div class="form-group w-100">
+          <select id="" class="w-100" data-ng-model="patientArchive.reason" data-ng-options="reason as reason.name for reason in reasonsForArchive">
+            <option value="">Please Select</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row" data-ng-if="patientArchive.reason.guid === '{0dd9035c-86e8-412a-a6bd-ab1389f1f1c6}' || patientArchive.reason.guid === '{6160ee98-245f-4e65-adaf-3f2a03114cc8}' || patientArchive.reason.guid === '{755e74fd-16c7-4e0a-96b3-2f35ed10ba23}'">
+        <h5>Please give an explanation:</h5>
+        <div class="form-group w-100">
+          <input data-ng-model="patientArchive.archiveDescription" class="w-100"></input>
+        </div>
+      </div>
+
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+       <button type="button" class="btn btn-primary" data-ng-click="archiveCase(patientArchive)">Confirm</button>
+     </div>
+   </div>
+ </div>
+</div>

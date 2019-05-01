@@ -1,0 +1,51 @@
+        <div id="SystemAdministratorRegistrationStep6" ng-init="initOrderDetails()">
+            <h2 class="teal">Order + Submit</h2>
+            <h4 class="subStepTitle">Order Details</h4>
+            <div class="row">
+                <div class="orderDetails">
+
+                    <div class="orderInfo">
+                        <div class="orderInfoDetails">
+                            <div class="detail" ng-repeat="detail in orderDetails">
+                                <div class="check">
+                                    <input id="{{detail.id}}" type="checkbox" class="addExpertAnalysis" name="detail.id" value="detail.product_price" ng-disabled="!detail.isOptional"
+                                        ng-model="detail.addToOrder" ng-click="calculateOrder()">
+                                    <label for="{{detail.id}}" class="checkbox" ng-hide="!detail.isOptional">{{detail.name}}</label>
+                                    <label for="{{detail.id}}" ng-show="!detail.isOptional">{{detail.name}}</label>
+                                </div>
+                                <p class="priceTag">${{detail.product_price}}.00</p>
+                            </div>
+                            <div class="detail">
+                                <div class="check">
+                                    <input id="addCBCTAnalysis" type="checkbox" class="addExpertAnalysis" name="addCBCTAnalysis" ng-model="newCasefile.cbctAnalysis"
+                                        ng-click="calculateOrder()">
+                                    <label for="addCBCTAnalysis" class="checkbox">Radiology Report</label>
+                                </div>
+                                <p class="priceTag">$95.00</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <footer class="orderFooter">
+                        <h3>Total</h3>
+                        <h3 id="finalPrice">${{totalOrder}}.00</h3>
+                    </footer>
+                </div>
+            </div>
+
+            <div class="row errorMsg" ng-show="ccError">
+                <span class="fieldError">{{errorMsg}}</span>
+            </div>
+            <form id="js-ecommercePayments" name="ecommercePayments"></form>
+
+            <div class="row">
+                <div class="save">
+                    <button class="btn btn-primary hideSubmit" ng-click="placeOrder(newCasefile, orderDetails)">Place Order</button>
+                </div>
+                <div class="disabledMsg">Please select a credit card before submitting</div>
+            </div>
+
+
+
+
+        </div>

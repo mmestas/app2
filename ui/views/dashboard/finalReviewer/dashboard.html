@@ -1,0 +1,71 @@
+<!-- <div id="user" ng-cloak>
+  <div class="container">
+  </div>
+</div> -->
+    <div id="dashboard" ng-init="dashboardInit()">
+      <div class="container">
+        <div class="dashboardWrapper">
+          <div class="dashTitle">
+            <h2>Final Reviewer Dashboard</h2>
+          </div>
+        </div>
+        <div class="stats" >
+          <div class="stat" ng-class="{statActive: 1 === selected}"  ng-click="getTechDashStatuses(1)" >
+            <button>Assigned Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{(casesData | filter: { status: { id: finalReviewerCasesFilter } }:filterByStatus | filter:{ assignedToFinalReviewer: { id: userInfo.id } } ).length}}</h3>
+                <p>My Active Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 2 === selected}"ng-click="getTechDashStatuses(2)">
+            <button>All Active Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{(cases.data | filter: { status: { id: activeCasesFilter } }:filterByStatus).length}}</h3>
+                <p>All Active Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 3 === selected}" ng-click="getTechDashStatuses(3)">
+            <button>My Completed Cases</button>
+            <a href="#">
+              <div>
+                <h3 ng-if="!completedCasesData">{{(notHiddenCompletedCases + statushiddenCompletedCases)}}</h3>
+                <h3 ng-if="completedCasesData">{{(completedCasesData | filter: { assignedToFinalReviewer: { id: userInfo.id } } ).length }}</h3>
+                <p>My Completed Cases</p>
+              </div></a>
+          </div>
+          <div class="stat" ng-class="{statActive: 4 === selected}" ng-click="getTechDashStatuses(4)">
+            <button>All Completed Cases</button>
+            <a href="#">
+              <div>
+                <h3>{{notHiddenCompletedCases + statushiddenCompletedCases}}</h3>
+                <p>All Completed Cases</p>
+              </div></a>
+          </div>
+        </div>
+
+
+        <div class="sortDropdown">
+          <span class="safariSelectHack">
+            <select ng-options="option.date for option in sortByDate" ng-model="sorted" ng-change="sortNewstOldest(sorted)">
+              <option value=''> --Sort by Days in Queue-- </option>
+            </select>
+          </span>
+          <div>
+            <input id="showHideCases" type="checkbox" ng-model="showHideCases" value="" ng-true-value="''">
+              <label class="checkbox-inline checkbox" for="showHideCases"> Show Hidden Cases </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col col-md-12" ng-include="'/views/dashboard/finalReviewer/tables/activeCases.html'" ng-if="selected === 1"></div>
+          <div class="col col-md-12" ng-include="'/views/dashboard/finalReviewer/tables/activeCasesAll.html'" ng-if="selected === 2"></div>
+          <div class="col col-md-12" ng-include="'/views/dashboard/finalReviewer/tables/completedCases.html'" ng-if="selected === 3"></div>
+          <div class="col col-md-12" ng-include="'/views/dashboard/finalReviewer/tables/completedCasesAll.html'" ng-if="selected === 4"></div>
+        </div>
+
+      </div>
+    </div>
+
+  <div ng-include="'/views/modals/admin/autoLogout.html'"></div>

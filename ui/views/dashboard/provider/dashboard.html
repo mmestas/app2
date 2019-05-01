@@ -1,0 +1,57 @@
+<!-- <div id="user" ng-cloak><div class="container"></div></div> -->
+
+<div id="dashboard" ng-init="dashboardInit()">
+  <div class="container">
+    <div class="dashboardWrapper">
+      <div class="dashTitle">
+        <h2>Patients</h2>
+      </div>
+      <div class="open">
+        <button class="btn btn-primary" href="/new-case-step1" ng-click="openNewCase(casefile)">Add New Patient &nbsp; <i  class="fa fa-user-plus"></i></button>
+      </div>
+    </div>
+    <div class="stats" >
+      <div class="stat" ng-class="{statActive: 1 === selectedTile}"  ng-click="selectTile(1)" >
+        <button>Active Cases</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: activeCases} }:inclusiveFilter).length }}</h3>
+            <p>Active Cases</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 2 === selectedTile}"  ng-click="selectTile(2)" >
+        <button>Action Required</button>
+        <a href="#">
+          <div>
+            <h3>{{(casesData | filter: { status: { id: attentionNeeded} }:inclusiveFilter).length }}</h3>
+            <p>Action Required</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 3 === selectedTile}"  ng-click="selectTile(3)" >
+        <button>Treatment Completed</button>
+        <a href="#">
+          <div>
+            <h3>{{notHiddenTreatmentCompletedCases + statushiddenTreatmentCompletedCases}}</h3>
+            <p>Treatment Completed</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div ng-include="'/views/modals/admin/tagFilter.html'"></div>
+    <!-- TABLES -->
+    <div class="row">
+      <div class="col col-md-12" ng-include="'/views/dashboard/provider/tables/active.html'" ng-if="selectedTile === 1"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/provider/tables/attentionNeeded.html'" ng-if="selectedTile === 2"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/provider/tables/treatmentCompleted.html'" ng-if="selectedTile === 3"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODALS -->
+<div ng-include="'/views/modals/admin/confirmDelete.html'"></div>
+
+<div ng-include="'/views/modals/admin/requestRefund.html'"></div>
+<div ng-include="'/views/modals/admin/autoLogout.html'"></div>

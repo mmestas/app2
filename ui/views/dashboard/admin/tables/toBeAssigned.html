@@ -1,0 +1,62 @@
+<table ng-table="casesTable" class="table table-condensed table-bordered table-striped casesTable" >
+    <tr ng-class="{rushOrderAdmin: case.isRushOrder == true }"
+        ng-repeat="case in $data | orderBy: ['-isRushOrder']
+        | filter: { status: { id: diagnosticFilter3 } }:filterByStatus2
+        | filter: allToBeAssignedFilter
+        | filter: {adminHide: showHideCases}
+        ">
+    <td class="goToCase" title="'Case #'" data-title="'Case #'" filter="{'casenumber': 'text'}" sortable="'casenumber'" ng-click="gotocase(case)">
+      <div class="caseNumberWithReportImages">
+        <div>{{case.casenumber}}</div>
+        <div class="radiologyReportImg">
+          <img data-ng-show="case.includeRadiologyReport" src="/images/AirwayIcon.png">
+          <img data-ng-show="case.includeSassouniPlus" src="/images/sassouniPlus.png">
+        </div>
+      </div>
+    </td>
+    <td class="" data-title="'Provider'" filter="{'requestedby.name': 'text'}" sortable="'requestedby.name'">{{case.requestedby.name}}</td>
+    <td class="" data-title="'Patient'" filter="firstLastNameFilter" sortable="'info.lastname'">
+      <div class="flexBox">
+        <div><img class="profileImg tableImg" src="{{contentUrl+case.photos.facial.bigsmile}}"></div>
+        <div class="tablePatientName">{{case.info.firstname + " " + case.info.lastname}}</div>
+      </div>
+    </td>
+    <td class="statusColumn" data-title="'Treatment Status'" filter="{'status.status': 'text'}" sortable="'status.status'">{{case.status.status}}</td>
+    </td>
+    <td class="" data-title="'Technician'" filter="{'assignedTo.name': 'text'}" sortable="'assignedTo.name'">
+      <span ng-if="(case.status.id != 0) && (case.status.id != 2)">{{case.assignedTo.name}}</span>
+      <span class="safariSelectHack" ng-if="case.assignedTo.id == 0 && case.status.id == 2">
+      <select ng-if="case.assignedTo.id == 0 && case.status.id == 2" name="selectatech" id="" ng-model="case.assignedTo" ng-options="tech as tech.firstname + ' ' + tech.lastname for tech in listOfTechs" ng-change="setTechnician(case)">
+        <option value=''>Select a Technician</option>
+      </select>
+      </span>
+      <span class="safariSelectHack" ng-if="case.assignedTo.id != 0 && case.status.id == 2">
+      <select  ng-if="case.assignedTo.id != 0 && case.status.id == 2" name="techselection" id="" ng-model="case.assignedTo" ng-options="tech as tech.firstname + ' ' + tech.lastname for tech in listOfTechs" ng-change="setTechnician(case)">
+        <option value=''><b>{{case.assignedTo.firstname}} {{case.assignedTo.lastname}}</b></option>
+      </select>
+      </span>
+    </td>
+    <td class="" data-title="'Clinician'" filter="{'assignedToDiagnostician.name': 'text'}" sortable="'assignedToDiagnostician.name'">
+      <span ng-if="case.assignedToDiagnostician.id != 0 && case.status.id != 4">{{case.assignedToDiagnostician.name}}</span>
+      <span class="safariSelectHack" ng-if="case.assignedToDiagnostician.id == 0 && case.status.id == 4">
+      <select ng-if="case.assignedToDiagnostician.id == 0 && case.status.id == 4" name="selectadiagnostician" id="" ng-model="case.assignedToDiagnostician" ng-options="diagnostician as diagnostician.firstname + ' ' + diagnostician.lastname for diagnostician in listOfDiagnosticians" ng-change="setDiagnostician(case)">
+        <option value=''>Select a Clinician</option>
+      </select>
+      </span>
+      <span class="safariSelectHack" ng-if="case.assignedToDiagnostician.id != 0 && case.status.id == 4">
+      <select  ng-if="case.assignedToDiagnostician.id != 0 && case.status.id == 4" name="diagnosticianselection" id="" ng-model="case.assignedToDiagnostician" ng-options="diagnostician as diagnostician.firstname + ' ' + diagnostician.lastname for diagnostician in listOfDiagnosticians" ng-change="setDiagnostician(case)">
+        <option value=''><b>{{case.assignedToDiagnostician.firstname}} {{case.assignedToDiagnostician.lastname}}</b></option>
+      </select>
+      </span>
+    </td>
+    <td class="" data-title="'Final Reviewer'" filter="{'assignedToFinalReviewer.name': 'text'}" sortable="'assignedToFinalReviewer.name'">
+      <span class="safariSelectHack"  ng-if="case.status.id == 8">
+        <select name="finalReviewerSelection" id="" ng-model="case.assignedToFinalReviewer"
+        ng-options="finalReviewer as finalReviewer.firstname + ' ' + finalReviewer.lastname for finalReviewer in listOfFinalReviewers" ng-change="setFinalReviewer(case)">
+          <option value=''>Select</option>
+        </select>
+      </span>
+    </td>
+    <td ng-class="{'daysGreen' : daysSubmitted <= 6, 'daysYellow' : daysSubmitted > 6 && daysSubmitted <= 10, 'daysRed' : daysSubmitted > 10}" data-title="'Days in Queue'">{{getDaysSubmitted(case.submittedDate)}}</td>
+  </tr>
+</table>

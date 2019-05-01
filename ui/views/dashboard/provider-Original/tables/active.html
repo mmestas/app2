@@ -1,0 +1,23 @@
+<table ng-table="casesTable" class="table table-condensed table-bordered table-striped casesTable">
+  <tr ng-class="{rushOrder: case.isRushOrder == true }"
+  ng-repeat="case in $data | filter: {tag: {title: tagFilter} } | filter: { status: { id: activeCases} }:inclusiveFilter | filter: byFormattedDateFilter | orderBy: ['-isRushOrder']">
+    <td class="goToCase" title="'Case #'" data-title="'Case #'" filter="{'casenumber': 'text'}" sortable="'casenumber'" ng-click="gotocase(case)">
+      <div class="caseNumberWithReportImages">
+        <div>{{case.casenumber}}</div>
+        <div class="radiologyReportImg">
+          <img data-ng-show="case.includeRadiologyReport" src="/images/AirwayIcon.png">
+          <img data-ng-show="case.includeSassouniPlus" src="/images/sassouniPlus.png">
+        </div>
+      </div>
+    </td>
+    <td class="" data-title="'Patient'" filter="firstLastNameFilter" sortable="'info.lastname'">
+      <div class="flexBox">
+        <div><img class="profileImg tableImg" src="{{contentUrl+case.photos.facial.bigsmile}}"></div>
+        <div class="tablePatientName">{{case.info.firstname + " " + case.info.lastname}}</div>
+      </div>
+    </td>
+    <td data-title="'Date Created'" filter="{'submittedDate': 'text'}" sortable="'submittedDateSort'">{{case.submittedDate}}</td>
+    <td class="statusColumn" data-title="'Treatment Status'" filter="{'status.status': 'text'}" sortable="'status.status'">{{case.status.status}}</td>
+    <td class="delete" data-title="'Archive'"><i class=" fa fa-archive " ng-click="confirmDeleteModal(case)"></i></td>
+  </tr>
+</table>

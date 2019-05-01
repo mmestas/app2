@@ -1,0 +1,33 @@
+<table ng-table="casesTable" class="table table-condensed table-bordered table-striped casesTable" >
+    <tr ng-class="{rushOrderAdmin: case.isRushOrder == true }"
+        ng-repeat="case in $data | orderBy: ['-isRushOrder']
+        | filter: { status: { id: 2 } }
+        | filter: techOnlyFilter
+        | filter: {adminHide: showHideCases}
+        |  filter: {tag: {title: tagFilter} }
+        | filter: byFormattedDateFilter"
+        ">
+    <td class="goToCase" title="'Case #'" data-title="'Case #'" filter="{'casenumber': 'text'}" sortable="'casenumber'" ng-click="gotocase(case)">
+      <div class="caseNumberWithReportImages">
+        <div>{{case.casenumber}}</div>
+        <div class="radiologyReportImg">
+          <img data-ng-show="case.includeRadiologyReport" src="/images/AirwayIcon.png">
+          <img data-ng-show="case.includeSassouniPlus" src="/images/sassouniPlus.png">
+        </div>
+      </div>
+    </td>
+    <td class="" data-title="'Provider'" filter="{'requestedby.name': 'text'}" sortable="'requestedby.name'">{{case.requestedby.name}}</td>
+    <td class="" data-title="'Patient'" filter="firstLastNameFilter" sortable="'info.lastname'">
+      <div class="flexBox">
+        <div><img class="profileImg tableImg" src="{{contentUrl+case.photos.facial.bigsmile}}"></div>
+        <div class="tablePatientName">{{case.info.firstname + " " + case.info.lastname}}</div>
+      </div>
+    </td>
+    <td class="" data-title="'Technician'" filter="{'assignedTo.name': 'text'}" sortable="'assignedTo.name'">
+      {{case.assignedTo.name}}
+    </td>
+    <td ng-class="{'daysGreen' : daysSubmitted <= 6, 'daysYellow' : daysSubmitted > 6 && daysSubmitted <= 10, 'daysRed' : daysSubmitted > 10}" data-title="'Days Assigned'">{{getDaysSubmitted(case.setPatientTechnicianDate | jsonDate)}}</td>
+
+    <td ng-class="{'daysGreen' : daysSubmitted <= 6, 'daysYellow' : daysSubmitted > 6 && daysSubmitted <= 10, 'daysRed' : daysSubmitted > 10}" data-title="'Days in Queue'">{{getDaysSubmitted(case.submittedDate)}}</td>
+  </tr>
+</table>

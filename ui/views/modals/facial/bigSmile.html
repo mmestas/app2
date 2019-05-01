@@ -1,0 +1,43 @@
+<script type="text/ng-template" id="bigSmileModal.html">
+   <div class="modal fade show">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Case File:{{modalCtrl.data.casenumber}} - {{modalCtrl.data.requestedby.name}}</h4>
+          <button type="button" class="close" ng-click="modalCtrl.areYouSure()"aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modalDetails">
+            <div class="modalImg">
+              <div class="modalHeaders">Big Smile</div>
+              <img class="modalPhoto" ng-src="{{modalCtrl.data.photos.facial.bigsmile}}" ng-class="{'invisibleDiv' : modalCtrl.showCropper}">
+              <button  class="btn btn-default" ng-click="modalCtrl.showCropTool()" ng-hide="modalCtrl.showCropper">Zoom & Rotate</button>
+              <div ng-include src="modalCtrl.cropperHtml" class="cropperInclude"></div>
+            </div>
+            <div class="modalNotes">
+              <div class="modalHeaders">Technician Notes</div>
+              <textarea ng-disabled="!(modalCtrl.user.userRole.ccGuid == '{fbc16991-fd1b-43db-89c8-9c2906281eb3}')" ng-model="modalCtrl.data.techNotes.facialphotos.bigsmile">{{modalCtrl.data.techNotes.facialphotos.bigsmile}}</textarea>
+              <div class="modalHeaders">Diagnostician Notes</div>
+              <textarea ng-disabled="!(modalCtrl.user.userRole.ccGuid == 'clinicianKey')" ng-model="modalCtrl.data.diagnosticianNotes.facialphotos.bigsmile">{{modalCtrl.data.diagnosticianNotes.facialphotos.bigsmile}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="modalCtrl.areYouSure()">Dismiss</button>
+          <button type="button" class="btn btn-default" ng-click="modalCtrl.saveModalNotes(modalCtrl.data)" data-dismiss="modal">Save Notes</button>
+        </div>
+      </div>
+    </div>
+   </div>
+</script>
+
+<script type="text/ng-template" id="cropperBigSmileModal.html"  >
+  <image-cropper
+  image-url="{{modalCtrl.data.photos.facial.bigsmile}}"
+         show-controls="{{modalCtrl.showControls}}"
+         fit-on-init="true"
+         center-on-init="true"
+         crop-callback="savePhotoCrop"
+         action-labels="modalCtrl.myButtonLabels"
+  ></image-cropper>
+</script>

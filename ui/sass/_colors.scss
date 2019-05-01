@@ -1,0 +1,54 @@
+// Original colors:
+// $urlSiteOrange: #ffa400;
+// $urlSiteGreen: #95d600;
+// $urlSiteTeal: #1ccfc9;
+// $urlSiteTealOutline: #49c1c2;
+
+// New colors:
+//     color: #abc27d;
+//     color: #8faaa0;
+//     color: #e4bf44;
+//     color: #63655e;
+
+
+//
+$urlSiteOrange: #e4bf44;
+$urlSiteDarkOrange: darken($urlSiteOrange, 10);
+$urlSiteOrangeHover: lighten($urlSiteOrange, 24);
+
+$urlSiteGreen: #abc27d;
+$urlSiteGreenHover: lighten($urlSiteGreen, 20%);
+$urlSiteDarkGreen: darken($urlSiteGreen, 10%);
+$urlSiteHazyGreen: #b2cc77;
+
+
+$urlSiteTeal: #8faaa0;
+$urlSiteTealHover: lighten($urlSiteTeal, 20%);
+$urlSiteDarkTeal: darken($urlSiteTeal, 20%);
+
+$urlSiteRed: #ea5353;
+$urlSiteRedHover: lighten($urlSiteRed, 30%);
+$urlSiteDarkRed: darken($urlSiteRed, 10%);
+
+$urlSiteText: #212529;
+$urlSiteGrey: #535353;
+$urlSiteMedGrey: #64656A;
+$urlSiteMedLtGrey: #868686;
+$urlSiteLtGrey: #a9a9ab;
+$urlSiteBorderGrey: #bbbbbb;
+$urlSiteBorderGrey2: #c3c3c3;
+$urlSiteBorderGrey3: #cccccc;
+$urlSiteBorder: #eaeaea;
+$urlSiteOffWhite: #f1f1f1;
+$urlSiteWhite: #ffffff;
+
+$urlSiteBlue: #23abe2;
+$urlSiteBlueHover: lighten($urlSiteBlue, 30%);
+$urlSiteDarkBlue: darken($urlSiteBlue, 10%);
+// $urlSiteBackgroundBlue: #7190af;
+$urlSiteBackgroundBlue: #8e9faf;
+
+$urlSiteDkMauve: #9c27b0;
+$urlSiteDkMauveHover: lighten($urlSiteDkMauve, 30%);
+$urlSiteFucshia: #f74783;
+$urlSiteFucshiaHover: lighten($urlSiteFucshia, 30%);

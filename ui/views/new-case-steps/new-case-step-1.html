@@ -1,0 +1,89 @@
+        <form id="newCaseStep1" name="step1" novalidate  ng-init="step1Init()">
+            <h2 class="teal">Step 1 - Patient Profile ({{newCasefile.casenumber}})</h2>
+            <h4 class="subStepTitle">Please Enter the Patient Information</h4>
+            <div class="row">
+                <div class="halffield">
+                    <label>First Name</label><span class="required">*</span>
+                    <input id="PatientFirstName" type="text" name="PatientFirstName" placeholder="* Patient First Name" ng-model="newCasefile.info.firstname"
+                        ng-required="true">
+                </div>
+                <div class="halffield">
+                    <label>Last Name</label><span class="required">*</span>
+                    <input id="PatientLastName" type="text" name="PatientLastName" placeholder="* Patient Last Name" ng-model="newCasefile.info.lastname"
+                        ng-required="true">
+                </div>
+            </div>
+            <div class="row">
+                <div class="halffield newCaseDatepicker flex">
+                    <div class="flex flex-column width_50">
+                        <div><label>D.O.B.</label><span class="required">*</span></div>
+                        <md-datepicker class="patientDOB" name="patientBD" ng-model="newCasefile.info.birthdate" md-current-view="year" md-placeholder="* Patient Birthdate"
+                            ng-change="getAge(newCasefile.info.birthdate)" ng-required="true"></md-datepicker>
+                    </div>
+                    <div  class="flex flex-column width_50">
+                        <!-- set height because font-size on * is set to 18 -->
+                        <div style="height:25px;"><label>Age</label></div>
+                        <input id="PatientAge" class="patientAgeInput" type="text" name="Patient Age" placeholder="Patient Age" ng-model="patientAge" value="{{patientAge}}" readonly>
+                        <input ng-hide="true" type="number" ng-model="newCasefile.info.age" value="{{newCasefile.info.age}}">
+                        <input ng-hide="true" type="number" ng-model="newCasefile.info.ageMonth" value="{{newCasefile.info.ageMonth}}">
+                    </div>
+                </div>
+                <div class="flex flex-align-center">
+                    <div class="width_50">
+                      <label>Gender</label><span class="required">*</span>
+                      <div style="height:45px;">
+                        <label class="radioLabel">
+                            <input id="PatientGenderMale" type="radio" name="Patient Gender" placeholder="Patient Gender" ng-model="newCasefile.info.gender" value="male"> Male
+                        </label>
+                        <label class="radioLabel">
+                            <input id="PatientGenderFemale" type="radio" name="Patient Gender" placeholder="Patient Gender" ng-model="newCasefile.info.gender" value="female"> Female
+                        </label>
+                      </div>
+                    </div>
+                    <div class="ethnicity">
+                        <label>Ethnicity</label><span class="required">*</span>
+                        <select class="width_100" data-ng-model="newCasefile.info.ethnicity" data-ng-options="ethnicity as ethnicity.name for ethnicity in ethnicities track by ethnicity.name">
+                            <option value=''>Ethnicity</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="save">
+                    <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 1)" data-ng-if="!caseIsSubmitted">
+                    Save + Continue</button>
+                    <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-2({selectedTile: selectedTile, id: caseLinkId})">
+                    Go to Health History</button>
+                     &nbsp;
+                     <div ng-if="showErrorMsg && (!newCasefile.info.firstname || !newCasefile.info.lastname || !newCasefile.info.birthdate || !newCasefile.info.gender || !newCasefile.info.ethnicity.guid)">
+                    <!-- <div ng-if="showErrorMsg"> -->
+                      <div class="fieldError" >
+                          {{errorMsg}}
+                      </div>
+                      <div class="fieldError">
+                        <span>
+                          Missing:
+                        </span>
+                        <span ng-show="!newCasefile.info.firstname">
+                            &nbsp; First Name <span ng-if="!newCasefile.info.lastname || !newCasefile.info.birthdate || !newCasefile.info.gender || !newCasefile.info.ethnicity.guid">,</span>
+                        </span>
+                        <span ng-show="!newCasefile.info.lastname">
+                            &nbsp; Last Name <span ng-if="!newCasefile.info.birthdate || !newCasefile.info.gender || !newCasefile.info.ethnicity.guid">,</span>
+                        </span>
+                        <span ng-show="!newCasefile.info.birthdate">
+                            &nbsp; D.O.B. <span ng-if="!newCasefile.info.gender || !newCasefile.info.ethnicity.guid">,</span>
+                        </span>
+                        <span ng-show="!newCasefile.info.gender">
+                            &nbsp; Gender <span ng-if="!newCasefile.info.ethnicity">,</span>
+                        </span>
+                        <span ng-show="!newCasefile.info.ethnicity.guid">
+                            &nbsp; Ethnicity
+                        </span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </form>

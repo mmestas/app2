@@ -1,0 +1,22 @@
+   <div class="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modalCentered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Case File: {{patientDetails.caseNumber}} - {{patientDetails.provider.name}}</h4>
+          <button type="button" class="close" data-ng-click="dismissModal()" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modalDetails">
+            <div style="width: 100%; height: 100%;">
+              <div class="modalHeaders">Need More Information</div>
+              <textarea class="w-100" style="height: 200px;" ng-model="patientDetails.needsMoreInfo">{{patientDetails.needsMoreInfo}}</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" ng-click="dismissModal()"">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="saveMoreInfoNotes(patientDetails)"">Add Note & Return to Provider</button>
+        </div>
+      </div>
+    </div>
+   </div>

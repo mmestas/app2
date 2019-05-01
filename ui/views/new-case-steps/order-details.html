@@ -1,0 +1,28 @@
+        <div id="SystemAdministratorRegistrationStep6" ng-init="initOrderDetails()">
+            <h2 class="teal">Order + Submit</h2>
+            <h4 class="subStepTitle">Order Details</h4>
+            <div class="row">
+              <div class="col col-md-12">
+                <div class="form-check">
+                  <input id="radiologyReport" type="checkbox" class="radiologyReport" name="radiologyReport" ng-model="newCasefile.includeRadiologyReport">
+                  <label for="radiologyReport" class="checkbox">Radiology Report - $95.00</label>
+                </div>
+              </div>
+
+            </div>
+            <div class="row errorMsg" ng-show="ccError">
+                <span class="fieldError">{{errorMsg}}</span>
+            </div>
+            <form id="js-ecommercePayments" name="ecommercePayments"></form>
+
+            <div class="row">
+                <div class="save">
+                    <button class="btn btn-primary hideSubmit" ng-click="submitPatientCase(newCasefile)">Place Order</button>
+                </div>
+                <div class="disabledMsg">Please select a credit card before submitting</div>
+            </div>
+
+
+
+
+        </div>

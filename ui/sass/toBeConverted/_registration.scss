@@ -1,0 +1,620 @@
+.registration .container h2 {
+  clear: both;
+  // color: white;
+  text-align: center;
+  padding: 10px 0px;
+  margin-bottom: 25px;
+}
+
+.registration .container h2.teal {
+  color: $urlSiteTeal;
+  font-size: 22px;
+  font-weight: 300;
+  background: transparent;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding: 0;
+}
+.registration .container h4.subStepTitle {
+  text-align: center;
+  color: #868686;
+  margin-top: 0;
+  margin-bottom: 20px;
+  }
+.registration .container h2.green {
+  background: $urlSiteTeal;
+}
+
+.registration .container form {
+  margin: 0 auto;
+  padding: 15px 25px;
+  display: block;
+}
+
+.registration .container form#js-ecommercePayments {
+  width:100%;
+}
+
+.registration .container form .field .lock, .registration .container form .field .camera, .registration .container form .field .bank, .registration .container form .field .dropdown, .registration .container form .halffield .lock, .registration .container form .halffield .camera, .registration .container form .halffield .bank, .registration .container form .halffield .dropdown {
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  right: 0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+}
+
+.registration .container form .field .lock img, .registration .container form .field .camera img, .registration .container form .field .bank img, .registration .container form .field .dropdown img, .registration .container form .halffield .lock img, .registration .container form .halffield .camera img, .registration .container form .halffield .bank img, .registration .container form .halffield .dropdown img {
+  height: 20px;
+}
+
+.registration .container form .field .dropdown, .registration .container form .halffield .dropdown {
+  border-left: 1px solid #eaeaea;
+}
+
+.registration .container form .field .dropdown img, .registration .container form .halffield .dropdown img {
+  height: 10px;
+  z-index: 99;
+}
+
+.registration .container form .field {
+  padding: 0px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.registration .container form .field p {
+  background: #f1f1f1;
+  height: 45px;
+  line-height: 45px;
+  padding-left: 10px;
+  color: #64656A;
+  margin: 0px;
+}
+
+.registration .container form .field input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #EAEAEA;
+  font-size: 12px;
+  margin: 0px;
+}
+
+.registration .container form .field textarea {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #EAEAEA;
+  font-size: 12px;
+  margin: 0px;
+  padding-top: 10px;
+}
+
+.registration .container form .row .BillingAccount {
+  /*height: 200px;*/
+  margin-top: 25px;
+  padding: 25px;
+}
+
+.registration .container form .row .BillingAccount .selectBilling {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+          -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+  margin-bottom: 10px;
+}
+
+.registration .container form .row .BillingAccount .selectBilling h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container form .row .BillingAccount .selectBilling .select {
+  width: 50%;
+  position: relative;
+}
+
+.registration .container form .row .BillingAccount .selectBilling .select .dropdown {
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  right: 0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+  border-left: 1px solid #EAEAEA;
+}
+
+.registration .container form .row .BillingAccount .selectBilling .select .dropdown img {
+  height: 10px;
+  z-index: 99;
+}
+
+.registration .container form .row .BillingAccount .selectBilling .select select#BillingAccount {
+  width: 100%;
+  border-radius: 0px;
+  border: 1px solid #EAEAEA;
+  height: 45px;
+  text-align: left;
+  -webkit-appearance: none;
+  color: #64656A;
+  text-indent: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.registration .container form .row .BillingAccount .selectBilling .select select#BillingAccount:focus {
+  outline: none;
+}
+
+/************** change to div ****************/
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount {
+  /*height: 200px;*/
+  margin-top: 25px;
+  padding: 25px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+          -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+  margin-bottom: 10px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling .select {
+  width: 50%;
+  position: relative;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling .select .dropdown {
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  right: 0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+  border-left: 1px solid #EAEAEA;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling .select .dropdown img {
+  height: 10px;
+  z-index: 99;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling .select select#BillingAccount {
+  width: 100%;
+  border-radius: 0px;
+  border: 1px solid #EAEAEA;
+  height: 45px;
+  text-align: left;
+  -webkit-appearance: none;
+  color: #64656A;
+  text-indent: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .BillingAccount .selectBilling .select select#BillingAccount:focus {
+  outline: none;
+}
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails {
+  border: 1px solid #EAEAEA;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderHeader {
+  padding: 25px 25px;
+  border-bottom: 1px solid #EAEAEA;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderHeader h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails footer.orderFooter {
+  padding: 25px 25px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails footer.orderFooter h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails footer.orderFooter h3#finalPrice {
+  font-size: 24px;
+  color: $urlSiteOrange;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo {
+  border-bottom: 1px solid #EAEAEA;
+  padding: 25px 25px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoHeader {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoHeader h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoHeader h3#diagnosticPrice, .registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoHeader #subTotalPrice, .registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoHeader #finalPrice {
+  font-size: 20px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoDetails {
+  margin-top: 20px;
+  padding-left: 25px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .orderDetails .orderInfo .orderInfoDetails .detail {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+          -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators {
+  background: #c3c3c3;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators .other {
+  margin-top: 10px;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators .other:last-child {
+  margin-right: 0;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators .other textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 12px;
+  padding-top: 10px;
+  border: 1px solid #EAEAEA;
+  background: white;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators .checkboxs {
+  width: 25%;
+  float: left;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .indicators .checkboxs .check {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield:last-child {
+  margin-right: 0;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #EAEAEA;
+  font-size: 12px;
+  margin: 0px;
+}
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield label.radioLabel {
+  margin-right: 10px;
+}
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input[type='radio'] {
+  width:13px;
+  height: 15px;
+  margin-right: 3px;
+}
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input.lock {
+  background: url(images/lock.svg) cover;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input::-webkit-input-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input::-moz-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input:-ms-input-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield input::placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield select#State,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield select#Country,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #account,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #creditcard,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #BillingState,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #patientGender,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #expiry-month,
+.registration .container #SystemAdministratorRegistrationStep6 .row .halffield #expiry-year, .status_drop {
+  background: transparent;
+  width: 100%;
+  border-radius: 0px;
+  border: 1px solid #EAEAEA;
+  height: 45px;
+  text-align: left;
+  margin-top: 0px;
+  -webkit-appearance: none;
+  padding-left: 10px;
+  color: #a9a9ab;
+  text-indent: 0px;
+  font-size: 12px;
+  font-weight: normal;
+}
+/**************** change from form to div***********************************************************************************************/
+
+.registration .container form .row .orderDetails {
+  border: 1px solid #EAEAEA;
+}
+
+.registration .container form .row .orderDetails .orderHeader {
+  padding: 25px 25px;
+  border-bottom: 1px solid #EAEAEA;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -ms-flex-align: center;
+-webkit-align-items: center;
+align-items: center;
+}
+
+.registration .container form .row .orderDetails .orderHeader h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container form .row .orderDetails footer.orderFooter {
+  padding: 25px 25px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.registration .container form .row .orderDetails footer.orderFooter h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container form .row .orderDetails footer.orderFooter h3#finalPrice {
+  font-size: 24px;
+  color: $urlSiteOrange;
+}
+
+.registration .container form .row .orderDetails .orderInfo {
+  border-bottom: 1px solid #EAEAEA;
+  padding: 25px 25px;
+}
+
+.registration .container form .row .orderDetails .orderInfo .orderInfoHeader {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.registration .container form .row .orderDetails .orderInfo .orderInfoHeader h3 {
+  font-size: 16px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.registration .container form .row .orderDetails .orderInfo .orderInfoHeader h3#diagnosticPrice, .registration .container form .row .orderDetails .orderInfo .orderInfoHeader #subTotalPrice, .registration .container form .row .orderDetails .orderInfo .orderInfoHeader #finalPrice {
+  font-size: 20px;
+}
+
+.registration .container form .row .orderDetails .orderInfo .orderInfoDetails {
+  margin-top: 20px;
+  padding-left: 25px;
+}
+
+.registration .container form .row .orderDetails .orderInfo .orderInfoDetails .detail {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+          -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+}
+
+.registration .container form .row .indicators {
+  background: #c3c3c3;
+}
+
+.registration .container form .row .indicators .other {
+  margin-top: 10px;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+}
+
+.registration .container form .row .indicators .other:last-child {
+  margin-right: 0;
+}
+
+.registration .container form .row .indicators .other textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 12px;
+  padding-top: 10px;
+  border: 1px solid #EAEAEA;
+  background: white;
+}
+
+.registration .container form .row .indicators .checkboxs {
+  width: 25%;
+  float: left;
+}
+
+.registration .container form .row .indicators .checkboxs .check {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.registration .container form .row .halffield {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.registration .container form .row .halffield:last-child {
+  margin-right: 0;
+}
+
+.registration .container form .row .halffield input {
+  width: 100%;
+  height: 45px;
+  border: 1px solid #EAEAEA;
+  font-size: 12px;
+  margin: 0px;
+}
+.registration .container form .row .halffield label.radioLabel {
+  margin-right: 10px;
+}
+.registration .container form .row .halffield input[type='radio'] {
+  width:13px;
+  height: 15px;
+  margin-right: 3px;
+}
+.registration .container form .row .halffield input.lock {
+  background: url(images/lock.svg) cover;
+}
+
+.registration .container form .row .halffield input::-webkit-input-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container form .row .halffield input::-moz-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container form .row .halffield input:-ms-input-placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container form .row .halffield input::placeholder {
+  color: #a9a9ab;
+}
+
+.registration .container form .row .halffield select {
+    height: 45px;
+    border: 1px solid #EAEAEA;
+    font-size: 12px;
+    margin: 0px;
+    border-radius: 3px;
+    padding: 10px;
+    color: #64656A;
+}
+.registration .container form .row .halffield select#State,
+.registration .container form .row .halffield select#Country,
+.registration .container form .row .halffield #account, .registration .container form .row .halffield #creditcard, .registration .container form .row .halffield #BillingState, .registration .container form .row .halffield #patientGender, .registration .container form .row .halffield #expiry-month, .registration .container form .row .halffield #expiry-year, .status_drop {
+  background: transparent;
+  width: 100%;
+  border-radius: 0px;
+  border: 1px solid #EAEAEA;
+  height: 45px;
+  text-align: left;
+  margin-top: 0px;
+  -webkit-appearance: none;
+  padding-left: 10px;
+  color: #a9a9ab;
+  text-indent: 0px;
+  font-size: 12px;
+  font-weight: normal;
+}

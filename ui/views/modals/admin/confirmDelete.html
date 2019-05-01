@@ -1,0 +1,20 @@
+<script type="text/ng-template" id="confirmDelete.html">
+   <div class="modal fade show">
+    <div class="modal-dialog modal-sm modalCentered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title confirmDelete">Confirm Delete {{modalCtrl.data.casenumber}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <b>Do you want to archive this case file?</b><br>
+          (This will remove the file from your dashboard)
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-default" ng-click="modalCtrl.archiveCase(modalCtrl.data)" data-dismiss="modal">Yes, archive</button>
+        </div>
+      </div>
+    </div>
+   </div>
+</script>

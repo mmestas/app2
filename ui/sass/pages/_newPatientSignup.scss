@@ -1,0 +1,338 @@
+/*************** New Patient Signup Nav *******************/
+#newPatientSignup {margin-top:20px;
+  .container { background-color: transparent; padding-bottom: 100px;
+    .sideNav {width:200px; background-color: $urlSiteWhite; margin-right:5px;
+      // .saveAndReturnContainer {position: absolute; bottom:10px;}
+      .saveAndReturn {text-align: center;cursor: pointer;border: 1px solid black;padding: 5px;margin: 10px;
+        -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.1) inset;
+                box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.1) inset;
+        &:hover {background-color: $urlSiteMedGrey; color: $urlSiteWhite;}
+        i.fa {font-size: 24px;width: 40px;}
+      }
+      .sideNavLink {padding:12px; margin-bottom: 7px; background-color: $urlSiteWhite; cursor: pointer;font-weight: 600; color: $urlSiteMedGrey;
+        &:last-child {margin-bottom: 0;}
+        &.nmiStep {color:$urlSiteOrange;
+          &.active, &:hover {background-color: $urlSiteDarkTeal; color: $urlSiteWhite;}
+        }
+        &.active, &:hover {background-color: $urlSiteDarkTeal; color: $urlSiteWhite;
+          position:relative;
+          -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+             -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+                  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+          &:before, &:after {
+            content:"";
+            position:absolute;
+            z-index:-1;
+            -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+            box-shadow:0 0 20px rgba(0,0,0,0.8);
+            top:50%;
+            bottom:0;
+            left:10px;
+            right:10px;
+            -moz-border-radius:100px / 10px;
+            border-radius:100px / 10px;
+          }
+          &:after {
+            right:10px;
+            left:auto;
+            -webkit-transform:skew(8deg) rotate(3deg);
+               -moz-transform:skew(8deg) rotate(3deg);
+                -ms-transform:skew(8deg) rotate(3deg);
+                 -o-transform:skew(8deg) rotate(3deg);
+                    transform:skew(8deg) rotate(3deg);
+          }
+        }
+        &.disabled {color: $urlSiteBorderGrey; cursor: auto;
+          &:hover {
+            background-color:$urlSiteWhite;
+            -webkit-box-shadow: none;
+             -moz-box-shadow: none;
+                  box-shadow: none;
+          }
+        }
+        .fa-check-circle {color: $urlSiteOrange;}
+      }
+    }
+    .signUpContent {width: calc(100% - 200px); background-color: $urlSiteWhite;
+      .uploadLabels {
+              font-size: 12px;
+              color: $urlSiteGrey;
+              padding-top: 5px;
+              overflow: hidden;
+              word-break: break-word;
+        }
+      .uploadWrapper {padding: 10px;text-align: center;
+        .uploadInnerWrapper {border: 1px solid $urlSiteBorder; padding:10px; min-height: 142px; position: relative;
+          .uploadLabel {
+          }
+        }
+        .selectionInfo {text-align: center;
+          h3 {text-align: center;}
+        }
+      }
+      #newCaseStep1 {
+        .uploadWrapper {padding: 10px;text-align: center;
+          .uploadInnerWrapper {border: 1px solid $urlSiteBorder; padding:10px; min-height: 142px; position: relative;
+            .uploadLabel {
+
+            }
+          }
+        }
+        .row {
+          .halffield {
+            &.newCaseDatepicker {
+              .patientDOB {
+                .md-datepicker-input-container {
+                  width: calc(100% - 50px);
+                }
+              }
+              .patientAgeInput {width:130px; float:right;}
+            }
+          }
+          .flex {
+            .ethnicity {width:250px; margin-left:15px;}
+          }
+        }
+      }
+      #newCaseStep2 {
+        .md-datepicker-input-container {width:170px;}
+      }
+      #newCaseStep6 {
+        #archAnalysisForm {font-size: 13px;width: calc(100% - 260px);
+          @media (max-width: 992px) {width:100%;}
+          .archAnalysisFormLabels {width:calc(100% - 200px);}
+        }
+      }
+      #needsMoreInfoStep {
+        .nmiAdminNotes {border: 1px solid $urlSiteBorderGrey3; padding: 15px;
+          label {
+            font-weight: bold; font-size:16px; color: $urlSiteTeal;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+
+#toothMap {
+  ul.tabbedList { list-style-type: none; margin-top:5px;
+    li {
+      border: 1px solid black;
+      padding: 5px;
+      cursor: pointer;
+      &:hover, &.selectedDiagram {background-color: $urlSiteDarkTeal; color: $urlSiteWhite;}
+    }
+  }
+  .toothDiagram {padding: 0 10px 10px; text-align: center;width: 511px;height: 600px;
+    h2 {
+      margin:0; text-align:center;
+    }
+  }
+
+  #Teeth {
+    #LowerTeeth , #UpperTeeth {
+      g {
+        &:focus {outline:0;}
+        &.hideTooth {display:none;}
+        &.toothDisabled path {fill: $urlSiteBorder;
+          &:hover {cursor: auto; fill: $urlSiteBorder;}
+        }
+        path {
+          &:hover {
+            cursor: pointer;
+            fill: #fff263;
+          }
+          &:focus {outline:0;}
+        }
+        &.highlight path {fill: $urlSiteTeal;}
+        &.highlightMatch path {fill: #fff263;}
+      }
+    }
+    &.missingTeethDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteTeal;}
+        g.highlightMatch path {fill: #fff263;}
+      }
+    }
+    &.crownDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteOrange;}
+        g.highlightMatch path {fill: $urlSiteOrangeHover;}
+      }
+    }
+    &.bridgeDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteGreen;}
+        g.highlightMatch path {fill: $urlSiteGreenHover;}
+      }
+    }
+    &.implantsDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteBlue;}
+        g.highlightMatch path {fill: $urlSiteBlueHover;}
+      }
+    }
+    &.impactedDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteDkMauve;}
+        g.highlightMatch path {fill: $urlSiteDkMauveHover;}
+      }
+    }
+    &.deciduousDiagram {
+      #LowerTeeth , #UpperTeeth {
+        g.highlight path {fill: $urlSiteFucshia;}
+        g.highlightMatch path {fill: $urlSiteFucshiaHover;}
+      }
+    }
+  }
+
+  .toothMap {
+    width: 30px;
+    height: 30px;
+    background: #e0e0e0;
+    color: #888888;
+    border-radius: 50%;
+    border: 2px solid darkgrey;
+    text-align: center;
+    font-size: 11px;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {background-color: #fff263;}
+    &.toothSelected {background-color: $urlSiteTeal; color:$urlSiteWhite; border-color:darken($urlSiteTeal, 10%);}
+    &:focus {outline:0;}
+  }
+
+  .missingTeethDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteTeal; color:$urlSiteWhite; border-color:darken($urlSiteTeal, 10%);}
+  }
+  .crownDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteOrange; color:$urlSiteWhite; border-color:darken($urlSiteOrange, 10%);}
+  }
+  .bridgeDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteGreen; color:$urlSiteWhite; border-color:darken($urlSiteGreen, 10%);}
+  }
+  .implantsDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteBlue; color:$urlSiteWhite; border-color:darken($urlSiteBlue, 10%);}
+  }
+  .impactedDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteDkMauve; color:$urlSiteWhite; border-color:darken($urlSiteDkMauve, 15%);}
+  }
+  .deciduousDiagram {
+   .toothMap.toothSelected {background-color: $urlSiteFucshia; color:$urlSiteWhite; border-color:darken($urlSiteFucshia, 20%);}
+  }
+
+  // In case where user cannot edit (Create Rx Form)  This is a hack for now
+  .toothInactive {
+    #Teeth {
+      #LowerTeeth , #UpperTeeth {
+        g {
+          &:focus {outline:0;}
+          &.toothDisabled path {fill: $urlSiteBorder;
+            &:hover {cursor: auto; fill: $urlSiteBorder;}
+          }
+          path {
+            &:hover {
+              cursor: auto;
+              fill: $urlSiteWhite;
+            }
+            &:focus {outline:0;}
+          }
+        }
+      }
+      &.missingTeethDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteTeal;}}
+          g.highlightMatch path {&:hover  {fill: #fff263};}
+        }
+      }
+      &.crownDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteOrange;}}
+          g.highlightMatch path {&:hover  {fill: $urlSiteOrangeHover;}}
+        }
+      }
+      &.bridgeDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteGreen;}}
+          g.highlightMatch path {&:hover  {fill: $urlSiteGreenHover;}}
+        }
+      }
+      &.implantsDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteBlue;}}
+          g.highlightMatch path {&:hover  {fill: $urlSiteBlueHover;}}
+        }
+      }
+      &.impactedDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteDkMauve;}}
+          g.highlightMatch path {&:hover  {fill: $urlSiteDkMauveHover;}}
+        }
+      }
+      &.deciduousDiagram {
+        #LowerTeeth , #UpperTeeth {
+          g.highlight path {&:hover  {fill: $urlSiteFucshia;}}
+          g.highlightMatch path {&:hover  {fill: $urlSiteFucshiaHover;}}
+        }
+      }
+    }
+    .missingTeethDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteTeal; color:$urlSiteWhite; border-color:darken($urlSiteTeal, 10%);}
+     }
+    }
+    .crownDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteOrange; color:$urlSiteWhite; border-color:darken($urlSiteOrange, 10%);}
+     }
+    }
+    .bridgeDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteGreen; color:$urlSiteWhite; border-color:darken($urlSiteGreen, 10%);}
+     }
+    }
+    .implantsDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteBlue; color:$urlSiteWhite; border-color:darken($urlSiteBlue, 10%);}
+     }
+    }
+    .impactedDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteDkMauve; color:$urlSiteWhite; border-color:darken($urlSiteDkMauve, 15%);}
+     }
+    }
+    .deciduousDiagram {
+     .toothMap.toothSelected {
+       &:hover {background-color: $urlSiteFucshia; color:$urlSiteWhite; border-color:darken($urlSiteFucshia, 20%);}
+     }
+    }
+
+    .toothMap {
+      cursor: auto;
+      &:hover {background-color: #e0e0e0;}
+    }
+  }
+  // End Create Rx Form hack
+}
+
+
+
+// Need to Fit these in
+.orderHeader {
+	padding: 25px 25px;
+	border-bottom: 1px solid #EAEAEA;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+.orderInfo {
+	border-bottom: 1px solid #EAEAEA;
+	padding: 25px 25px;
+}

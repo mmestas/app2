@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="filter/tagHeader.html">
+      <div class="dropdownThFilter">
+        <button id="101" class="btn" ng-click="showTagFilterDropdown()" style="padding:0 9px 0 0; min-height:30px;">
+          <div id="100" class="tagFilterStyle" style="background-color:{{tagColor}}; border: 1px solid {{tagBorder}};"></div>
+          <i id="99" class="fa fa-caret-down"></i>
+        </button>
+        <ul ng-show="showTagDropdown"  style="z-index:1200;">
+          <li ng-click="filterTag()">All</li>
+          <li ng-repeat="tag in tagSelections" ng-click="filterTag(tag)">
+              <div ng-if="tag.id"  ng-class="{'defaultTag' : !case.tag.id}" class="tagStyle" style="background-color:{{tag.color}};">{{tag.name}}</div>
+          </li>
+        </ul>
+      </div>
+</script>

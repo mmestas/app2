@@ -1,0 +1,27 @@
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  min-height: 40px;
+  padding:20px;
+}
+
+.row {
+  // display: block;
+  // margin: 0;
+}
+
+// .row::after {
+//   clear: both;
+//   content: "";
+//   display: block;
+// }
+
+
+// BACKGROUNDS
+.bg-transparent {background-color: transparent;}
+
+
+// BORDERS
+.border-light {border-color: #eee !important;}

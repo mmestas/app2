@@ -1,0 +1,67 @@
+<div class="modal" id="addNewAddressModal" data-backdrop="static">
+ <div class="modal-dialog modalCentered">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h4 class="modal-title">Add New Shipping Address</h4>
+       <button type="button" class="close" ng-click="closeModal()" aria-hidden="true">&times;</button>
+     </div>
+     <div class="modal-body">
+       <form name="addNewShippingAddressForm">
+         <div class="flex-justify-spaceBetween vmb-10">
+            <div class="width_50 vmr-5">
+              <label>First Name</label>
+              <input data-ng-model="addressFields.firstName" name="firstName" data-ng-class="{'errorField': (!addressFields.firstName && showErrorMsg)}" required></input>
+            </div>
+            <div class="width_50 vmr-5">
+              <label>Last Name</label>
+              <input data-ng-model="addressFields.lastName" name="lastName" data-ng-class="{'errorField': (!addressFields.lastName && showErrorMsg)}" required></input>
+            </div>
+         </div>
+
+         <div class="flex-justify-spaceBetween vmb-10">
+            <div class="vmr-5">
+              <label>Address</label>
+              <input data-ng-model="addressFields.addressLine1" name="addressLine1" data-ng-class="{'errorField': (!addressFields.addressLine1 && showErrorMsg)}" required></input>
+            </div>
+            <div class="vmr-5">
+              <label>Address 2</label>
+              <input data-ng-model="addressFields.addressLine2" name="addressLine2"></input>
+            </div>
+            <div class="vmr-5">
+              <label>Country</label>
+              <select data-ng-model="addressFields.country" name="country" data-ng-class="{'errorField': (!addressFields.country && showErrorMsg)}" required data-ng-options="country as country.name for country in countriesList" data-ng-change="getStatesbyCountry(addressFields.country)"></select>
+            </div>
+         </div>
+
+         <div class="flex-justify-spaceBetween vmb-10">
+            <div class="width_33 vmr-5">
+              <label>City</label>
+              <input data-ng-model="addressFields.city" name="city" data-ng-class="{'errorField': (!addressFields.city && showErrorMsg)}" required></input>
+            </div>
+            <div class="width_33 vmr-5">
+              <label>State</label>
+              <select data-ng-model="addressFields.stateProvince" name="stateProvince" data-ng-class="{'errorField': (!addressFields.stateProvince && showErrorMsg)}" required data-ng-options="state.name as state.name for state in statesList" data-ng-disabled="statesIsInactive"></select>
+            </div>
+            <div class="width_33 vmr-5">
+              <label>Zip</label>
+              <input data-ng-model="addressFields.zipPostalCode" name="zipPostalCode" data-ng-class="{'errorField': (!addressFields.zipPostalCode && showErrorMsg)}" required></input>
+            </div>
+         </div>
+
+         <!-- <div class="flex-default">
+           <input type="checkbox" id="isPrimary" data-ng-model="addressFields.isPrimary" name="isPrimary">
+           <label for="isPrimary" class="checkbox">Make Primary?</label>
+         </div> -->
+
+         <div class="text-danger vmt-10" data-ng-show="showErrorMsg">
+           {{errorMsg}}
+         </div>
+
+       </form>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" aria-hidden="true" ng-click="saveNewAddress(addressFields, addNewShippingAddressForm)">Save</button>
+     </div>
+   </div>
+ </div>
+</div>

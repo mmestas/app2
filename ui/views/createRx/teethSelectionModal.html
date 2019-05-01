@@ -1,0 +1,97 @@
+<div class="modal" id="teethSelectionModal" data-backdrop="static"> <!-- Note: Do not use the class "fade" - there is a bug when using a manual close!-->
+ <div class="modal-dialog">
+   <div class="modal-content">
+
+     <!-- <button type="button" class="close" ng-click="closeModal()" aria-hidden="true" style="padding: 7px 10px 0 0;">&times;</button> -->
+       <!-- <button type="button" class="close btn btn-sm" ng-click="closeModal()" aria-hidden="true" style="padding: 7px 10px 0 0;">Save</button> -->
+
+      <div>
+        <div id="applianceMap" class="">
+          <div class="flex">
+            <div class="flex flex-column" style="">
+              <div class="flex flex-align-end flex-justify-end">
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected:  teeth.tooth1, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(1)">1</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth1b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(1.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected:  teeth.tooth2, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(2)">2</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth2b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(2.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth3, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(3)">3</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth3b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(3.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth4, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(4)">4</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth4b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(4.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth5, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(5)">5</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth5b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(5.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth6, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(6)">6</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth6b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(6.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth7, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(7)">7</button>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth7b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(7.5)"><span ng-if="showUpper">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth8, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(8)">8</button>
+                <div class="betweenUpperTeeth middleTeeth" ng-class="{toothSelected: teeth.tooth8b}" ng-click="addToSelected(8.5)"><span  ng-if="onlyBetween && showUpper">-</span></div>
+              </div>
+              <div><hr></div>
+              <div class="flex flex-justify-end">
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth32, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(32)">32</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth32b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(32.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth31, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(31)">31</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth31b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(31.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth30, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(30)">30</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth30b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(30.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth29, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(29)">29</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth29b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(29.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth28, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(28)">28</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth28b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(28.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth27, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(27)">27</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth27b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(27.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth26, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(26)">26</button>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth26b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(26.5)"><span ng-if="showLower">-</span></div>
+                <button class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth25, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(25)">25</button>
+                <div class="betweenLowerTeeth middleTeeth" ng-class="{toothSelected: teeth.tooth2b5}" ng-click="addToSelected(25.5)"><span ng-if="onlyBetween && showLower">-</span></div>
+              </div>
+            </div>
+            <div class="flex flex-column" style="">
+              <div class="flex flex-align-end">
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth9, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(9)">9</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth9b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(9.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth10, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(10)">10</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth10b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(10.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth11, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(11)">11</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth11b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(11.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth12, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(12)">12</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth12b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(12.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth13, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(13)">13</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth13b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(13.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth14, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(14)">14</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth14b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(14.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth15, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(15)">15</div>
+                <div class="betweenUpperTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth15b, 'toothMarkerHidden': showLower}" ng-click="addToSelected(15.5)"><span ng-if="showUpper">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showLower" ng-class="{toothSelected: teeth.tooth16, 'disabled': onlyBetween || showLower}" ng-click="addToSelected(16)">16</div>
+              </div>
+              <div><hr></div>
+              <div class="flex">
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth24, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(24)">24</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth24b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(24.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth23, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(23)">23</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth23b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(23.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth22, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(22)">22</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth22b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(22.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth21, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(21)">21</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth21b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(21.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth20, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(20)">20</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth20b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(20.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth19, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(19)">19</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth19b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(19.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth18, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(18)">18</div>
+                <div class="betweenLowerTeeth" ng-if="onlyBetween" ng-class="{toothSelected: teeth.tooth18b, 'toothMarkerHidden': showUpper}" ng-click="addToSelected(18.5)"><span ng-if="showLower">-</span></div>
+                <div class="toothMap" ng-disabled="onlyBetween || showUpper" ng-class="{toothSelected: teeth.tooth17, 'disabled': onlyBetween || showUpper}" ng-click="addToSelected(17)">17</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="text-align:right;" class="vm-10"><button type="button" class="btn btn-primary btn-sm" ng-click="closeModal()" aria-hidden="true" style="">Save</button></div>
+
+
+    </div>
+  </div>
+</div>

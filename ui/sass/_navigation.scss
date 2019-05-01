@@ -1,0 +1,24 @@
+/*************** NAV *******************/
+nav {width: 100%;height: 85px;position: fixed;top: 0;left: 0;margin: 0px;z-index: 999;background-image: url('https://daks2k3a4ib2z.cloudfront.net/59419022ff1d4150cb0158a6/59421fc731a3e631a9ba4827_shutterstock_491761618.jpg');background-repeat: no-repeat;background-size: 100%;background-position: 0% 50%;
+  .urlSite-technicianTransparentNav {background: rgba(134, 134, 134, 0.8);  height: 100%;}
+  .urlSite-diagnosticianTransparentNav {background: rgba(134, 134, 134, 0.8);  height: 100%;}
+  .urlSite-adminTransparentNav {background: rgba(0, 19, 31, 0.8);  height: 100%;}
+  .urlSite-providerTransparentNav {background: rgba(76, 47, 72, 0.8);  height: 100%;}
+  .navContainer {display: -ms-flexbox;display: -webkit-flex;display:flex;-ms-flex-align: center;-webkit-align-items: center;align-items: center;justify-content: space-between;height: 100%;padding:5px;max-width: 1200px;width: 100%;margin: 0 auto;
+    .leftNav {width:50%;display: flex; align-items: center;
+      .urlSiteLogo {height:45px;}
+      .title {color: $urlSiteOrange;margin-left: 30px;cursor:pointer;}
+    }
+    .rightNav {width:50%;display: flex; align-items: center;align-content: flex-end; justify-content: flex-end;
+      .btn {width: initial;padding: 5px;background: transparent;border-radius: 3px;font-size: 15px;text-align: center;margin-right: 10px;color: $urlSiteWhite;text-decoration: none;border: 1.5px solid $urlSiteWhite;border: 0;
+        &:hover {opacity: 0.8;background: transparent;color: $urlSiteOrange;border-color: transparent;}
+      }
+      .img-circle {height: 60px;width: 60px;border-radius: 35px;margin-left: 10px;}
+      .userName {color: $urlSiteWhite; margin-left: 5px;}
+      .logoutBtn {margin-left: 20px;width: 125px;padding: 10px;background: transparent;border-radius: 3px;font-size: 12px;text-align: center;margin-right: 15px;color: $urlSiteWhite;text-decoration: none;border: 1.5px solid $urlSiteWhite;
+        &:hover {background: $urlSiteTeal;border-color: $urlSiteTeal;color: $urlSiteWhite;}
+      }
+
+    }
+  }
+}

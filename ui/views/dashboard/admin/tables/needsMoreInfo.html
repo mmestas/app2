@@ -1,0 +1,54 @@
+<script type="text/ng-template" id="filter/tagHeader.html">
+      <div class="dropdownThFilter">
+        <button id="101" class="btn" ng-click="showTagFilterDropdown()" style="padding:0 9px 0 0; min-height:30px;">
+          <div id="100" class="tagFilterStyle" style="background-color:{{tagColor}}; border: 1px solid {{tagBorder}};"></div>
+          <i id="99" class="fa fa-caret-down"></i>
+        </button>
+        <ul ng-show="showTagDropdown"  style="z-index:1200;">
+          <li ng-click="filterTag()" class="tagStyle">All</li>
+          <li ng-repeat="tag in tagSelections" ng-click="filterTag(tag)">
+            <div ng-if="tag.id"  ng-class="{'defaultTag' : !case.tag.id}" class="tagStyle" style="background-color:{{tag.color}};">{{tag.name}}</div>
+              <!-- <div  ng-class="{'defaultTag' : !case.tag.id}" class="tagStyle" style="background-color:{{tag.color}};">{{tag.name}}</div> -->
+          </li>
+        </ul>
+      </div>
+
+</script>
+
+<table ng-table="casesTable" class="table table-condensed table-bordered table-striped casesTable" >
+    <tr ng-class="{rushOrderAdmin: case.isRushOrder == true }"
+        ng-repeat="case in $data | orderBy: ['-isRushOrder']
+        | filter: { status: { id: 6 } }
+        | filter: {adminHide: showHideCases}
+        ">
+
+      <td class="goToCase" title="'Case #'" data-title="'Case #'" filter="{'casenumber': 'text'}" sortable="'casenumber'" ng-click="gotocase(case)">
+        <div class="caseNumberWithReportImages">
+          <div>{{case.casenumber}}</div>
+          <div class="radiologyReportImg">
+            <img data-ng-show="case.includeRadiologyReport" src="/images/AirwayIcon.png">
+            <img data-ng-show="case.includeSassouniPlus" src="/images/sassouniPlus.png">
+          </div>
+        </div>
+      </td>
+      <td class="" data-title="'Provider'" filter="{'requestedby.name': 'text'}" sortable="'requestedby.name'">{{case.requestedby.name}}</td>
+      <td class="" data-title="'Patient'" filter="firstLastNameFilter" sortable="'info.lastname'">
+        <div class="flexBox">
+          <div><img class="profileImg tableImg" src="{{contentUrl+case.photos.facial.bigsmile}}"></div>
+          <div class="tablePatientName">{{case.info.firstname + " " + case.info.lastname}}</div>
+        </div>
+      </td>
+      <td class="dateField" data-title="'Date Sent Back'">{{case.statusModifiedDate | jsonDate}}</td>
+      <td filter="{'tag.title' : 'filter/tagHeader.html'}" data-title="'Tag'" style="position:relative;">
+        <ul ng-show="case.selected"  class="tagContainer">
+          <li ng-repeat="tag in tagSelections" ng-click="changeTagColor(case, tag)">
+              <div id="{{tag.id}}" ng-class="{'defaultTag' : !tag.id}" class="tagStyle" style="background-color:{{tag.color}};">{{tag.name}}</div>
+          </li>
+        </ul>
+        <div class="tagStyle" ng-class="{'defaultTag' : !case.tag.id}" style="background-color:{{case.tag.color}};" ng-click="openCaseTag(case)">{{case.tag.name}}</div>
+      </td>
+      <td class="delete" data-title="'Hide Case'" ng-if="!case.adminHide"><i class=" fa fa-folder-open" ng-click="hideCase(case)"></i> {{hiddenFile}}</td>
+      <td class="delete" data-title="'Undo Hide Case'" ng-if="case.adminHide"><i class=" fa fa-undo" ng-click="undoHideCase(case)"></i> {{shownFile}}</td>
+
+  </tr>
+</table>

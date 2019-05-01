@@ -1,0 +1,60 @@
+table.casesTable { width:100%;border-spacing: 0;border-collapse: separate; border-top-right-radius: 10px;border-top-left-radius: 10px;
+  select {-moz-appearance: none;text-indent: 0.01px;text-overflow: '';-webkit-appearance: none;-moz-appearance: none;-ms-appearance: none;appearance: none;padding: 5px;padding-right: 25px;border-radius: 2px;border-color: $urlSiteBorderGrey3;
+  }
+
+  thead {font-size: 14px;
+    tr {
+      th {
+        padding: 10px;
+        border-right: 1px solid $urlSiteBorderGrey3;border-bottom: 1px solid $urlSiteBorderGrey3;border-top: 1px solid $urlSiteBorderGrey3;
+        &:first-child {border-left: 1px solid $urlSiteBorderGrey3;}
+      }
+      &:first-child {
+        th {background: rgba(222, 210, 149, 0.2); border-bottom:0;
+          &:first-child {border-top-left-radius: 7px;width: 100px;}
+          &:last-child {border-top-right-radius: 7px;}
+        }
+      }
+    }
+  }
+  tbody {font-size: 12px;
+    tr {
+      td {
+        padding: 6px;border-right: 1px solid $urlSiteBorderGrey3;border-bottom: 1px solid $urlSiteBorderGrey3;
+        &:first-child {border-left: 1px solid $urlSiteBorderGrey3;}
+        &.delete {font-size: 200%;text-align: center;}
+        &.refund {font-size: 200%;text-align: center;}
+      }
+      &:nth-of-type(odd) {background-color: #f9f9f9;}
+      &:last-child {
+        th {background: rgba(222, 210, 149, 0.2);
+          &:first-child {border-bottom-left-radius: 7px;}
+          &:last-child {border-bottom-right-radius: 7px;}
+        }
+      }
+    }
+  }
+  tfoot {
+    tr {
+      td {
+        border: 1px solid $urlSiteBorderGrey3;padding: 10px;
+      }
+    }
+  }
+}
+
+
+//For Patient Tables
+// table.casesTable {
+//   thead {
+//       tr {
+//         &:first-child {
+//           th {
+//             &:first-child {width: 100px;}
+//             // &:last-child {width: 62px;}
+//           }
+//         }
+//       }
+//   }
+//
+// }

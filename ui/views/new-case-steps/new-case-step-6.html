@@ -1,0 +1,403 @@
+<form id="newCaseStep6" novalidate ng-init="step6Init()">
+    <h2 class="teal">Step 6 - Patient Occlusion</h2>
+    <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+
+    <div class="row">
+        <div class="cbctInfo" ng-bind-html="impression3DInfoData"></div>
+    </div>
+
+    <section class="border vp-10 vmt-15">
+      <div class="collapsableSection">
+          <div class="collapsableSectionHeader vmb-10">
+            <i class="fa fa-minus-circle" data-ng-click="showMolarRelationships = !showMolarRelationships" ng-show="showMolarRelationships"></i>
+            <i class="fa fa-plus-circle" data-ng-click="showMolarRelationships = !showMolarRelationships" ng-hide="showMolarRelationships"></i>
+            <strong>Molar Relationships</strong>
+          </div>
+          <div class="collapsableSectionBody" ng-show="showMolarRelationships">
+            <div class="flex vmt-20">
+                <div class="flex flex-column vmr-20">
+                    <label class="vmb-5">Right Molar Relationship</label>
+                    <select ng-model="newCasefile.studyModels.rightModalRelationship" data-ng-options="cr.id as cr.name for cr in classRelationships" >
+                        <option value=''>Select One</option>
+                    </select>
+                </div>
+                <div class="flex flex-column vmr-20">
+                    <label class="vmb-5">Left Molar Relationship</label>
+                    <select ng-model="newCasefile.studyModels.leftModalRelationship" data-ng-options="crs.id as crs.name for crs in classRelationships" >
+                        <option value=''>Select One</option>
+                    </select>
+                </div>
+                <div class="flex flex-column vmr-20">
+                    <label class="vmb-5">Staff Member Who Took the Impression</label>
+                    <input type="text" ng-model="newCasefile.studyModels.staffMemberWhoTookTheImpression">
+                </div>
+            </div>
+          </div>
+      </section>
+
+    <section class="border vp-10 vmt-15">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader vmb-10">
+              <i class="fa fa-minus-circle" data-ng-click="show3DUploads = !show3DUploads" ng-show="show3DUploads"></i>
+              <i class="fa fa-plus-circle" data-ng-click="show3DUploads = !show3DUploads" ng-hide="show3DUploads"></i>
+              <strong>3D Digital Impression .stl files</strong>
+            </div>
+            <div class="collapsableSectionBody" ng-show="show3DUploads">
+              <div class="row">
+                  <div class="col col-md-3">
+                      <div class="text-center">
+                          <h3>Upper Arch</h3>
+                      </div>
+                        <input class="hidden" id="studymodels_Impression3D" name="studymodels_Impression3D" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.impression3D, 'studymodels_Impression3D')"
+                             data-ng-model="newCasefile2.photos.studymodels.impression3D" value="">
+                        <label class="dragNDropFileUploader m-auto" for="studymodels_Impression3D">
+                          <i class="fa fa-upload"></i>
+                        </label>
+                        <div id="" class="dragFileUploader ml-auto mr-auto" data-ng-class="{'fileUploaded': newCasefile2.photos.studymodels.impression3D}" ngf-select="uploadFiles(newCasefile2.photos.studymodels.impression3D, 'studymodels_Impression3D')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.studymodels.impression3D, 'studymodels_Impression3D')"  data-ng-model="newCasefile2.photos.studymodels.impression3D"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            ngf-accept="acceptSelect" data-ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="text-center">
+                            <div class="uploadLabels" data-ng-if="newCasefile2.photos.studymodels.impression3D"
+                                data-ng-bind="newCasefile2.photos.studymodels.impression3D | fileNameOnly"></div>
+                            <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.photos.studymodels.impression3D" data-ng-click="deleteFiles('studymodels_Impression3D')"></i>
+                        </div>
+                  </div>
+
+                  <div class="col col-md-3">
+                      <div class="text-center">
+                          <h3>Lower Arch</h3>
+                      </div>
+                        <input class="hidden" id="studymodels_lowerArch3Dimpression" name="studymodels_lowerArch3Dimpression" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')"
+                             data-ng-model="newCasefile2.photos.studymodels.lowerArch3Dimpression" value="">
+                        <label class="dragNDropFileUploader m-auto" for="studymodels_lowerArch3Dimpression">
+                          <i class="fa fa-upload"></i>
+                        </label>
+                        <div id="" class="dragFileUploader ml-auto mr-auto" data-ng-class="{'fileUploaded': newCasefile2.photos.studymodels.lowerArch3Dimpression}" ngf-select="uploadFiles(newCasefile2.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.studymodels.lowerArch3Dimpression, 'studymodels_lowerArch3Dimpression')"  data-ng-model="newCasefile2.photos.studymodels.lowerArch3Dimpression"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            ngf-accept="acceptSelect" data-ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="text-center">
+                            <div class="uploadLabels" data-ng-if="newCasefile2.photos.studymodels.lowerArch3Dimpression" data-ng-hide="newCasefile2.photos.studymodels.lowerArch3Dimpression.name"
+                                data-ng-bind="newCasefile2.photos.studymodels.lowerArch3Dimpression | fileNameOnly"></div>
+                            <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.photos.studymodels.lowerArch3Dimpression" data-ng-click="deleteFiles('studymodels_lowerArch3Dimpression')"></i>
+                        </div>
+                  </div>
+
+                  <div class="col col-md-3">
+                      <div class="text-center">
+                          <h3>Natural Bite</h3>
+                      </div>
+                        <input class="hidden" id="studymodels_naturalBite3Dimpression" name="studymodels_naturalBite3Dimpression" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')"
+                             data-ng-model="newCasefile2.photos.studymodels.naturalBite3Dimpression" value="">
+                        <label class="dragNDropFileUploader m-auto" for="studymodels_naturalBite3Dimpression">
+                          <i class="fa fa-upload" data-ng-class="{'text-white': rTab.patientOcclussions.digitalImpression.naturalBite3Dimpression}"></i>
+                        </label>
+                        <div id="" class="dragFileUploader ml-auto mr-auto" data-ng-class="{'fileUploaded': newCasefile2.photos.studymodels.naturalBite3Dimpression}" ngf-select="uploadFiles(newCasefile2.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.studymodels.naturalBite3Dimpression, 'studymodels_naturalBite3Dimpression')"  data-ng-model="newCasefile2.photos.studymodels.naturalBite3Dimpression"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            ngf-accept="acceptSelect" data-ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="text-center">
+                            <div class="uploadLabels" data-ng-if="newCasefile2.photos.studymodels.naturalBite3Dimpression" data-ng-hide="newCasefile2.photos.studymodels.naturalBite3Dimpression.name"
+                                data-ng-bind="newCasefile2.photos.studymodels.naturalBite3Dimpression | fileNameOnly"></div>
+                            <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.photos.studymodels.naturalBite3Dimpression" data-ng-click="deleteFiles('studymodels_naturalBite3Dimpression')"></i>
+                        </div>
+                  </div>
+
+                  <div class="col col-md-3">
+                      <div class="text-center">
+                          <h3>Constructed Bite</h3>
+                      </div>
+                        <input class="hidden" id="studymodels_constructedBite3Dimpression" name="studymodels_constructedBite3Dimpression" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')"
+                             data-ng-model="newCasefile2.photos.studymodels.constructedBite3Dimpression" value="">
+                        <label class="dragNDropFileUploader m-auto" for="studymodels_constructedBite3Dimpression">
+                          <i class="fa fa-upload"></i>
+                        </label>
+                        <div id="" class="dragFileUploader ml-auto mr-auto" data-ng-class="{'fileUploaded': newCasefile2.photos.studymodels.constructedBite3Dimpression}" ngf-select="uploadFiles(newCasefile2.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')"
+                            ngf-drop="uploadFiles(newCasefile2.photos.studymodels.constructedBite3Dimpression, 'studymodels_constructedBite3Dimpression')"  data-ng-model="newCasefile2.photos.studymodels.constructedBite3Dimpression"
+                            ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern"
+                            ngf-accept="acceptSelect" data-ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                            ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                            ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                            ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            &nbsp;
+                        </div>
+                        <div class="text-center">
+                            <div class="uploadLabels" data-ng-if="newCasefile2.photos.studymodels.constructedBite3Dimpression" data-ng-hide="newCasefile2.photos.studymodels.constructedBite3Dimpression.name"
+                                data-ng-bind="newCasefile2.photos.studymodels.constructedBite3Dimpression | fileNameOnly"></div>
+                            <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.photos.studymodels.constructedBite3Dimpression" data-ng-click="deleteFiles('studymodels_constructedBite3Dimpression')"></i>
+                        </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="border vp-10 vmt-15">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader vmb-10">
+              <i class="fa fa-minus-circle" data-ng-click="show2DStoneModels = !show2DStoneModels" ng-show="show2DStoneModels"></i>
+              <i class="fa fa-plus-circle" data-ng-click="show2DStoneModels = !show2DStoneModels" ng-hide="show2DStoneModels"></i>
+              <strong>2D Stone Model .jpg files</strong>
+            </div>
+            <div class="collapsableSectionBody" ng-show="show2DStoneModels">
+                <div class="row">
+                    <div class="col col-md-12 pb-4">
+                        Please upload your 2D photos of your study models or if you have taken a 3D impression, your digital
+                            models with the different orientations.
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap">
+
+                    <div class="width_33 uploadWrapper">
+                        <div class="uploadInnerWrapper">
+                            <label class="uploadLabel" for="SM-UpperArch">
+                                <img ngf-src="newCasefile2.photos.studymodels.upperarchStoneModel" value="">
+                                <input class="hidden" id="SM-UpperArch" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.upperarchStoneModel, 'studymodels_upperarch')"
+                                    ng-model="newCasefile2.photos.studymodels.upperarchStoneModel" name="file" ngf-accept="'image/*'">
+                            </label>
+                            <div id="smUpperArch" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.studymodels.upperarchStoneModel, 'studymodels_upperarch')"
+                                ngf-drop="uploadFiles(newCasefile2.photos.studymodels.upperarchStoneModel, 'studymodels_upperarch')" ng-model="newCasefile2.photos.studymodels.upperarchStoneModel"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            </div>
+                            <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('studymodels_upperarch')" data-ng-if="newCasefile2.photos.studymodels.upperarchStoneModel !== apiUrl+'/images/camera.svg'"></i>
+                        </div>
+                        <div class="selectionInfo">
+                            <h3>
+                                <span class="v-tooltip">Upper Arch
+                                    <span class="v-tooltipInfo">
+                                        <img src="/images/instructions/sm-upperarch.jpg">
+                                    </span>
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="width_33 uploadWrapper">
+                        <div class="uploadInnerWrapper">
+                            <label class="uploadLabel" for="SM-LowerArch">
+                                <img ngf-src="newCasefile2.photos.studymodels.lowerarchStoneModel" value="">
+                                <input class="hidden" id="SM-LowerArch" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.lowerarchStoneModel, 'studymodels_lowerarch')"
+                                    ng-model="newCasefile2.photos.studymodels.lowerarchStoneModel" name="file" ngf-accept="'image/*'">
+                            </label>
+                            <div id="smLowerArch" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.studymodels.lowerarchStoneModel, 'studymodels_lowerarch')"
+                                ngf-drop="uploadFiles(newCasefile2.photos.studymodels.lowerarchStoneModel, 'studymodels_lowerarch')" ng-model="newCasefile2.photos.studymodels.lowerarchStoneModel"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            </div>
+                            <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('studymodels_lowerarch')" data-ng-if="newCasefile2.photos.studymodels.lowerarchStoneModel !== apiUrl+'/images/camera.svg'"></i>
+                        </div>
+                        <div class="selectionInfo">
+                            <h3>
+                                <span class="v-tooltip">Lower Arch
+                                    <span class="v-tooltipInfo">
+                                        <img src="/images/instructions/sm-lowerarch.jpg">
+                                    </span>
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="width_33 uploadWrapper">
+                        <div class="uploadInnerWrapper">
+                            <label class="uploadLabel" for="SM-AnteriorOcclusion">
+                                <img ngf-src="newCasefile2.photos.studymodels.anteriorocclusionStoneModel" value="">
+                                <input class="hidden" id="SM-AnteriorOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.anteriorocclusionStoneModel, 'studymodels_anteriorocclusion')"
+                                    ng-model="newCasefile2.photos.studymodels.anteriorocclusionStoneModel" name="file" ngf-accept="'image/*'">
+                            </label>
+                            <div id="smAnteriorOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.studymodels.anteriorocclusionStoneModel, 'studymodels_anteriorocclusion')"
+                                ngf-drop="uploadFiles(newCasefile2.photos.studymodels.anteriorocclusionStoneModel, 'studymodels_anteriorocclusion')"
+                                ng-model="newCasefile2.photos.studymodels.anteriorocclusionStoneModel" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                                ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                                ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            </div>
+                            <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('studymodels_anteriorocclusion')" data-ng-if="newCasefile2.photos.studymodels.anteriorocclusionStoneModel !== apiUrl+'/images/camera.svg'"></i>
+                        </div>
+                        <div class="selectionInfo">
+                            <h3>
+                                <span class="v-tooltip">Anterior Occlusion
+                                    <span class="v-tooltipInfo">
+                                        <img src="/images/instructions/sm-frontocclusion.jpg">
+                                    </span>
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="width_33 uploadWrapper">
+                        <div class="uploadInnerWrapper">
+                            <label class="uploadLabel" for="SM-LeftOcclusion">
+                                <img ngf-src="newCasefile2.photos.studymodels.leftocclusionStoneModel" value="">
+                                <input class="hidden" id="SM-LeftOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.leftocclusionStoneModel, 'studymodels_leftocclusion')"
+                                    ng-model="newCasefile2.photos.studymodels.leftocclusionStoneModel" name="file" ngf-accept="'image/*'">
+                            </label>
+                            <div id="smLeftOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.studymodels.leftocclusionStoneModel, 'studymodels_leftocclusion')"
+                                ngf-drop="uploadFiles(newCasefile2.photos.studymodels.leftocclusionStoneModel, 'studymodels_leftocclusion')" ng-model="newCasefile2.photos.studymodels.leftocclusionStoneModel"
+                                ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            </div>
+                            <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('studymodels_leftocclusion')" data-ng-if="newCasefile2.photos.studymodels.leftocclusionStoneModel !== apiUrl+'/images/camera.svg'"></i>
+                        </div>
+                        <div class="selectionInfo">
+                            <h3>
+                                <span class="v-tooltip">Left Occlusion
+                                    <span class="v-tooltipInfo">
+                                        <img src="/images/instructions/sm-leftocclusion.jpg">
+                                    </span>
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="width_33 uploadWrapper">
+                        <div class="uploadInnerWrapper">
+                            <label class="uploadLabel" for="SM-RightOcclusion">
+                                <img ngf-src="newCasefile2.photos.studymodels.rightocclusionStoneModel" value="">
+                                <input class="hidden" id="SM-RightOcclusion" type="file" ngf-select="uploadFiles(newCasefile2.photos.studymodels.rightocclusionStoneModel, 'studymodels_rightocclusion')"
+                                    ng-model="newCasefile2.photos.studymodels.rightocclusionStoneModel" name="file" ngf-accept="'image/*'">
+                            </label>
+                            <div id="smRightOcclusion" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.studymodels.rightocclusionStoneModel, 'studymodels_rightocclusion')"
+                                ngf-drop="uploadFiles(newCasefile2.photos.studymodels.rightocclusionStoneModel, 'studymodels_rightocclusion')"
+                                ng-model="newCasefile2.photos.studymodels.rightocclusionStoneModel" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                                ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                                ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                            </div>
+                            <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('studymodels_rightocclusion')" data-ng-if="newCasefile2.photos.studymodels.rightocclusionStoneModel !== apiUrl+'/images/camera.svg'"></i>
+                        </div>
+                        <div class="selectionInfo">
+                            <h3>
+                                <span class="v-tooltip">Right Occlusion
+                                    <span class="v-tooltipInfo">
+                                        <img src="/images/instructions/sm-rightocclusion.jpg">
+                                    </span>
+                                </span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Teeth Mapping -->
+    <section class="border vp-10 vmt-15">
+        <div class="collapsableSection">
+            <div class="collapsableSectionHeader vmb-10">
+              <i class="fa fa-minus-circle" data-ng-click="showTeethCharting = !showTeethCharting" ng-show="showTeethCharting"></i>
+              <i class="fa fa-plus-circle" data-ng-click="showTeethCharting = !showTeethCharting" ng-hide="showTeethCharting"></i>
+              <strong>Teeth Charting<span class="required">*</span></strong>
+            </div>
+            <div class="collapsableSectionBody" ng-show="showTeethCharting">
+                <div class="" style="margin-top: 15px; border: 1px solid #eaeaea; padding: 10px;">
+                  <h2>Teeth Charting</h2>
+                  <div id="toothMap" class="flex flex-justify-center flex-wrap">
+                    <div style="width:236px;">
+                      <div style="font-size:13px;"><strong>Select input, then indicate on teeth chart</strong></div>
+                      <div>
+                        <ul class="tabbedList">
+                          <li data-ng-click="selectModel(1)" data-ng-class="{'selectedDiagram': missingTeethDiagram}">Missing teeth/extractions (M)</li>
+                          <li data-ng-click="selectModel(2)" data-ng-class="{'selectedDiagram': bridgeDiagram}">Bridge (B)</li>
+                          <li data-ng-click="selectModel(3)" data-ng-class="{'selectedDiagram': crownDiagram}">Crown (C)</li>
+                          <li data-ng-click="selectModel(4)" data-ng-class="{'selectedDiagram': implantsDiagram}">Implants (I)</li>
+                          <li data-ng-click="selectModel(5)" data-ng-class="{'selectedDiagram': impactedDiagram}">Impacted (IP)</li>
+                          <li data-ng-click="selectModel(6)" data-ng-class="{'selectedDiagram': deciduousDiagram}">Deciduous (D)</li>
+                          <li data-ng-click="selectModel(7)" data-ng-class="{'selectedDiagram': allDiagram}">All</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="toothDiagram">
+                      <div ng-include="'views/new-case-steps/teethModels/missingTeeth.html'" ng-show="missingTeethDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/bridge.html'" ng-show="bridgeDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/crown.html'" ng-show="crownDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/implants.html'" ng-show="implantsDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/impacted.html'" ng-show="impactedDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/deciduous.html'" ng-show="deciduousDiagram"></div>
+                      <div ng-include="'views/new-case-steps/teethModels/all.html'" ng-show="allDiagram"></div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Show only if age is < 12 -->
+
+    <!-- SAVE -->
+    <div class="row">
+        <div class="save">
+            <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 6)" data-ng-if="!caseIsSubmitted">
+            Save + Continue</button>
+            <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-8({selectedTile: selectedTile, id: caseLinkId})">Go to Misc. Documents</button>
+            &nbsp;
+            <div ng-if="showErrorMsg && !(newCasefile2.photos.studymodels.impression3D && newCasefile2.photos.studymodels.lowerArch3Dimpression && (newCasefile2.photos.studymodels.naturalBite3Dimpression || newCasefile2.photos.studymodels.constructedBite3Dimpression)) && !((newCasefile2.photos.studymodels.upperarchStoneModel !== apiUrl+'/images/camera.svg') && (newCasefile2.photos.studymodels.lowerarchStoneModel !== apiUrl+'/images/camera.svg')) ">
+              <div class="fieldError" >
+                  {{errorMsg}}
+              </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>
+
+
+<script type="text/ng-template" id="confirmStatusChange.html">
+   <div class="modal fade show">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title confirmDelete">Confirm Status Change
+            {{modalCtrl.data.casenumber}}
+           </h4>
+        </div>
+        <div class="modal-body">
+          <b>You are about to change this patient's status.  Proceed?</b><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-default" ng-click="modalCtrl.changeStatus(modalCtrl.data)" data-dismiss="modal">Yes, delete</button>
+        </div>
+      </div>
+    </div>
+   </div>
+</script>

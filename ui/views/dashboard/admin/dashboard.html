@@ -1,0 +1,178 @@
+<div id="dashboard"  ng-init="adminDashboardInit()">
+  <div class="container">
+    <div class="dashboardWrapper">
+      <div class="dashTitle">
+        <h2>Administrator Dashboard</h2>
+      </div>
+    </div>
+
+    <div class="stats" >
+      <div class="stat" ng-class="{statActive: 10 === selected}" ng-click="getStatus(10)">
+        <button>Cases in Progress</button>
+        <a href="#">
+          <div>
+            <h3 ng-show="(showHideCases === false)">{{(cases.data | filter:{ status: { id: diagnosticFilter3 } }:filterByStatus2).length - (cases.data  | filter:{ status: { id: diagnosticFilter3 } }:filterByStatus2 | filter:{ adminHide: true }).length}}</h3>
+            <h3 ng-show="(showHideCases === '')">{{(cases.data | filter:{ status: { id: diagnosticFilter3 } }:filterByStatus2).length}}</h3>
+            <p>Cases in Progress</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 6 === selected}" ng-click="getStatus(6)">
+        <button>Needs More Info</button>
+        <a href="#">
+          <div>
+            <h3>{{((cases.data | filter:{ status: { id: 6 } }).length)}}</h3>
+            <p>Needs More Info</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 9 === selected}" ng-click="getStatus(9)">
+        <button>To Be Assigned</button>
+        <a href="#">
+          <div>
+            <h3 ng-show="(showHideCases === false)">
+              {{
+                (
+                (cases.data | filter:{ status: { id: 2 } } | filter: { assignedTo: { id: 0 } } : true).length +
+                (cases.data | filter:{ status: { id: 4 } } | filter: { assignedToDiagnostician: { id: 0 } } : true).length +
+                (cases.data | filter:{ status: { id: 8 } } | filter: { assignedToFinalReviewer: { id: 0 } } : true).length
+                )
+                -
+                (
+                (cases.data | filter:{ status: { id: 2 } } | filter: { assignedTo: { id: 0 } } : true |  filter:{ adminHide: true }).length +
+                (cases.data | filter:{ status: { id: 4 } } | filter: { assignedToDiagnostician: { id: 0 } } : true |  filter: { adminHide: true }).length +
+                (cases.data | filter:{ status: { id: 8 } } | filter: { assignedToFinalReviewer: { id: 0 } } : true |  filter: { adminHide: true }).length
+                )
+              }}
+            </h3>
+            <h3 ng-show="(showHideCases === '')">
+              {{
+                (
+                (cases.data | filter:{ status: { id: 2 } } | filter: { assignedTo: { id: 0 } } : true).length +
+                (cases.data | filter:{ status: { id: 4 } } | filter: { assignedToDiagnostician: { id: 0 } } : true).length +
+                (cases.data | filter:{ status: { id: 8 } } | filter: { assignedToFinalReviewer: { id: 0 } } : true).length
+                )
+            }}
+            </h3>
+            <p>To Be Assigned</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 2 === selected}" ng-click="getStatus(2)">
+        <button>Technician Review</button>
+        <a href="#">
+          <div>
+            <h3 ng-show="(showHideCases === '')">
+              {{(cases.data | filter:{ status: { id: 2 } } | filter: techOnlyFilter).length}}
+            </h3>
+            <h3 ng-show="(showHideCases === false)">
+              {{
+                (cases.data | filter:{ status: { id: 2 } } | filter: techOnlyFilter).length
+                - (cases.data | filter:{ status: { id: 2 } } | filter: techOnlyFilter | filter:{ adminHide: true }).length
+              }}
+            </h3>
+            <p>Technician Review</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 4 === selected}" ng-click="getStatus(4)">
+        <button>Clinician Review</button>
+        <a href="#">
+          <div>
+            <h3 ng-show="(showHideCases === '')">
+              {{(cases.data | filter:{ status: { id: 4 } } | filter: clinicianOnlyFilter).length}}
+            </h3>
+            <h3 ng-show="(showHideCases === false)">
+            {{
+                (cases.data | filter:{ status: { id: 4 } } | filter: clinicianOnlyFilter).length
+              - (cases.data | filter:{ status: { id: 4 } } | filter: clinicianOnlyFilter | filter:{ adminHide: true }).length
+            }}
+          </h3>
+            <p>Clinician Review</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 8 === selected}" ng-click="getStatus(8)">
+        <button>Final Review</button>
+        <a href="#">
+          <div>
+            <h3 ng-show="(showHideCases === '')">{{(cases.data | filter:{ status: { id: 8 } } | filter: finalReviewerOnlyFilter).length}}</h3>
+            <h3 ng-show="(showHideCases === false)">
+              {{
+              (cases.data | filter:{ status: { id: 8 } } | filter: finalReviewerOnlyFilter).length
+            - (cases.data | filter:{ status: { id: 8 } } | filter: finalReviewerOnlyFilter | filter:{ adminHide: true }).length
+              }}
+            </h3>
+            <p>Final Review</p>
+          </div>
+        </a>
+      </div>
+      <div class="stat" ng-class="{statActive: 3 === selected}" ng-click="getStatus(3)">
+        <button>Completed</button>
+        <a href="#">
+          <div>
+            <h3 ng-if="showHideCases === false">{{notHiddenCompletedCases}}</h3>
+            <h3 ng-if="showHideCases === ''">{{statushiddenCompletedCases + notHiddenCompletedCases}}</h3>
+            <p>Completed</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="sortDropdown">
+      <div class="d-flex">
+        <div class="mr-2">
+          <span class="safariSelectHack">
+            <select ng-options="option.date for option in sortByDate" ng-model="sorted" ng-change="sortNewstOldest(sorted)">
+              <option value=''> --Sort by Days in Queue-- </option>
+            </select>
+          </span>
+        </div>
+
+        <!--  4.17.19 - Patient Search -->
+        <!-- "3 === selected" Means that only will display when the completed tab is selected -->
+        <div data-ng-if="3 === selected" class="autcompleteWrapper">
+          <input data-ng-model="searchFields.input" data-ng-change="getPatientsByAutocomplete(searchFields.input)" ng-placeholder="autocompleteField" data-ng-class="{'darkInputText': autocompleteSelected}"></input>
+          <div class="autocompleteDropdown" data-ng-class="{'showDropdown': patientSearchDropdown && showAutocompleteDropdown}">
+              <ul>
+                  <li data-ng-repeat="result in patientSearchDropdown" data-ng-click="getCasesBySearch(result)">
+                      {{result.info.firstname}} {{result.info.lastname}} - {{result.casenumber}}
+                  </li>
+              </ul>
+          </div>
+          <button class="btn btn-outline-secondary btn-lg" data-ng-click="clearSearch(searchFields)">Clear</button>
+        </div>
+        <!-- END 4.17.19 - Patient Search -->
+
+      </div>
+
+      <div>
+        <input id="showHidCases" type="checkbox" ng-model="showHideCases" value="" ng-true-value="''">
+          <label class="checkbox-inline checkbox" for="showHidCases"> Show Hidden Cases </label>
+      </div>
+    </div>
+    <div ng-show="showRadioSelections">
+      <input type="radio" name="tbaFilter" value="All" ng-click="setRadio(0)" checked> All
+      <input type="radio" name="tbaFilter" value="Technician" ng-click="setRadio(1)"> Technician
+      <input type="radio" name="tbaFilter" value="Clinician" ng-click="setRadio(2)"> Clinician
+      <input type="radio" name="tbaFilter" value="Final Reviewer" ng-click="setRadio(3)"> Final Reviewer
+    </div>
+
+    <div class="row">
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/casesInProgress.html'" ng-if="selected === 10"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/needsMoreInfo.html'" ng-if="selected === 6"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/toBeAssigned.html'" ng-if="selected === 9"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/techReview.html'" ng-if="selected === 2"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/clinicianReview.html'" ng-if="selected === 4"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/finalReview.html'" ng-if="selected === 8"></div>
+      <div class="col col-md-12" ng-include="'/views/dashboard/admin/tables/completed.html'" ng-if="selected === 3"></div>
+
+    </div>
+
+  </div>
+</div>
+
+  <div ng-include="'/views/modals/admin/autoLogout.html'"></div>
+  <script type="text/ng-template" id="assignedToTemplate.html">
+    <input type="text" ng-model="$root.assignedToValue" placeholder="Assigned To" />
+  </script>

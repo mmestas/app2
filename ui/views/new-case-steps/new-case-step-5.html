@@ -1,0 +1,235 @@
+        <form id="SystemAdministratorRegistrationStep4" novalidate ng-init="step5Init()">
+            <h2 class="teal">Step 5 - CBCT Scan</h2>
+            <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+            <div class="row">
+                <div class="cbctInfo" ng-init="getCBCTInfo()" ng-bind-html="cbctInfoData"></div>
+            </div>
+            <div class="row flex flex-align-center">
+                <div class="width_50" ng-init="checkFileisEmpty()">
+                    <div id="dropzone" style="clear:both;" class="steps files_list" data-ng-if="!caseIsSubmitted">
+                        <span ng-if="!newCasefile2.photos.cbct.scan.name">Upload CBCT Scan</span>
+                        <input class="hidden" id="fileInput" name="file" type="file" ng-model="newCasefile2.photos.cbct.scan" accept=".zip">
+                        <label class="choose_a_sleep_study_file" for="fileInput">Upload</label>
+                    </div>
+                    <!-- The global progress bar -->
+                    <div id="progress" class="progress" data-ng-if="!caseIsSubmitted">
+                        <div class="progress-bar progress-bar-success" data-ng-class="{'failedUpload': notAZip}"></div>
+                    </div>
+                    &nbsp;
+                    <i class="fa fa-check-circle-o" ng-show="uploadCBCTScanDone" style="font-size:25px; color:limegreen;"></i>
+                    <div class="warningMsg" ng-if="notAZip">{{notAZipMsg}}</div>
+                    <!-- The container for the uploaded files -->
+                    <div ng-if="fileNameisEmpty && !newFileName">{{newCasefile2.s3PostResponseCBCTfileName}}</div>
+                    <div id="files" class="files" ng-hide="notAZip"></div>
+                    <div class="selectionInfo">
+                        <h3>
+                            <span class="v-tooltip">CBCT Scan
+                                <span class="v-tooltipInfo v-tooltipCBCT">
+                                    <img src="/images/instructions/cbctscan.jpg">
+                                    <div>
+                                        We only need the data file folder for the Cone Beam CT. Do not send anything but the data folder containing the MULTI-SLICE
+                                        .dcm files. If you need technical advice please ask the tech operating the machine
+                                        to ensure that the CBCT is exported correctly in dicom (.dcm) format. Typically the
+                                        size of the CBCT should be 75 MB to 200 MB. The field of view for the cone beam should
+                                        be from the eyebrow ridge to the hyoid bone in the neck. If your technician cannot
+                                        expand the field of view have the technician focus on the airway
+                                    </div>
+                                </span>
+                            </span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="check width_50">
+                    <div>
+                      <input id="addcbctAnalysis" type="checkbox" class="addExpertAnalysis" name="addcbctAnalysis" ng-model="newCasefile.includeRadiologyReport">
+                      <label for="addcbctAnalysis" class="checkbox">Add Radiology Report ($95)</label>
+                    </div>
+                    <div>
+                      <input id="addSassouni" type="checkbox" class="addExpertAnalysis" name="addSassouni" ng-model="newCasefile.includeSassouniPlus">
+                      <label for="addSassouni" class="checkbox">Sassouni Analysis (no charge)</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <section class="border vp-10 vmt-15">
+                <div class="collapsableSection">
+                    <div class="collapsableSectionHeader vmb-10">
+                        <i class="fa fa-minus-circle" data-ng-click="show2DImages = !show2DImages" ng-show="show2DImages"></i>
+                        <i class="fa fa-plus-circle" data-ng-click="show2DImages = !show2DImages" ng-hide="show2DImages"></i>
+                        <strong>2D X-Ray Images</strong>
+                    </div>
+                    <div class="collapsableSectionBody" ng-show="show2DImages">
+                        <div class="cbctAlternate">
+                            <div>Note: If you cannot produce a CBCT scan, you can upload alternative images below.</div>
+                            <div class="smallText" data-ng-if="!under8">
+                                <span class="required">*</span> Denotes required images (if CBCT scan is not available).
+                            </div>
+                        </div>
+                        <div class="row flex flex-wrap">
+                            <div class="width_33 uploadWrapper">
+                                <div class="uploadInnerWrapper">
+                                    <label class="uploadLabel" for="LateralCeph">
+                                        <img ngf-src="newCasefile2.photos.cbct.lateralceph" value="">
+                                    </label>
+                                    <div id="LateralCeph" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.cbct.lateralceph, 'cbct_lateralceph')"
+                                        ngf-drop="uploadFiles(newCasefile2.photos.cbct.lateralceph, 'cbct_lateralceph')" ng-model="newCasefile2.photos.cbct.lateralceph"
+                                        ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                        ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                    </div>
+                                    <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('cbct_lateralceph')" data-ng-if="newCasefile2.photos.cbct.lateralceph !== apiUrl+'/images/camera.svg'"></i>
+                                </div>
+                                <div class="selectionInfo">
+                                    <h3>
+                                        <span class="required" data-ng-if="!under8">*</span>
+                                        <span class="v-tooltip">Lateral Ceph
+                                            <span class="v-tooltipInfo">
+                                                <img src="/images/instructions/lateralceph.jpg">
+                                            </span>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="width_33 uploadWrapper">
+                                <div class="uploadInnerWrapper">
+                                    <label class="uploadLabel" for="Pano">
+                                        <img ngf-src="newCasefile2.photos.cbct.pano" value="">
+                                        <input class="hidden" id="Pano" type="file" ngf-select="uploadFiles(newCasefile2.photos.cbct.pano, 'cbct_pano')" ng-model="newCasefile2.photos.cbct.pano"
+                                            name="other" ngf-accept="'image/*'">
+                                    </label>
+                                    <div id="Pano" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.cbct.pano, 'cbct_pano')" ngf-drop="uploadFiles(newCasefile2.photos.cbct.pano, 'cbct_pano')"
+                                        ng-model="newCasefile2.photos.cbct.pano" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                                        ngf-multiple="multiple" ngf-pattern="'image/*'" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                    </div>
+                                    <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('cbct_pano')" data-ng-if="newCasefile2.photos.cbct.pano !== apiUrl+'/images/camera.svg'"></i>
+                                </div>
+                                <div class="selectionInfo">
+                                    <h3>
+                                        <span class="required" data-ng-if="!under8">*</span>
+                                        <span class="v-tooltip">Pano
+                                            <span class="v-tooltipInfo">
+                                                <img src="/images/instructions/pano.jpg">
+                                            </span>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="width_33 uploadWrapper">
+                                <div class="uploadInnerWrapper">
+                                    <label class="uploadLabel" for="FrontCeph">
+                                        <img ngf-src="newCasefile2.photos.cbct.frontceph" value="">
+                                        <input class="hidden" id="FrontCeph" type="file" ngf-select="uploadFiles(newCasefile2.photos.cbct.frontceph, 'cbct_frontceph')"
+                                            ng-model="newCasefile2.photos.cbct.frontceph" name="other" ngf-accept="'image/*'">
+                                    </label>
+                                    <div id="FrontCeph" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.cbct.frontceph, 'cbct_frontceph')"
+                                        ngf-drop="uploadFiles(newCasefile2.photos.cbct.frontceph, 'cbct_frontceph')" ng-model="newCasefile2.photos.cbct.frontceph"
+                                        ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                        ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                    </div>
+                                    <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('cbct_frontceph')" data-ng-if="newCasefile2.photos.cbct.frontceph !== apiUrl+'/images/camera.svg'"></i>
+                                </div>
+                                <div class="selectionInfo">
+                                    <h3>
+                                        <span class="v-tooltip">Front Ceph
+                                            <span class="v-tooltipInfo">
+                                                <img src="/images/instructions/frontceph.jpg">
+                                            </span>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="width_33 uploadWrapper">
+                                <div class="uploadInnerWrapper">
+                                    <label class="uploadLabel" for="TomographLeft">
+                                        <img ngf-src="newCasefile2.photos.cbct.tomographLeft" value="">
+                                        <input class="hidden" id="TomographLeft" type="file" ngf-select="uploadFiles(newCasefile2.photos.cbct.tomographLeft, 'cbct_tomographLeft')"
+                                            ng-model="newCasefile2.photos.cbct.tomographLeft" name="other" ngf-accept="'image/*'">
+                                    </label>
+                                    <div id="TomographLeft" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.cbct.tomographLeft, 'cbct_tomographLeft')"
+                                        ngf-drop="uploadFiles(newCasefile2.photos.cbct.tomographLeft, 'cbct_tomographLeft')" ng-model="newCasefile2.photos.cbct.tomographLeft"
+                                        ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                        ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                    </div>
+                                    <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('cbct_tomographLeft')" data-ng-if="newCasefile2.photos.cbct.tomographLeft !== apiUrl+'/images/camera.svg'"></i>
+                                </div>
+                                <div class="selectionInfo">
+                                    <h3>
+                                        <span class="v-tooltip">Tomograph Left
+                                            <span class="v-tooltipInfo">
+                                                <img src="/images/instructions/tomographLeft.png">
+                                            </span>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="width_33 uploadWrapper">
+                                <div class="uploadInnerWrapper">
+                                    <label class="uploadLabel" for="TomographRight">
+                                        <img ngf-src="newCasefile2.photos.cbct.tomographRight" value="">
+                                        <input class="hidden" id="TomographRight" type="file" ngf-select="uploadFiles(newCasefile2.photos.cbct.tomographRight, 'cbct_tomographRight')"
+                                            ng-model="newCasefile2.photos.cbct.tomographRight" name="other" ngf-accept="'image/*'">
+                                    </label>
+                                    <div id="TomographRight" class="dragNDrop-newCase" ngf-select="uploadFiles(newCasefile2.photos.cbct.tomographRight, 'cbct_tomographRight')"
+                                        ngf-drop="uploadFiles(newCasefile2.photos.cbct.tomographRight, 'cbct_tomographRight')" ng-model="newCasefile2.photos.cbct.tomographRight"
+                                        ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="'image/*'"
+                                        ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj"
+                                        ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                                    </div>
+                                    <i class="fa fa-times text-danger grow-1 deleteImg" data-ng-click="deleteFiles('cbct_tomographRight')" data-ng-if="newCasefile2.photos.cbct.tomographRight !== apiUrl+'/images/camera.svg'"></i>
+                                </div>
+                                <div class="selectionInfo">
+                                    <h3>
+                                        <span class="v-tooltip">Tomograph Right
+                                            <span class="v-tooltipInfo">
+                                                <img src="/images/instructions/tomograph.png">
+                                            </span>
+                                        </span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="row">
+                <div class="save">
+                    <button class="btn btn-primary" ng-click="checkRequiredFields(newCasefile, newCasefile2, 5)" data-ng-if="!caseIsSubmitted">
+                    Save + Continue</button>
+                    <button class="btn btn-primary" data-ng-if="caseIsSubmitted" ui-sref="new-case.step-6({selectedTile: selectedTile, id: caseLinkId})">Go to Patient Occlusion</button>
+                    &nbsp;
+                    <div ng-if="showErrorMsg && (!newCasefile2.s3PostResponseCBCTfileName && ((newCasefile2.photos.cbct.lateralceph  === apiUrl+'/images/camera.svg') || ( newCasefile2.photos.cbct.pano === apiUrl+'/images/camera.svg')))">
+                      <div class="fieldError" >
+                          {{errorMsg}}
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+<script>
+    $(function () {
+        initS3FileUpload($('#fileInput'));
+    });
+</script>

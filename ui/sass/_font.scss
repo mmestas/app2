@@ -1,0 +1,33 @@
+//Font Family
+@font-face {font-family: 'Calibri';src: url('/fonts/CALIBRI.TTF');}
+.urlSite-calibri {font-family: "Calibri", sans-serif;}
+
+// Text sizes
+.text-xs {font-size: 12px;}
+.text-small {font-size: 14px;}
+.text-md {font-size: 18px;}
+.text-lg {font-size: 24px;}
+
+//Bootstrap text-colors
+  .text-muted {color: $urlSiteLtGrey !important;}
+  .text-primary {color: $urlSiteTeal !important;}
+  .text-success {color: $urlSiteGreen !important;}
+  .text-info {color: $urlSiteBlue !important;}
+  .text-warning {color: $urlSiteOrange !important;}
+  .text-danger {color: $urlSiteRed !important;}
+  .text-secondary {color: $urlSiteMedGrey !important;}
+  .text-dark {color: $urlSiteGrey !important;}
+  .text-body {color: $urlSiteText !important;}
+  .text-light {color: $urlSiteBorder !important;}
+  .text-white {color: $urlSiteWhite !important;}
+//added - not bootstrap
+  .text-primary-dark {color: $urlSiteDarkTeal !important;}
+  .text-success-dark {color: $urlSiteDarkGreen !important;}
+  .text-info-dark {color: $urlSiteDarkBlue !important;}
+  .text-warning-dark {color: $urlSiteDarkOrange !important;}
+  .text-danger-dark {color: $urlSiteDarkRed !important;}
+
+//Dynamic Font changes
+  .grow-1 {cursor:pointer;
+    &:hover {transform: scale(1.1);}
+  }

@@ -1,0 +1,252 @@
+        <form id="SystemAdministratorRegistrationStep4" novalidate ng-init="step8Init()" style="position:relative; height:100%;">
+            <h2 class="teal">Step 8 - Miscellaneous Documents</h2>
+            <h4 class="subStepTitle">{{newCasefile.info.firstname}} {{newCasefile.info.lastname}} - {{patientAge}}</h4>
+            <div ng-if="under18">
+                <div class="row">
+                    <div class="selectionInfo">
+                        <h3>Upload a Pediatric Sleep Questionnaire - filled out by parents</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="clear:both;" class="steps files_list">
+                        <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous" ng-show="newCasefile2.files.pediatricSleepQuestionnaire">Choose a different File</label>
+                        <span ng-if="newCasefile2.files.pediatricSleepQuestionnaire" ng-hide="newCasefile2.files.pediatricSleepQuestionnaire.name"
+                            ng-bind="newCasefile2.files.pediatricSleepQuestionnaire | fileNameOnly"></span>
+                            <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.pediatricSleepQuestionnaire" data-ng-click="deleteFiles('pediatricSleepQuestionnaire')"></i>
+                        <input class="hidden" id="miscellaneous" name="miscellaneous" type="file" ngf-select="uploadFiles(newCasefile2.files.pediatricSleepQuestionnaire, 'pediatricSleepQuestionnaire')"
+                            ng-model="newCasefile2.files.pediatricSleepQuestionnaire" value="">
+                        <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous" ng-show="!newCasefile2.files.pediatricSleepQuestionnaire">Upload</label>
+                        <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.pediatricSleepQuestionnaire || newCasefile2.files.pediatricSleepQuestionnaire.name}"
+                            ngf-select="uploadFiles(newCasefile2.files.pediatricSleepQuestionnaire, 'pediatricSleepQuestionnaire')"
+                            ngf-drop="uploadFiles(newCasefile2.files.pediatricSleepQuestionnaire, 'pediatricSleepQuestionnaire')"
+                            ng-model="newCasefile2.files.pediatricSleepQuestionnaire" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                            ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                            ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                            ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)"
+                            ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid"
+                            ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="selectionInfo">
+                    <h3>Add additional miscellaneous files, such as a sleep study report, or other relevant files (up to 10 files,
+                        max 50 MB/file)</h3>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                  <div class="col col-md-12">
+                    <b>1.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous" ng-show="newCasefile2.files.misc.miscellaneous">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous" ng-hide="newCasefile2.files.misc.miscellaneous.name" ng-bind="newCasefile2.files.misc.miscellaneous | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous" data-ng-click="deleteFiles('document_miscellaneous')"></i>
+                    <input class="hidden" id="miscellaneous" name="miscellaneous" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous, 'document_miscellaneous')"
+                        ng-model="newCasefile2.files.misc.miscellaneous" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous" ng-show="!newCasefile2.files.misc.miscellaneous">Upload</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous || newCasefile2.files.misc.miscellaneous.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous, 'document_miscellaneous')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous, 'document_miscellaneous')"
+                        ng-model="newCasefile2.files.misc.miscellaneous" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous || newCasefile2.files.misc.miscellaneous2">
+                    <b>2.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous2" ng-show="newCasefile2.files.misc.miscellaneous2">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous2" ng-hide="newCasefile2.files.misc.miscellaneous2.name" ng-bind="newCasefile2.files.misc.miscellaneous2 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous2" data-ng-click="deleteFiles('document_miscellaneous2')"></i>
+                    <input class="hidden" id="miscellaneous2" name="miscellaneous2" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous2, 'document_miscellaneous2')"
+                        ng-model="newCasefile2.files.misc.miscellaneous2" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous2" ng-show="newCasefile2.files.misc.miscellaneous && !newCasefile2.files.misc.miscellaneous2">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous2 || newCasefile2.files.misc.miscellaneous2.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous2, 'document_miscellaneous2')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous2, 'document_miscellaneous2')"
+                        ng-model="newCasefile2.files.misc.miscellaneous2" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous2 || newCasefile2.files.misc.miscellaneous3">
+                    <b>3.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous3" ng-show="newCasefile2.files.misc.miscellaneous3">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous3" ng-hide="newCasefile2.files.misc.miscellaneous3.name" ng-bind="newCasefile2.files.misc.miscellaneous3 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous3" data-ng-click="deleteFiles('document_miscellaneous3')"></i>
+                    <input class="hidden" id="miscellaneous3" name="miscellaneous3" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous3, 'document_miscellaneous3')"
+                        ng-model="newCasefile2.files.misc.miscellaneous3" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous3" ng-show="newCasefile2.files.misc.miscellaneous2 && !newCasefile2.files.misc.miscellaneous3">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous3 || newCasefile2.files.misc.miscellaneous3.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous3, 'document_miscellaneous3')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous3, 'document_miscellaneous3')"
+                        ng-model="newCasefile2.files.misc.miscellaneous3" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous3 || newCasefile2.files.misc.miscellaneous4">
+                    <b>4.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous4" ng-show="newCasefile2.files.misc.miscellaneous4">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous4" ng-hide="newCasefile2.files.misc.miscellaneous4.name" ng-bind="newCasefile2.files.misc.miscellaneous4 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous4" data-ng-click="deleteFiles('document_miscellaneous4')"></i>
+                    <input class="hidden" id="miscellaneous4" name="miscellaneous4" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous4, 'document_miscellaneous4')"
+                        ng-model="newCasefile2.files.misc.miscellaneous4" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous4" ng-show="newCasefile2.files.misc.miscellaneous3 && !newCasefile2.files.misc.miscellaneous4">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous4 || newCasefile2.files.misc.miscellaneous4.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous4, 'document_miscellaneous4')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous4, 'document_miscellaneous4')"
+                        ng-model="newCasefile2.files.misc.miscellaneous4" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous4 || newCasefile2.files.misc.miscellaneous5">
+                    <b>5.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous5" ng-show="newCasefile2.files.misc.miscellaneous5">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous5" ng-hide="newCasefile2.files.misc.miscellaneous5.name" ng-bind="newCasefile2.files.misc.miscellaneous5 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous5" data-ng-click="deleteFiles('document_miscellaneous5')"></i>
+                    <input class="hidden" id="miscellaneous5" name="miscellaneous5" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous5, 'document_miscellaneous5')"
+                        ng-model="newCasefile2.files.misc.miscellaneous5" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous5" ng-show="newCasefile2.files.misc.miscellaneous4 && !newCasefile2.files.misc.miscellaneous5">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous5 || newCasefile2.files.misc.miscellaneous5.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous5, 'document_miscellaneous5')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous5, 'document_miscellaneous3')"
+                        ng-model="newCasefile2.files.misc.miscellaneous5" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous5 || newCasefile2.files.misc.miscellaneous6">
+                    <b>6.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous6" ng-show="newCasefile2.files.misc.miscellaneous6">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous6" ng-hide="newCasefile2.files.misc.miscellaneous6.name" ng-bind="newCasefile2.files.misc.miscellaneous6 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous6" data-ng-click="deleteFiles('document_miscellaneous6')"></i>
+                    <input class="hidden" id="miscellaneous6" name="miscellaneous6" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous6, 'document_miscellaneous6')"
+                        ng-model="newCasefile2.files.misc.miscellaneous6" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous6" ng-show="newCasefile2.files.misc.miscellaneous5 && !newCasefile2.files.misc.miscellaneous6">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous6 || newCasefile2.files.misc.miscellaneous6.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous6, 'document_miscellaneous6')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous6, 'document_miscellaneous6')"
+                        ng-model="newCasefile2.files.misc.miscellaneous6" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous6 || newCasefile2.files.misc.miscellaneous7">
+                    <b>7.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous7" ng-show="newCasefile2.files.misc.miscellaneous7">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous7" ng-hide="newCasefile2.files.misc.miscellaneous7.name" ng-bind="newCasefile2.files.misc.miscellaneous7 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous7" data-ng-click="deleteFiles('document_miscellaneous7')"></i>
+                    <input class="hidden" id="miscellaneous7" name="miscellaneous7" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous7, 'document_miscellaneous7')"
+                        ng-model="newCasefile2.files.misc.miscellaneous7" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous7" ng-show="newCasefile2.files.misc.miscellaneous6 && !newCasefile2.files.misc.miscellaneous7">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous7 || newCasefile2.files.misc.miscellaneous7.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous7, 'document_miscellaneous7')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous7, 'document_miscellaneous7')"
+                        ng-model="newCasefile2.files.misc.miscellaneous7" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous7 || newCasefile2.files.misc.miscellaneous8">
+                    <b>8.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous8" ng-show="newCasefile2.files.misc.miscellaneous8">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous8" ng-hide="newCasefile2.files.misc.miscellaneous8.name" ng-bind="newCasefile2.files.misc.miscellaneous8 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous8" data-ng-click="deleteFiles('document_miscellaneous8')"></i>
+                    <input class="hidden" id="miscellaneous8" name="miscellaneous8" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous8, 'document_miscellaneous8')"
+                        ng-model="newCasefile2.files.misc.miscellaneous8" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous8" ng-show="newCasefile2.files.misc.miscellaneous7 && !newCasefile2.files.misc.miscellaneous8">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous8 || newCasefile2.files.misc.miscellaneous8.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous8, 'document_miscellaneous8')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous8, 'document_miscellaneous8')"
+                        ng-model="newCasefile2.files.misc.miscellaneous8" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous8 || newCasefile2.files.misc.miscellaneous9">
+                    <b>9.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous9" ng-show="newCasefile2.files.misc.miscellaneous9">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous9" ng-hide="newCasefile2.files.misc.miscellaneous9.name" ng-bind="newCasefile2.files.misc.miscellaneous9 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous9" data-ng-click="deleteFiles('document_miscellaneous9')"></i>
+                    <input class="hidden" id="miscellaneous9" name="miscellaneous9" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous9, 'document_miscellaneous9')"
+                        ng-model="newCasefile2.files.misc.miscellaneous9" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous9" ng-show="newCasefile2.files.misc.miscellaneous8 && !newCasefile2.files.misc.miscellaneous9">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous9 || newCasefile2.files.misc.miscellaneous9.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous9, 'document_miscellaneous9')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous9, 'document_miscellaneous9')"
+                        ng-model="newCasefile2.files.misc.miscellaneous9" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col col-md-12" ng-show="newCasefile2.files.misc.miscellaneous9 || newCasefile2.files.misc.miscellaneous10">
+                    <b>10.</b>
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous10" ng-show="newCasefile2.files.misc.miscellaneous10">Choose a different File</label>
+                    <span ng-if="newCasefile2.files.misc.miscellaneous10" ng-hide="newCasefile2.files.misc.miscellaneous10.name" ng-bind="newCasefile2.files.misc.miscellaneous10 | fileNameOnly"></span>
+                    <i class="text-danger fa fa-times grow-1" data-ng-if="newCasefile2.files.misc.miscellaneous10" data-ng-click="deleteFiles('document_miscellaneous10')"></i>
+                    <input class="hidden" id="miscellaneous10" name="miscellaneous10" type="file" ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous10, 'document_miscellaneous10')"
+                        ng-model="newCasefile2.files.misc.miscellaneous10" value="">
+                    <label class="btn btn-primary" data-ng-if="!caseIsSubmitted" for="miscellaneous10" ng-show="newCasefile2.files.misc.miscellaneous9 && !newCasefile2.files.misc.miscellaneous10">Upload 1+</label>
+                    <div id="" class="dragMisc" ng-class="{chooseDifferent: newCasefile2.files.misc.miscellaneous10 || newCasefile2.files.misc.miscellaneous10.name}"
+                        ngf-select="uploadFiles(newCasefile2.files.misc.miscellaneous10, 'document_miscellaneous10')" ngf-drop="uploadFiles(newCasefile2.files.misc.miscellaneous10, 'document_miscellaneous10')"
+                        ng-model="newCasefile2.files.misc.miscellaneous10" ngf-model-invalid="invalidFiles" ngf-model-options="modelOptionsObj"
+                        ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled" ngf-capture="capture"
+                        ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="resizeObj" ngf-resize-if="resizeIfFn($file, $width, $height)"
+                        ngf-dimensions="dimensionsFn($file, $width, $height)" ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep"
+                        ngf-fix-orientation="true" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                        ngf-allow-dir="allowDir" class="drop-box" ngf-drop-available="dropAvailable">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="maximumMsg" ng-if="newCasefile2.files.misc.miscellaneous && newCasefile2.files.misc.miscellaneous2 && newCasefile2.files.misc.miscellaneous3 && newCasefile2.files.misc.miscellaneous4 && newCasefile2.files.misc.miscellaneous5 && newCasefile2.files.misc.miscellaneous6 && newCasefile2.files.misc.miscellaneous7 && newCasefile2.files.misc.miscellaneous8 && newCasefile2.files.misc.miscellaneous9 && newCasefile2.files.misc.miscellaneous10">Maximum number of uploads reached</div>
+
+
+            <div class="row mb-3" style="width: 100%;margin-bottom: 25px; cursor: pointer;">
+                <div class="modal"></div>
+                 <div class="save">
+                   <button data-ng-click="submitPatientCase(newCasefile)" class="btn btn-primary" data-ng-if="!caseIsSubmitted && (newCasefile2.status.id === 1) && !newCasefile.includeRadiologyReport">Save & Create Patient</button>
+                    <button data-ng-click="goToPaymentScreen(newCasefile)" class="btn btn-primary" data-ng-if="!caseIsSubmitted && (newCasefile2.status.id === 1) && newCasefile.includeRadiologyReport">Save & Continue</button>
+                    <button data-ng-click="submitPatientCase(newCasefile)" class="btn btn-primary" data-ng-if="!caseIsSubmitted && newCasefile2.status.id === 6">Update & Save</button>
+                </div>
+            </div>
+        </form>

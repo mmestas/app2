@@ -1,0 +1,54 @@
+
+/* Active Case File - inline stylesheets */
+#myProgress {
+  width: 47%;
+  background-color: #ddd;
+  float: left;
+}
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+}
+#myProgress1 {
+  width: 47%;
+  background-color: #ddd;
+  float: left;
+}
+#myBar1 {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.orderHeader {
+	padding: 25px 25px;
+	border-bottom: 1px solid #EAEAEA;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+.orderInfo {
+	border-bottom: 1px solid #EAEAEA;
+	padding: 25px 25px;
+}
+
+/* Active Case File - inline  styles converted to classes*/
+.note {width:100%; height:140px;border: 1px solid #EAEAEA;}
+.gallery {height: 420px;}
+.spec-box-longTitle {height: 100px;}
+.spec-box-longTitlelabel {float:left;width:66%; display:block; margin-top: 35px;}
+.spec-box-longTitleDiv {float:right;width:33%}
+.spec_dropdown .dropdown {pointer-events:none;}
+.orderDetailsContainer {margin-top:10px;}
